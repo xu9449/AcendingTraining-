@@ -18,7 +18,7 @@ public class PetJDBCDaoTest {
     public void init() {
         petDao = new PetJDBCDao();
         long testid = 0;
-        testRe
+
     }
 
 
