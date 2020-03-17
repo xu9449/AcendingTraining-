@@ -10,26 +10,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdopterJDBCDao {
-    static final String DBURL = "jdbc:postgresql://localhost:5431/pet";
+    static final String DBURL = "jdbc:postgresql://localhost:5430/dealer2";
     static final String USER = "admin";
     static final String PASS = "password";
 
     private static Logger logger = LoggerFactory.getLogger(AdopterJDBCDao.class);
 
 
-    public static void main (String[] args) {
-        AdopterJDBCDao adopterJDBCDao = new AdopterJDBCDao();
-        System.out.println(adopterJDBCDao.getAdopter());
-        logger.debug("Debug");
-        logger.info("infor");
-        logger.warn("warn");
+//    public static void main (String[] args) {
+//        AdopterJDBCDao adopterJDBCDao = new AdopterJDBCDao();
+//        System.out.println(adopterJDBCDao.getAdopter());
+//        logger.debug("Debug");
+//        logger.info("infor");
+//        logger.warn("warn");
+//
+//    }
 
-    }
-
-    public List<Pet> getAdopter() {
+    public List<Adopter> getAdopter() {
 
 
-        List<Pet> adopters = new ArrayList<>();
+        List<Adopter> adopters = new ArrayList<>();
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;

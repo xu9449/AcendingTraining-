@@ -6,26 +6,27 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 public class PetJDBCDao {
 
-    static final String DBURL = "jdbc:postgresql://localhost:5431/pet";
+    static final String DBURL = "jdbc:postgresql://localhost:5430/dealer2";
     static final String USER = "admin";
     static final String PASS = "password";
 
-    private static Logger logger = LoggerFactory.getLogger(PetJDBCDao.class);
+//    private static Logger logger = LoggerFactory.getLogger(PetJDBCDao.class);
 
 
-    public static void main (String[] args) {
-        PetJDBCDao petJDBCDdao = new PetJDBCDao();
-        System.out.println(petJDBCDdao.getPet());
-        logger.debug("Debug");
-        logger.info("infor");
-        logger.warn("warn");
-
-    }
+//    public static void main (String[] args) {
+//        PetJDBCDao petJDBCDdao = new PetJDBCDao();
+//        System.out.println(petJDBCDdao.getPet());
+//        logger.debug("Debug");
+//        logger.info("infor");
+//        logger.warn("warn");
+//
+//    }
 
     public List<Pet> getPet() {
 
@@ -45,19 +46,25 @@ public class PetJDBCDao {
             sql = "SELECT * FROM pet";
             rs = stmt.executeQuery(sql);
             //STEP 4: Extract data from result set
+
             while (rs.next()) {
                 //Retrieve by column name
                 Long id = rs.getLong("id");
                 String name = rs.getString("name");
-                String description = rs.getString("description");
+                String age = rs.getString("age");
+                String shelter = rs.getString("shelter_id");
+
                 String breed = rs.getString("breed");
-//                String shelter = rs.getString("shelter");
-//                Date adoptdate = rs.getDate("adoptdate");
+                Date adoptdate = rs.getDate("adop_date");
+
+
                 //Fill the object
                 Pet pet = new Pet();
                 pet.setId(id);
                 pet.setName(name);
-                pet.setDescription(description);
+                pet.setAge(age);
+                pet.setAdoptdate(adoptdate);
+
                 pet.setBreed(breed);
                 pets.add(pet);
 

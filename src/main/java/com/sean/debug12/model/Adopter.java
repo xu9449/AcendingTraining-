@@ -4,7 +4,7 @@ public class Adopter {
     private Long id;
     private String name;
     private String tel;
-    private String emial;
+    private String email;
     private String location;
     private String description;
     private String pet_id;
@@ -23,7 +23,7 @@ public class Adopter {
     }
 
     public void setEmial(String emial) {
-        this.emial = emial;
+        this.email = email;
     }
 
     public void setLocation(String location) {
@@ -53,7 +53,7 @@ public class Adopter {
     }
 
     public String getEmial() {
-        return emial;
+        return email;
     }
 
     public String getLocation() {

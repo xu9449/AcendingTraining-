@@ -10,8 +10,14 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+
+
 public class PetJDBCDaoTest {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private static Logger logger = LoggerFactory.getLogger(PetJDBCDao.class);
+
+
+
     private PetJDBCDao petDao;
 
     @Before
@@ -25,9 +31,17 @@ public class PetJDBCDaoTest {
     @Test
     public void getPetsTest() {
         List<Pet> pets = petDao.getPet();
-        int expectedNumbOfDept = 4;
+        int expectedNumbOfDept = 2;
 
         Assert.assertEquals(expectedNumbOfDept, pets.size());
+
+    }
+
+    public static void main (String[] args) {
+
+        logger.debug("Debug");
+        logger.info("infor");
+        logger.warn("warn");
 
     }
 

@@ -17,7 +17,7 @@ public class Pet {
     public void setName(String name) {
         this.name = name;
     }
-    public void setDescription(String description) {this.description = description; }
+
 
     public void setAge(String age) { this.age = age;}
 
@@ -37,7 +37,5 @@ public class Pet {
     public String getShelter() { return shelter; }
     public String getAge() { return age; }
 
-    public String getDescription() {
-        return description;
-    }
+
 }
