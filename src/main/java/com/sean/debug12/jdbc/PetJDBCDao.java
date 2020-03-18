@@ -49,7 +49,7 @@ public class PetJDBCDao {
 
             while (rs.next()) {
                 //Retrieve by column name
-                Long id = rs.getLong("id");
+                Integer id = rs.getInt("id");
                 String name = rs.getString("name");
                 String age = rs.getString("age");
                 String shelter = rs.getString("shelter_id");

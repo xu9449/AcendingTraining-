@@ -1,6 +1,8 @@
-package com.sean.debug12.jdbc;
+package com.sean.debug12.repository;
 
+import com.sean.debug12.jdbc.PetJDBCDao;
 import com.sean.debug12.model.Pet;
+import com.sean.debug12.model.Shelter;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,29 +12,39 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-
-
-public class PetJDBCDaoTest {
+public class PetDaoTest {
 
     private static Logger logger = LoggerFactory.getLogger(PetJDBCDao.class);
 
 
 
-    private PetJDBCDao petDao;
+    private PetDao petDao;
+    private Pet p1;
+    private Pet p2;
+    private Shelter s1;
+    private String petString = "Lily";
 
     @Before
     public void init() {
-        petDao = new PetJDBCDao();
-        long testid = 0;
+        petDao = new PetDaoImpl();
+        p1 = new Pet();
+        p1.setName(petString);
+        p1.setAge("Less than one year");
+        p1.setBreed("Kogi");
+        p1 = petDao.save(p1);
+
 
     }
 
 
     @After
+    public void tearDown() {
+        petDao.delete(p1);
+    }
 
     @Test
     public void getPetsTest() {
-        List<Pet> pets = petDao.getPet();
+        List<Pet> pets = petDao.getPets();
         int expectedNumbOfPet = 2;
 
         Assert.assertEquals(expectedNumbOfPet, pets.size());
@@ -44,6 +56,8 @@ public class PetJDBCDaoTest {
 
     }
 
+
+
     public static void main (String[] args) {
 
         logger.debug("Debug");
@@ -51,5 +65,6 @@ public class PetJDBCDaoTest {
         logger.warn("warn");
 
     }
+
 
 }
