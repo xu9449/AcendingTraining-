@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "pet")
+// invert side
 public class Pet {
     public Pet() {};
     public Pet(Integer id, String name, String age, String breed, Integer shelter, Date adoptdate) {
@@ -18,8 +19,16 @@ public class Pet {
         this.shelter = shelter;
         this.adoptdate = adoptdate;
 
+//        @OneToOne(mappedBy = "pet");
+//        private Adopter adopter;
+
 
     };
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userid")
+
+
 
     @Id
     // 每次会加一

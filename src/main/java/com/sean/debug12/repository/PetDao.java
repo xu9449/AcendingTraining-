@@ -25,7 +25,7 @@ public interface PetDao {
     //Pet getDepartmentByName(String petName);
     //Pet getPetAndShelterBy(String petName);
     //List<Object[]> getPetAndShelterAndAdopters(String petName);
-
+    Pet getPetEagerBy(Integer id);
 
 
 }

@@ -12,6 +12,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
+
 public class PetDaoTest {
 
     private static Logger logger = LoggerFactory.getLogger(PetJDBCDao.class);
@@ -47,13 +51,23 @@ public class PetDaoTest {
         List<Pet> pets = petDao.getPets();
         int expectedNumbOfPet = 2;
 
-        Assert.assertEquals(expectedNumbOfPet, pets.size());
+        assertEquals(expectedNumbOfPet, pets.size());
 
     }
 
-    @Test
-    public void getPetByNameTest(){
+//    @Test
+//    public void getPetByNameTest(){
+//
+//    }
 
+    @Test
+    public void getDepartmentEagerByTest() {
+        Pet pet = petDao.getPetEagerBy(p1.getId());
+
+        assertNotNull(pet);
+
+        assertEquals(pet.getName(), p1.getName());
+        //assertTrue(pet.getShelter().size()>0);
     }
 
 

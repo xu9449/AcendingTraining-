@@ -98,4 +98,18 @@ public class PetDaoImpl implements PetDao{
         return false;
     }
 
+    public Pet getPetEagerBy(Integer id) {
+        String hql = "From Pet d LEFT JOIN FETCH d.emplyees where d.id = Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query<Pet> query = session.createQuery(hql);
+            query.setParameter("Id", id);
+            Pet result = query.uniqueResult();
+            session.close();
+            return result;
+        }catch (HibernateException e) {
+            logger.error("failure to retrieve date record", e);
+            return null;
+        }
+    }
 }

@@ -1,5 +1,11 @@
 package com.sean.debug12.model;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+// owning set
 public class Adopter {
     private Long id;
     private String name;
@@ -8,6 +14,15 @@ public class Adopter {
     private String location;
     private String description;
     private String pet_id;
+
+
+    //annotation where is the foreign key
+//    @OneToMany(mappedBy = )
+//    private Pet pet;
+//
+//    @OneToMany(mappedBy = "adopter", cascadeType.ALL, fetch = FetchType.LAZY)
+//    private Set<Pet> accounts = new HashSet();
+
 
     // set
     public void setName(String name) {

@@ -1,5 +1,7 @@
 package com.sean.debug12.model;
 
+import javax.persistence.*;
+
 public class Shelter {
     private Long id;
     private String name;
@@ -36,6 +38,11 @@ public class Shelter {
     public void setPrinciple(String principle) {
         this.principle = principle;
     }
+
+
+    private Pet pet;
+
+
 
     public String getTel() {
         return tel;
