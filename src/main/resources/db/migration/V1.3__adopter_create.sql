@@ -6,6 +6,7 @@ CREATE TABLE adopter (
     email             VARCHAR(50),
     location          VARCHAR(100),
     description       VARCHAR(150),
+    adopt_date        TIMESTAMP,
     pet_id            VARCHAR(30)
 
 );

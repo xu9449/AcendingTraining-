@@ -1,9 +1,9 @@
 update pet
-SET Adopter = 1;
+SET Adopter = 01;
 where name = 'Pepper';
 
 update pet
-SET Adopter = 2;
+SET Adopter = 02;
 where name = 'Shadow';
 
 Alter table pet
