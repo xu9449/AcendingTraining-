@@ -1,4 +1,16 @@
 package com.sean.debug12.repository;
 
-public class ShelterDao {
+import com.sean.debug12.model.Pet;
+import com.sean.debug12.model.Shelter;
+
+import java.util.List;
+
+public interface ShelterDao {
+
+    List<Shelter> getShelters() ;
+    Shelter save(Shelter shelter);
+//    Shelter update(Shelter shelter);
+
+
+
 }

@@ -1,7 +1,5 @@
 package com.sean.debug12.model;
 
-import sun.awt.AWTAccessor;
-import sun.util.resources.Bundles;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -14,7 +12,7 @@ import java.util.Set;
 public class Adopter {
     public Adopter(){};
 
-    public Adopter(Long id, String name, String email, String location, String description, Timestamp adopt_date, String pet_id){
+    public Adopter(Integer id, String name, String email, String location, String description, Timestamp adopt_date, Integer pet_id){
         this.id = id;
         this.name = name;
         this.email = email;
@@ -28,7 +26,7 @@ public class Adopter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Column(name = "name")
     private String name;
     @Column (name = "tel")
@@ -42,7 +40,7 @@ public class Adopter {
     @Column(name = "adopt_date")
     private Timestamp adopt_date;
     @Column(name = "pet_id")
-    private String pet_id;
+    private Integer pet_id;
 
 
     //annotation where is the foreign key
@@ -58,7 +56,7 @@ public class Adopter {
         this.name = name;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -66,7 +64,7 @@ public class Adopter {
         this.tel = tel;
     }
 
-    public void setEmial(String emial) {
+    public void setEmial(String email) {
         this.email = email;
     }
 
@@ -80,13 +78,13 @@ public class Adopter {
 
     public void setAdopt_date(Timestamp adopt_date) {this.adopt_date = adopt_date;}
 
-    public void setPet_id(String pet_id) {
+    public void setPet_id(Integer pet_id) {
         this.pet_id = pet_id;
     }
     // get
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -98,7 +96,7 @@ public class Adopter {
         return description;
     }
 
-    public String getEmial() {
+    public String getEmail() {
         return email;
     }
 
@@ -108,7 +106,7 @@ public class Adopter {
 
     public Timestamp getAdopt_date() { return adopt_date; }
 
-    public String getPet_id() {
+    public Integer getPet_id() {
         return pet_id;
     }
 

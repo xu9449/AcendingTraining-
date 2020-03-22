@@ -7,6 +7,6 @@ CREATE TABLE adopter (
     location          VARCHAR(100),
     description       VARCHAR(150),
     adopt_date        TIMESTAMP,
-    pet_id            VARCHAR(30)
+    pet_id            INTEGER
 
 );

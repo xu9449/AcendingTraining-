@@ -12,7 +12,7 @@ import java.util.List;
 
 public class PetJDBCDao {
 
-    static final String DBURL = "jdbc:postgresql://localhost:5430/dealer2";
+    static final String DBURL = "jdbc:postgresql://localhost:5430/pethelp";
     static final String USER = "admin";
     static final String PASS = "password";
 
@@ -63,7 +63,7 @@ public class PetJDBCDao {
                 pet.setId(id);
                 pet.setName(name);
                 pet.setAge(age);
-                pet.setAdoptdate(adoptdate);
+
 
                 pet.setBreed(breed);
                 pets.add(pet);

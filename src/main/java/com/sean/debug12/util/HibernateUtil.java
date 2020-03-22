@@ -2,7 +2,7 @@ package com.sean.debug12.util;
 
 
 import com.github.fluent.hibernate.cfg.scanner.EntityScanner;
-//import org.hibernate.Session;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -15,6 +15,7 @@ import java.util.Properties;
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
     private static Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
+
     /* Define JVM options
     -Ddatabase.driver=org.postgresql.Driver
     -Ddatabase.dialect=org.hibernate.dialect.PostgreSQL9Dialect
@@ -22,22 +23,20 @@ public class HibernateUtil {
     -Ddatabase.user=admin
     -Ddatabase.password=Training123!
     */
+
     public static SessionFactory getSessionFactory() {
         //first time invoke
         if (sessionFactory == null) {
             try {
-                Configuration configuration = new Configuration();
-                Properties settings = new Properties();
-
 
                 String[] modelPackages = {"com.sean.debug12.model"};
-
-
                 String dbDriver = System.getProperty("database.driver");
                 String dbDialect = System.getProperty("database.dialect");
                 String dbUrl = System.getProperty("database.url");
                 String dbUser = System.getProperty("database.user");
                 String dbPassword = System.getProperty("database.password");
+                Configuration configuration = new Configuration();
+                Properties settings = new Properties();
 
 
 
@@ -50,8 +49,8 @@ public class HibernateUtil {
                 //验证mapping做的对不对， validate schema
                 settings.put(Environment.HBM2DDL_AUTO, "validate");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-
                 configuration.setProperties(settings);
+
                 EntityScanner.scanPackages(modelPackages).addTo(configuration);
                 StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder();
                 ServiceRegistry serviceRegistry = registryBuilder.applySettings(configuration.getProperties()).build();

@@ -16,7 +16,7 @@ sex               VARCHAR (50),
 breed             VARCHAR(100),
 name              VARCHAR(30) not null unique,
 age               VARCHAR(150),
-shelter           VARCHAR(100),
+shelter           INTEGER NOT NUll,
 description       VARCHAR(150),
 adoptable         boolean
 );

@@ -9,12 +9,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdopterJDBCDao {
-    static final String DBURL = "jdbc:postgresql://localhost:5430/dealer2";
-    static final String USER = "admin";
-    static final String PASS = "password";
-
-    private static Logger logger = LoggerFactory.getLogger(AdopterJDBCDao.class);
+//public class AdopterJDBCDao {
+//    static final String DBURL = "jdbc:postgresql://localhost:5430/dealer2";
+//    static final String USER = "admin";
+//    static final String PASS = "password";
+//
+//    private static Logger logger = LoggerFactory.getLogger(AdopterJDBCDao.class);
 
 
 //    public static void main (String[] args) {
@@ -26,58 +26,58 @@ public class AdopterJDBCDao {
 //
 //    }
 
-    public List<Adopter> getAdopter() {
-
-
-        List<Adopter> adopters = new ArrayList<>();
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        try {
-            //STEP 2: Open a connection
-            System.out.println("Connecting to database...");
-            conn = DriverManager.getConnection(DBURL, USER, PASS);
-            //STEP 3: Execute a query
-            System.out.println("Creating statement...");
-            stmt = conn.createStatement();
-            String sql;
-            sql = "SELECT * FROM adopter";
-            rs = stmt.executeQuery(sql);
-            //STEP 4: Extract data from result set
-            while (rs.next()) {
-                //Retrieve by column name
-                Long id = rs.getLong("id");
-                String name = rs.getString("name");
-                String description = rs.getString("description");
-                String tel = rs.getString("tel");
-                String email = rs.getString("email");
-                String location = rs.getString("location");
-                String pet_id = rs.getString("pet_id");
-
-                //Fill the object
-                Adopter adopter = new Adopter();
-                adopter.setId(id);
-                adopter.setName(name);
-                adopter.setDescription(description);
-                adopter.setTel(tel);
-                adopter.setEmial(email);
-                adopter.setLocation(location);
-                adopter.setPet_id(pet_id);
-
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            //STEP 6: finally block used to close resources
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-        return adopters;
-    }
-}
+//    public List<Adopter> getAdopter() {
+//
+//
+//        List<Adopter> adopters = new ArrayList<>();
+//        Connection conn = null;
+//        Statement stmt = null;
+//        ResultSet rs = null;
+//        try {
+//            //STEP 2: Open a connection
+//            System.out.println("Connecting to database...");
+//            conn = DriverManager.getConnection(DBURL, USER, PASS);
+//            //STEP 3: Execute a query
+//            System.out.println("Creating statement...");
+//            stmt = conn.createStatement();
+//            String sql;
+//            sql = "SELECT * FROM adopter";
+//            rs = stmt.executeQuery(sql);
+//            //STEP 4: Extract data from result set
+//            while (rs.next()) {
+//                //Retrieve by column name
+//                Long id = rs.getLong("id");
+//                String name = rs.getString("name");
+//                String description = rs.getString("description");
+//                String tel = rs.getString("tel");
+//                String email = rs.getString("email");
+//                String location = rs.getString("location");
+//                String pet_id = rs.getString("pet_id");
+//
+//                //Fill the object
+//                Adopter adopter = new Adopter();
+//                adopter.setId(id);
+//                adopter.setName(name);
+//                adopter.setDescription(description);
+//                adopter.setTel(tel);
+//                adopter.setEmial(email);
+//                adopter.setLocation(location);
+//                adopter.setPet_id(pet_id);
+//
+//
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            //STEP 6: finally block used to close resources
+//            try {
+//                if (rs != null) rs.close();
+//                if (stmt != null) stmt.close();
+//                if (conn != null) conn.close();
+//            } catch (SQLException se) {
+//                se.printStackTrace();
+//            }
+//        }
+//        return adopters;
+//    }
+//}

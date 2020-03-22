@@ -18,38 +18,38 @@ public class PetJDBCDaoTest {
 
 
 
-    private PetJDBCDao petDao;
+//    private PetJDBCDao petDao;
+//
+//    @Before
+//    public void init() {
+//        petDao = new PetJDBCDao();
+//        long testid = 0;
+//
+//    }
 
-    @Before
-    public void init() {
-        petDao = new PetJDBCDao();
-        long testid = 0;
 
-    }
+//    @After
+//
+//    @Test
+//    public void getPetsTest() {
+//        List<Pet> pets = petDao.getPet();
+//        int expectedNumbOfPet = 2;
+//
+//        Assert.assertEquals(expectedNumbOfPet, pets.size());
+//
+//    }
 
-
-    @After
-
-    @Test
-    public void getPetsTest() {
-        List<Pet> pets = petDao.getPet();
-        int expectedNumbOfPet = 2;
-
-        Assert.assertEquals(expectedNumbOfPet, pets.size());
-
-    }
-
-    @Test
-    public void getPetByNameTest(){
-
-    }
-
-    public static void main (String[] args) {
-
-        logger.debug("Debug");
-        logger.info("infor");
-        logger.warn("warn");
-
-    }
+//    @Test
+//    public void getPetByNameTest(){
+//
+//    }
+//
+//    public static void main (String[] args) {
+//
+//        logger.debug("Debug");
+//        logger.info("infor");
+//        logger.warn("warn");
+//
+//    }
 
 }

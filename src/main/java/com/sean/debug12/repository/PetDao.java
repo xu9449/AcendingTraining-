@@ -16,16 +16,16 @@ public interface PetDao {
 //
 //        Assert.assertEquals(expectedNumOfPet, pets.size());
 //    }
-    Pet save(Pet pet);
+//    Pet save(Pet pet);
     //Pet update(Pet pet);
     //boolean delete(String petName);
-    boolean delete(Pet pet);
+//    boolean delete(Pet pet);
     List<Pet> getPets();
     //List<Pet> getPetsWithChildren();
     //Pet getDepartmentByName(String petName);
     //Pet getPetAndShelterBy(String petName);
     //List<Object[]> getPetAndShelterAndAdopters(String petName);
-    Pet getPetEagerBy(Integer id);
+//    Pet getPetEagerBy(Integer id);
 
 
 }

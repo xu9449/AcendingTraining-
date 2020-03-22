@@ -1,12 +1,10 @@
 package com.sean.debug12.repository;
 
+
 import com.sean.debug12.jdbc.PetJDBCDao;
 import com.sean.debug12.model.Pet;
 import com.sean.debug12.model.Shelter;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,28 +21,38 @@ public class PetDaoTest {
 
 
     private PetDao petDao;
-    private Pet p1;
-    private Pet p2;
-    private Shelter s1;
-    private String petString = "Lily";
+//    private Pet p1;
+//    private Pet p2;
+//    private Shelter s1;
+//    private String petString = "Lily";
 
+    @BeforeClass
+    public static void initAllTest() {
+        logger.info("*************Before Class: start testing....");
+    }
+
+    @AfterClass
+    public static void endAllTest() {
+        logger.info("*************After Class: end testing....");
+    }
     @Before
     public void init() {
+//        petDao = new PetDaoImpl();
+//        p1 = new Pet();
+//        p1.setName(petString);
+//        p1.setAge("Less than one year");
+//        p1.setBreed("Kogi");
+//        p1 = petDao.save(p1);
         petDao = new PetDaoImpl();
-        p1 = new Pet();
-        p1.setName(petString);
-        p1.setAge("Less than one year");
-        p1.setBreed("Kogi");
-        p1 = petDao.save(p1);
 
 
     }
 
 
-    @After
-    public void tearDown() {
-        petDao.delete(p1);
-    }
+//    @After
+//    public void tearDown() {
+//        petDao.delete(p1);
+//    }
 
     @Test
     public void getPetsTest() {
@@ -60,25 +68,25 @@ public class PetDaoTest {
 //
 //    }
 
-    @Test
-    public void getDepartmentEagerByTest() {
-        Pet pet = petDao.getPetEagerBy(p1.getId());
-
-        assertNotNull(pet);
-
-        assertEquals(pet.getName(), p1.getName());
-        //assertTrue(pet.getShelter().size()>0);
-    }
-
-
-
-    public static void main (String[] args) {
-
-        logger.debug("Debug");
-        logger.info("infor");
-        logger.warn("warn");
-
-    }
+//    @Test
+//    public void getDepartmentEagerByTest() {
+//        Pet pet = petDao.getPetEagerBy(p1.getId());
+//
+//        assertNotNull(pet);
+//
+//        assertEquals(pet.getName(), p1.getName());
+//        //assertTrue(pet.getShelter().size()>0);
+//    }
+//
+//
+//
+//    public static void main (String[] args) {
+//
+//        logger.debug("Debug");
+//        logger.info("infor");
+//        logger.warn("warn");
+//
+//    }
 
 
 }

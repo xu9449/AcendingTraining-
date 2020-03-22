@@ -11,7 +11,7 @@ import java.util.Date;
 // invert side
 public class Pet {
     public Pet() {};
-    public Pet(Integer id, String sex, String name, String age, String breed, String shelter, String description, boolean adoptable, String adopter) {
+    public Pet(Integer id, String sex, String name, String age, String breed, Integer shelter, String description, boolean adoptable, String adopter) {
 
         this.id = id;
         this.sex = sex;
@@ -20,7 +20,6 @@ public class Pet {
         this.shelter = shelter;
         this.breed = breed;
         this.description = description;
-        this.shelter = shelter;
         this.adoptable = adoptable;
         this.adopter = adopter;
 
@@ -28,10 +27,11 @@ public class Pet {
 
 
 
+
     };
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userid")
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "userid")
 
 
 
@@ -57,7 +57,7 @@ public class Pet {
     private String age;
 
     @Column(name = "shelter")
-    private String shelter;
+    private Integer shelter;
 
     @Column(name = "description")
     private String description;
@@ -83,7 +83,7 @@ public class Pet {
         this.name = name;
     }
     public void setAge(String age) { this.age = age;}
-    public void setShelter(String shelter) {
+    public void setShelter(Integer shelter) {
         this.shelter = shelter;
     }
     public void setDescription(String description) { this.description = description;}
@@ -96,7 +96,7 @@ public class Pet {
     public String getBreed() { return breed; }
     public String getName() { return name; }
     public String getAge() {return age; }
-    public String getShelter() { return shelter; }
+    public Integer getShelter() { return shelter; }
     public String getDescription() {return description;}
     public Boolean getAdoptable() {return adoptable;}
     public String getAdopter() {return adopter;}
