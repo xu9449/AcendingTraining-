@@ -2,14 +2,41 @@ package com.sean.debug12.model;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "pet")
 public class Shelter {
+    public Shelter(){};
+
+    public Shelter(Long id, String name, String email, String location, String description, String principle) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.tel = tel;
+        this.location = location;
+        this.description = description;
+        this.principle = principle;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "id")
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name ="tel")
     private String tel;
+    @Column(name = "email")
     private String email;
+    @Column(name = "location")
     private String location;
+    @Column(name = "description")
     private String description;
+    @Column(name = "principle")
     private String principle;
+
+
+    //Set
 
     public void setId(Long id) {
         this.id = id;
@@ -40,9 +67,7 @@ public class Shelter {
     }
 
 
-    private Pet pet;
-
-
+    //Get
 
     public String getTel() {
         return tel;
