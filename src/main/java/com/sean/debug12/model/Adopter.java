@@ -8,18 +8,19 @@ import java.util.Set;
 
 @Entity
 @Table(name = "adopter")
+
 // owning set
 public class Adopter {
     public Adopter(){};
 
-    public Adopter(Integer id, String name, String email, String location, String description, Timestamp adopt_date, Integer pet_id){
+    public Adopter(Integer id, String name, String email, String location, String description, Timestamp adopt_date){
         this.id = id;
         this.name = name;
         this.email = email;
         this.location = location;
         this.description = description;
         this.adopt_date = adopt_date;
-        this.pet_id = pet_id;
+//        this.pet_id = pet_id;
     }
 
     @Id
@@ -39,8 +40,12 @@ public class Adopter {
     private String description;
     @Column(name = "adopt_date")
     private Timestamp adopt_date;
-    @Column(name = "pet_id")
-    private Integer pet_id;
+//    @Column(name = "pet_id")
+//    private Integer pet_id;
+
+//    @OneToOne
+//    @JoinColumn(name = "pet_id")
+//    private Pet petForMapping;
 
 
     //annotation where is the foreign key
@@ -78,9 +83,9 @@ public class Adopter {
 
     public void setAdopt_date(Timestamp adopt_date) {this.adopt_date = adopt_date;}
 
-    public void setPet_id(Integer pet_id) {
-        this.pet_id = pet_id;
-    }
+//    public void setPet_id(Integer pet_id) {
+//        this.pet_id = pet_id;
+//    }
     // get
 
 
@@ -106,9 +111,9 @@ public class Adopter {
 
     public Timestamp getAdopt_date() { return adopt_date; }
 
-    public Integer getPet_id() {
-        return pet_id;
-    }
+//    public Integer getPet_id() {
+//        return pet_id;
+//    }
 
     public String getTel() {
         return tel;

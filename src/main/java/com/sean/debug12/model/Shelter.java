@@ -1,6 +1,8 @@
 package com.sean.debug12.model;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "shelter")
@@ -35,6 +37,8 @@ public class Shelter {
     @Column(name = "principle")
     private String principle;
 
+    @OneToMany(mappedBy = "shelter", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Pet> pets;
 
     //Set
 
@@ -66,7 +70,7 @@ public class Shelter {
         this.principle = principle;
     }
 
-
+    public void setPets(Set<Pet> pets) {this.pets = pets;}
     //Get
 
     public String getTel() {
@@ -91,6 +95,16 @@ public class Shelter {
 
     public String getEmail() {
         return email;
+    }
+
+    public Set<Pet> getPets() {
+        try {
+            int size = pets.size();
+        }
+        catch (Exception e){
+            return null;
+        }
+        return pets;
     }
 
     public String getPrinciple() {

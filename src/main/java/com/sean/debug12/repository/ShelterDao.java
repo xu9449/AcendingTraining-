@@ -12,6 +12,8 @@ public interface ShelterDao {
     Shelter save(Shelter shelter);
     Shelter update(Shelter shelter);
     //Shelter getShelterByName(String sheltName);
+    Shelter getShelterEagerBy(Integer Id);
+    Shelter getShelterBy(Integer Id);
 
 
 }

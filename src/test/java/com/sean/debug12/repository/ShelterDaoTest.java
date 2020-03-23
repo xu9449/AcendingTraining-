@@ -11,6 +11,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
+
 public class ShelterDaoTest {
 
     private ShelterDao shelterDao;
@@ -49,8 +53,17 @@ public class ShelterDaoTest {
     public void getSheltersTest() {
         List<Shelter> shelters = shelterDao.getShelters();
         int expectedNumOfShelt = 6;
-        shelters.forEach(shelt -> System.out.println(shelt));
+        shelters.forEach(shelter -> System.out.println(shelter));
         Assert.assertEquals(expectedNumOfShelt, shelters.size());
+    }
+
+    @Test
+    public void getShelterEagerTest() {
+        Shelter shelter = shelterDao.getShelterEagerBy(s1.getId());
+        assertNotNull(shelter);
+        assertEquals(shelter.getName(), s1.getName());
+        assertTrue(shelter.getPets().size() >0);
+
     }
 
 

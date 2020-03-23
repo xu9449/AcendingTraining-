@@ -8,27 +8,29 @@ import java.util.Date;
 
 @Entity
 @Table(name = "pet")
+
 // invert side
 public class Pet {
     public Pet() {};
-    public Pet(Integer id, String sex, String name, String age, String breed, Integer shelter, String description, boolean adoptable, String adopter) {
+    public Pet(Integer id, String sex, String name, String age, String breed, Integer shelter_id, String description, boolean adoptable, String adopter) {
 
         this.id = id;
         this.sex = sex;
         this.name = name;
         this.age = age;
-        this.shelter = shelter;
+        this.shelter_id = shelter_id;
         this.breed = breed;
         this.description = description;
         this.adoptable = adoptable;
         this.adopter = adopter;
 
-
-
-
-
-
     };
+
+
+    @ManyToOne
+    @JoinColumn(name = "shelter")
+    private Shelter shelter;
+
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "userid")
@@ -56,8 +58,8 @@ public class Pet {
     @Column(name = "age")
     private String age;
 
-    @Column(name = "shelter")
-    private Integer shelter;
+    @Column(name = "shelter_id")
+    private Integer shelter_id;
 
     @Column(name = "description")
     private String description;
@@ -83,12 +85,13 @@ public class Pet {
         this.name = name;
     }
     public void setAge(String age) { this.age = age;}
-    public void setShelter(Integer shelter) {
-        this.shelter = shelter;
-    }
+    public void setShelter(Integer shelter_id) { this.shelter_id = shelter_id; }
     public void setDescription(String description) { this.description = description;}
     public void setAdoptable(Boolean adoptable) {this.adoptable = adoptable;}
     public void setAdopter(String adopter) {this.adopter = adopter;}
+    public void setShelter(Shelter shelter) {
+        this.shelter = shelter;
+    }
 
     // Get
     public Integer getId() { return id; }
@@ -96,10 +99,13 @@ public class Pet {
     public String getBreed() { return breed; }
     public String getName() { return name; }
     public String getAge() {return age; }
-    public Integer getShelter() { return shelter; }
+    public Integer getShelter_id() { return shelter_id; }
     public String getDescription() {return description;}
     public Boolean getAdoptable() {return adoptable;}
     public String getAdopter() {return adopter;}
+    public Shelter getShelter() {
+        return shelter;
+    }
 
 
 

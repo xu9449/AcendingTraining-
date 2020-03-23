@@ -39,6 +39,38 @@ public class ShelterDaoImpl implements ShelterDao {
         }
     }
 
+    public Shelter getShelterEagerBy(Integer Id) {
+
+        String hql = "FROM Shelter d LEFT JOIN FETCH d.pets where d.id = :Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query<Shelter> query = session.createQuery(hql);
+            query.setParameter("Id", Id);
+            Shelter result = query.uniqueResult();
+            return result;
+        }
+        catch (Exception e){
+            logger.debug(e.getMessage());
+
+            return null;
+        }
+    }
+    public Shelter getShelterBy(Integer Id) {
+        String hql = "FROM Shelter d  where d.id = :Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query<Shelter> query = session.createQuery(hql);
+            query.setParameter("Id", Id);
+            Shelter result = query.uniqueResult();
+            return result;
+        }
+        catch (Exception e){
+            logger.debug(e.getMessage());
+
+            return null;
+        }
+    }
+
     @Override
     public Shelter save(Shelter shelter){
         Transaction transaction = null;
