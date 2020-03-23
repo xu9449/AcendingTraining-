@@ -75,11 +75,11 @@ public class PetDaoImpl implements PetDao{
         try {
             Query<Pet> query = session.createQuery(hql);
             pets = query.list();
-            session.close();
+
             return pets;
         } catch (Exception e) {
             logger.error("failure to retrieve data record", e);
-            session.close();
+
             return pets;
         }
     }

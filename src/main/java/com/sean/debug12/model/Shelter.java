@@ -3,11 +3,11 @@ package com.sean.debug12.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "pet")
+@Table(name = "shelter")
 public class Shelter {
     public Shelter(){};
 
-    public Shelter(Long id, String name, String email, String location, String description, String principle) {
+    public Shelter(Integer id, String name, String email, String location, String description, String principle) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -21,7 +21,7 @@ public class Shelter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Column(name = "name")
     private String name;
     @Column(name ="tel")
@@ -38,7 +38,7 @@ public class Shelter {
 
     //Set
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -85,7 +85,7 @@ public class Shelter {
         return name;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
