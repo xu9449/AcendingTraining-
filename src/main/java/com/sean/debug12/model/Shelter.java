@@ -1,6 +1,7 @@
 package com.sean.debug12.model;
 
 import javax.persistence.*;
+
 import java.util.List;
 import java.util.Set;
 
@@ -9,7 +10,7 @@ import java.util.Set;
 public class Shelter {
     public Shelter(){};
 
-    public Shelter(Integer id, String name, String email, String location, String description, String principle) {
+    public Shelter(long id, String name, String email, String location, String description, String principle) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -23,7 +24,7 @@ public class Shelter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "id")
-    private Integer id;
+    private long id;
     @Column(name = "name")
     private String name;
     @Column(name ="tel")
@@ -37,12 +38,13 @@ public class Shelter {
     @Column(name = "principle")
     private String principle;
 
+
     @OneToMany(mappedBy = "shelter", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Pet> pets;
 
     //Set
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -89,7 +91,7 @@ public class Shelter {
         return name;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 

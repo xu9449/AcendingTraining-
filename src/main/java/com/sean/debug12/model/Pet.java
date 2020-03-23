@@ -3,6 +3,7 @@ package com.sean.debug12.model;
 
 
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -12,23 +13,22 @@ import java.util.Date;
 // invert side
 public class Pet {
     public Pet() {};
-    public Pet(Integer id, String sex, String name, String age, String breed, Integer shelter_id, String description, boolean adoptable, String adopter) {
+    public Pet(long id, String sex, String name, String age, String breed, String description, boolean adoptable) {
 
         this.id = id;
         this.sex = sex;
         this.name = name;
         this.age = age;
-        this.shelter_id = shelter_id;
         this.breed = breed;
         this.description = description;
         this.adoptable = adoptable;
-        this.adopter = adopter;
+//        this.adopter = adopter;
 
     };
 
 
     @ManyToOne
-    @JoinColumn(name = "shelter")
+    @JoinColumn(name = "shelter_id")
     private Shelter shelter;
 
 
@@ -44,7 +44,7 @@ public class Pet {
 
 
     @Column(name = "id")
-    private Integer id;
+    private long id;
 
     @Column(name = "sex")
     private String sex;
@@ -58,8 +58,8 @@ public class Pet {
     @Column(name = "age")
     private String age;
 
-    @Column(name = "shelter_id")
-    private Integer shelter_id;
+//    @Column(name = "shelter_id")
+//    private long shelter_id;
 
     @Column(name = "description")
     private String description;
@@ -67,8 +67,8 @@ public class Pet {
     @Column(name = "adoptable")
     private boolean adoptable;
 
-    @Column(name = "adopter")
-    private String adopter;
+//    @Column(name = "adopter")
+//    private String adopter;
 
 
 
@@ -78,31 +78,31 @@ public class Pet {
 
 //    settings.put(Environment.HBM2DD_AUTO, "validate");
     // Set
-    public void setId(Integer id) { this.id = id; }
+    public void setId(long id) { this.id = id; }
     public void setSex(String sex) { this.sex = sex;}
     public void setBreed(String breed) {this.breed = breed;}
     public void setName(String name) {
         this.name = name;
     }
     public void setAge(String age) { this.age = age;}
-    public void setShelter(Integer shelter_id) { this.shelter_id = shelter_id; }
+//    public void setShelter(long shelter_id) { this.shelter_id = shelter_id; }
     public void setDescription(String description) { this.description = description;}
     public void setAdoptable(Boolean adoptable) {this.adoptable = adoptable;}
-    public void setAdopter(String adopter) {this.adopter = adopter;}
+//    public void setAdopter(String adopter) {this.adopter = adopter;}
     public void setShelter(Shelter shelter) {
         this.shelter = shelter;
     }
 
     // Get
-    public Integer getId() { return id; }
+    public long getId() { return id; }
     public String getSex() {return sex; }
     public String getBreed() { return breed; }
     public String getName() { return name; }
     public String getAge() {return age; }
-    public Integer getShelter_id() { return shelter_id; }
+//    public long getShelter_id() { return shelter_id; }
     public String getDescription() {return description;}
     public Boolean getAdoptable() {return adoptable;}
-    public String getAdopter() {return adopter;}
+//    public String getAdopter() {return adopter;}
     public Shelter getShelter() {
         return shelter;
     }

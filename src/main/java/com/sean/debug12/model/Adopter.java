@@ -2,6 +2,7 @@ package com.sean.debug12.model;
 
 
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +14,7 @@ import java.util.Set;
 public class Adopter {
     public Adopter(){};
 
-    public Adopter(Integer id, String name, String email, String location, String description, Timestamp adopt_date){
+    public Adopter(long id, String name, String email, String location, String description, Timestamp adopt_date){
         this.id = id;
         this.name = name;
         this.email = email;
@@ -27,7 +28,7 @@ public class Adopter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "id")
-    private Integer id;
+    private long id;
     @Column(name = "name")
     private String name;
     @Column (name = "tel")
@@ -40,8 +41,8 @@ public class Adopter {
     private String description;
     @Column(name = "adopt_date")
     private Timestamp adopt_date;
-//    @Column(name = "pet_id")
-//    private Integer pet_id;
+    @Column(name = "pet_id")
+    private long pet_id;
 
 //    @OneToOne
 //    @JoinColumn(name = "pet_id")
@@ -61,7 +62,7 @@ public class Adopter {
         this.name = name;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -83,13 +84,13 @@ public class Adopter {
 
     public void setAdopt_date(Timestamp adopt_date) {this.adopt_date = adopt_date;}
 
-//    public void setPet_id(Integer pet_id) {
-//        this.pet_id = pet_id;
-//    }
+    public void setPet_id(long pet_id) {
+        this.pet_id = pet_id;
+    }
     // get
 
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
@@ -111,9 +112,9 @@ public class Adopter {
 
     public Timestamp getAdopt_date() { return adopt_date; }
 
-//    public Integer getPet_id() {
-//        return pet_id;
-//    }
+    public long getPet_id() {
+        return pet_id;
+    }
 
     public String getTel() {
         return tel;

@@ -12,9 +12,9 @@ import java.util.List;
 
 
 
-public class PetJDBCDaoTest {
-
-    private static Logger logger = LoggerFactory.getLogger(PetJDBCDao.class);
+//public class PetJDBCDaoTest {
+//
+//    private static Logger logger = LoggerFactory.getLogger(PetJDBCDao.class);
 
 
 
@@ -51,5 +51,5 @@ public class PetJDBCDaoTest {
 //        logger.warn("warn");
 //
 //    }
-
-}
+//
+//}

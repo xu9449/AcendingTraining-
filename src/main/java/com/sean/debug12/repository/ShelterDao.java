@@ -3,6 +3,7 @@ package com.sean.debug12.repository;
 import com.sean.debug12.model.Pet;
 import com.sean.debug12.model.Shelter;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public interface ShelterDao {
@@ -12,8 +13,8 @@ public interface ShelterDao {
     Shelter save(Shelter shelter);
     Shelter update(Shelter shelter);
     //Shelter getShelterByName(String sheltName);
-    Shelter getShelterEagerBy(Integer Id);
-    Shelter getShelterBy(Integer Id);
+    Shelter getShelterEagerBy(long Id);
+    Shelter getShelterBy(long Id);
 
 
 }

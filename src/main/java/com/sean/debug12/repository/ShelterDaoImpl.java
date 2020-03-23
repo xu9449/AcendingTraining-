@@ -39,7 +39,7 @@ public class ShelterDaoImpl implements ShelterDao {
         }
     }
 
-    public Shelter getShelterEagerBy(Integer Id) {
+    public Shelter getShelterEagerBy(long Id) {
 
         String hql = "FROM Shelter d LEFT JOIN FETCH d.pets where d.id = :Id";
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -55,7 +55,7 @@ public class ShelterDaoImpl implements ShelterDao {
             return null;
         }
     }
-    public Shelter getShelterBy(Integer Id) {
+    public Shelter getShelterBy(long Id) {
         String hql = "FROM Shelter d  where d.id = :Id";
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
