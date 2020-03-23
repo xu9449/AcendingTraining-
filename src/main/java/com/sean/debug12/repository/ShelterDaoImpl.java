@@ -20,19 +20,19 @@ public class ShelterDaoImpl implements ShelterDao {
     @Override
     public List<Shelter> getShelters() {
 
-         List<Shelter> shelters = new ArrayList<>();
+         List<Shelter> shelts = new ArrayList<>();
         String hql = "FROM Shelter";
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Query<Shelter> query = session.createQuery(hql);
-            shelters = query.list();
+            shelts = query.list();
             session.close();
-            return shelters;
+            return shelts;
         }
         catch (Exception e){
             logger.debug(e.getMessage());
             session.close();
-            return shelters;
+            return shelts;
         }
     }
 
@@ -52,5 +52,10 @@ public class ShelterDaoImpl implements ShelterDao {
         }
         if (shelter != null)logger.debug("The department was inserted into database");
         return null;
+    }
+
+    @Override
+    public boolean delete(String sheltName) {
+
     }
 }

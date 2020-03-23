@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ShelterDao {
 
+    boolean delete(String sheltName);
     List<Shelter> getShelters() ;
     Shelter save(Shelter shelter);
 //    Shelter update(Shelter shelter);
