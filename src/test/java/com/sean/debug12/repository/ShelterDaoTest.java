@@ -1,14 +1,22 @@
 package com.sean.debug12.repository;
 
+import com.sean.debug12.init.Appbootstrap;
 import com.sean.debug12.model.Pet;
 import com.sean.debug12.model.Shelter;
+import com.sean.debug12.service.PetService;
+import com.sean.debug12.service.ShelterService;
+import org.hibernate.HibernateException;
 import org.hibernate.LazyInitializationException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
@@ -16,12 +24,19 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Appbootstrap.class)
 public class ShelterDaoTest {
 
-    private ShelterDao shelterDao;
-    private PetDao petDao;
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+//    @Autowired private ShelterService shelterService;
+//    @Autowired private PetService petService;
 
+    @Autowired
+    private ShelterDao shelterDao;
+    @Autowired
+    private PetDao petDao;
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     private Pet p1;
     private Pet p2;
     private Shelter s1;
@@ -29,8 +44,8 @@ public class ShelterDaoTest {
 
     @Before
     public void init() {
-        shelterDao = new ShelterDaoImpl();
-        petDao = new PetDaoImpl();
+//        shelterDao = new ShelterDaoImpl();
+//        petDao = new PetDaoImpl();
         s1 = new Shelter();
         s1.setName(ShelterString);
         s1.setLocation("Arlington");
@@ -65,7 +80,7 @@ public class ShelterDaoTest {
     @Test
     public void getSheltersTest() {
         List<Shelter> shelters = shelterDao.getShelters();
-        int expectedNumOfShelt = 6;
+        int expectedNumOfShelt = 5;
         shelters.forEach(shelter -> System.out.println(shelter));
         Assert.assertEquals(expectedNumOfShelt, shelters.size());
     }
@@ -79,14 +94,14 @@ public class ShelterDaoTest {
 
     }
 
-//    @Test(expected = LazyInitializationException.class)
-//    public void getShelterByTest() {
-//        Shelter shelter = shelterDao.getShelterBy(s1.getId());
-//        assertNotNull(shelter);
-//        assertEquals(shelter.getName(), s1.getName());
-//        shelter.getPets().size();
-//
-//    }
+    @Test(expected = HibernateException.class)
+    public void getShelterByTest() {
+        Shelter shelter = shelterDao.getShelterBy(s1.getId());
+        assertNotNull(shelter);
+        assertEquals(shelter.getName(), s1.getName());
+        shelter.getPets().size();
+
+    }
 
 
 }

@@ -10,10 +10,15 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+// repository 告诉我们这个class生成的instance会写到spring的container里面
+// ShelterDao sd = new ShelterDaoImpl();
+
+@Repository
 public class ShelterDaoImpl implements ShelterDao {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
