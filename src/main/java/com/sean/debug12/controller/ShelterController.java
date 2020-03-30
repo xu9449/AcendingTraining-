@@ -17,10 +17,9 @@ public class ShelterController {
     @Autowired
     private ShelterService shelterService;
 
-    // /shelters GET
+    // http://localhost:8080/shelter GET
     @RequestMapping(value = "", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Shelter> getShelters() {
-
         return shelterService.getShelters();
     }
 

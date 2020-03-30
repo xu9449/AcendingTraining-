@@ -16,19 +16,13 @@ import org.springframework.context.annotation.Scope;
 @SpringBootApplication(scanBasePackages = {"com.sean.debug12"})
 /*@ServletComponentScan(basePackages = {"com.sean.debug.filter"})*/
 public class Appbootstrap extends SpringBootServletInitializer {
+
     private Logger logger = LoggerFactory.getLogger(getClass());
+
     public static void main(String[] args) {
+        //AppInitializer app = new AppInitializer();
         SpringApplication.run(Appbootstrap.class, args);
     }
 
-//    @Bean
-//    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-//    public SessionFactory sessionFactory() {
-//        return HibernateUtil.getSessionFactory();
-//    }
-//    @Bean
-//    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-//    public Logger logger(InjectionPoint injectionPoint) {
-//        return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass());
-//    }
+
 }

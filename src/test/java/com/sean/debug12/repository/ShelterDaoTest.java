@@ -44,8 +44,10 @@ public class ShelterDaoTest {
 
     @Before
     public void init() {
+
 //        shelterDao = new ShelterDaoImpl();
 //        petDao = new PetDaoImpl();
+
         s1 = new Shelter();
         s1.setName(ShelterString);
         s1.setLocation("Arlington");

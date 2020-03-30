@@ -1,5 +1,7 @@
 package com.sean.debug12.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 import java.util.List;
@@ -38,7 +40,7 @@ public class Shelter {
     @Column(name = "principle")
     private String principle;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "shelter", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Pet> pets;
 
