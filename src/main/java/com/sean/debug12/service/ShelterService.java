@@ -33,12 +33,12 @@ public class ShelterService {
     }
 
 
-//    Shelter getShelterEagerBy(long Id) {
-//
-//    }
-//
-//    Shelter getShelterBy(long Id) {
-//
-//    }
+    public Shelter getShelterEagerBy(long Id) {
+        return shelterDao.getShelterEagerBy(Id);
+    }
+
+    public Shelter getShelterBy(long Id) {
+        return shelterDao.getShelterBy(Id);
+    }
 
 }
