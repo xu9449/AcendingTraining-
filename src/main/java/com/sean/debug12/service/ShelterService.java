@@ -15,7 +15,7 @@ public class ShelterService {
     private ShelterDao shelterDao;
 
     public Shelter save(Shelter shelter) {
-        shelter.setName(shelter.getName() + shelter.getLocation());
+//        shelter.setName(shelter.getName() + shelter.getLocation());
         Shelter s1 = shelterDao.save(shelter);
         return s1;
     }
