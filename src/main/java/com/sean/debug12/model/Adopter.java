@@ -1,10 +1,13 @@
 package com.sean.debug12.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -43,6 +46,14 @@ public class Adopter {
     private Timestamp adopt_date;
     @Column(name = "pet_id")
     private long pet_id;
+
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable( name = "adopters_roles",
+                joinColumns = { @JoinColumn(name = "adopter_id")},
+                inverseJoinColumns = {@JoinColumn(name = "role_id")}
+                )
+    @JsonIgnore
+    private List<Role> roles;
 
 //    @OneToOne
 //    @JoinColumn(name = "pet_id")

@@ -1,12 +1,12 @@
-insert into pet (name, sex, breed, age, shelter_id, description ) values
-('Pepper', 'M', 'Domestic Short Hair', '18 months', '1', 'Room 100, 999 Washington Ave. Falls Church, VA'),
-('Shadow','F', 'Domestic Short Hair', '2 years', '1', 'Room 101, 999 Washington Ave. Falls Church, VA'),
-('Eva','M', 'Domestic Medium Hair', '3 years', '2', 'Room 102, 999 Washington Ave. Falls Church, VA'),
-('Oki','F', 'Domestic Long Hair', '12 years', '1', 'Room 103, 999 Washington Ave. Falls Church, VA')
+insert into pets (name, sex, breed, age, shelter_id, adoptable, description) values
+('Pepper', 'M', 'Domestic Short Hair', '18 months', '1',TRUE, 'Perfect Condition'),
+('Shadow','F', 'Domestic Short Hair', '2 years', '1',TRUE, 'Perfect Condition'),
+('Eva','M', 'Domestic Medium Hair', '3 years', '2',TRUE, 'Perfect Condition'),
+('Oki','F', 'Domestic Long Hair', '12 years', '1',TRUE, 'Perfect Condition')
 ;
 commit;
 
-insert into shelter (name, tel, email, location, description, principle ) values
+insert into shelters (name, tel, email, location, description, principle ) values
 ('falls church', '222-444-2213', 'xu9449@gmail.com', 'Room 100, 999 Washington Ave. Falls Church, VA', '1', 'Sean Xu' ),
 ('Silver Spring', '222-444-2213', 'xu9449@gmail.com', 'Room 101, 999 Washington Ave. Falls Church, VA', '2', 'Nancy Chen'),
 ('Crystal City', '222-444-2213', 'xu9449@gmail.com', 'Room 102, 999 Washington Ave. Falls Church, VA', '4', 'Eric Liu'),
@@ -14,10 +14,18 @@ insert into shelter (name, tel, email, location, description, principle ) values
 ;
 commit;
 
-insert into adopter (name, tel, email, location, description, pet_id ) values
-('falls church', '222-444-2213', 'xu9449@gmail.com', 'Room 100, 999 Washington Ave. Falls Church, VA', '1', '2' ),
-('Silver Spring', '222-444-2213', 'xu9449@gmail.com', 'Room 101, 999 Washington Ave. Falls Church, VA', '2', '3'),
-('Crystal City', '222-444-2213', 'xu9449@gmail.com', 'Room 102, 999 Washington Ave. Falls Church, VA', '4', '1'),
-('Friendship Height', '222-444-2213', 'xu9449@gmail.com', 'Room 103, 999 Washington Ave. Falls Church, VA', '6', '4')
+insert into adopters (name, password, tel, email, location, description, first_name, last_name, pet_id ) values
+('Sean Xu', 'password','222-444-2213', 'xu9449@gmail.com', 'Room 100, 999 Washington Ave. Falls Church, VA', '1','Sean','Xu', '2' ),
+('Alex Jira', 'password', '222-444-2213', 'xu9449@gmail.com', 'Room 101, 999 Washington Ave. Falls Church, VA', '2','Alex', 'Jira', '3'),
+('Max Brown', 'password', '222-444-2213', 'xu9449@gmail.com', 'Room 102, 999 Washington Ave. Falls Church, VA', '4', 'Max', 'Brown','1'),
+('Hugh Jackman', 'password', '222-444-2213', 'xu9449@gmail.com', 'Room 103, 999 Washington Ave. Falls Church, VA', '6','Hugh','Jackman', '4')
 ;
 commit;
+
+Alter table adopters
+add constraint adopters_pets_fk FOREIGN KEY (pet_id)
+REFERENCES pets(id);
+
+Alter table pets
+add constraint shelters_pets_fk FOREIGN KEY (shelter_id)
+REFERENCES shelters(id);

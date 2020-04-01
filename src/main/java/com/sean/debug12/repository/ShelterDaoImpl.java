@@ -25,6 +25,7 @@ public class ShelterDaoImpl implements ShelterDao {
     ShelterDao shelterDao;
     PetDao petDao;
 
+
     @Override
     public List<Shelter> getShelters() {
 
@@ -44,6 +45,7 @@ public class ShelterDaoImpl implements ShelterDao {
         }
     }
 
+    @Override
     public Shelter getShelterEagerBy(long Id) {
 
         String hql = "FROM Shelter d LEFT JOIN FETCH d.pets where d.id = :Id";
@@ -52,14 +54,17 @@ public class ShelterDaoImpl implements ShelterDao {
             Query<Shelter> query = session.createQuery(hql);
             query.setParameter("Id", Id);
             Shelter result = query.uniqueResult();
+            session.close();
             return result;
         }
         catch (Exception e){
             logger.debug(e.getMessage());
-
+            session.close();
             return null;
         }
     }
+
+    @Override
     public Shelter getShelterBy(long Id) {
         String hql = "FROM Shelter d  where d.id = :Id";
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -67,11 +72,12 @@ public class ShelterDaoImpl implements ShelterDao {
             Query<Shelter> query = session.createQuery(hql);
             query.setParameter("Id", Id);
             Shelter result = query.uniqueResult();
+            session.close();
             return result;
         }
         catch (Exception e){
             logger.debug(e.getMessage());
-
+            session.close();
             return null;
         }
     }

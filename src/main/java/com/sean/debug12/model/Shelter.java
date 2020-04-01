@@ -101,6 +101,8 @@ public class Shelter {
         return email;
     }
 
+
+
     public Set<Pet> getPets() {
         try {
             int size = pets.size();

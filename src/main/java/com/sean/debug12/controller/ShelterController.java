@@ -2,6 +2,8 @@ package com.sean.debug12.controller;
 
 import com.sean.debug12.model.Shelter;
 import com.sean.debug12.service.ShelterService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,9 @@ import java.util.List;
 @RestController
 @RequestMapping(value = {"/shelters", "/shelter","/shelts"})
 public class ShelterController {
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private ShelterService shelterService;
 
@@ -21,16 +26,32 @@ public class ShelterController {
         return shelterService.getShelters();
     }
 
-    @RequestMapping(value = "/Id", method = RequestMethod.GET)
-    public Shelter findShelter(@PathVariable("Id") Long Id) {
-        return shelterService.getShelterBy(Id);
+//    //http://localhost:8080/shelter?name = xxx
+//    @RequestMapping(value = "", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+//    public Shelter getShelter(@RequestParam("name") String name){
+//        logger.info("pass in variable name: " + name);
+//
+////        return shelterService.getShelterByName(name);
+//    }
+
+    //http://localhost:8080/shelter?name = xxx
+    //可以加 params = {"name"}来区分
+    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE} )
+    public Shelter updateShelterName(@PathVariable("id") Long Id, @RequestParam("name") String name) {
+        logger.info("variable info passing in");
+        Shelter s = shelterService.getShelterById(Id);
+        s.setName(name);
+        s = shelterService.update(s);
+        return s;
     }
 
-    //{prefix}/shelters POST
+
+
+    //http://localhost:8080/shelters POST
     @RequestMapping(value = "", method = RequestMethod.POST)
     public Shelter save(@RequestBody Shelter shelter) {
         Shelter she = shelterService.save(shelter);
-        if (she == null) System.out.println("Shelter is noe created");
+        if (she == null) System.out.println("Shelter is not created");
         return she;
     }
 

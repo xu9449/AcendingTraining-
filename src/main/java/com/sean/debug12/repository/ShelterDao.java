@@ -12,7 +12,7 @@ public interface ShelterDao {
     List<Shelter> getShelters() ;
     Shelter save(Shelter shelter);
     Shelter update(Shelter shelter);
-    //Shelter getShelterByName(String sheltName);
+//    Shelter getShelterByName(String Name);
     Shelter getShelterEagerBy(long Id);
     Shelter getShelterBy(long Id);
 
