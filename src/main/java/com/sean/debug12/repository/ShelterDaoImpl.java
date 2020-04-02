@@ -118,7 +118,7 @@ public class ShelterDaoImpl implements ShelterDao {
 
     @Override
     public boolean delete(Shelter shelter) {
-        String hql ="DELETE shelters as s where s.id =:Id";
+        String hql ="DELETE Shelter as s where s.id =:Id";
         int deletedCount = 0;
         Transaction transaction = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
