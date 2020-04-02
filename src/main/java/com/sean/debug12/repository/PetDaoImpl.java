@@ -69,9 +69,10 @@ public class PetDaoImpl implements PetDao{
 
     @Override
     public List<Pet> getPets() {
-
+//FROM Shelter s LEFT JOIN FETCH s.pets
         List<Pet> pets = new ArrayList<>();
-        String hql = "FROM pet";
+//        String hql = "FROM Pet";
+        String hql = "FROM Pet p LEFT JOIN FETCH p.shelter";
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Query<Pet> query = session.createQuery(hql);

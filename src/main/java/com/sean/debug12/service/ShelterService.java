@@ -25,6 +25,7 @@ public class ShelterService {
     }
 
     public boolean delete(Shelter shelter) {
+
         return shelterDao.delete(shelter);
     }
 
@@ -34,6 +35,7 @@ public class ShelterService {
 
 
     public Shelter getShelterEagerBy(long Id) {
+
         return shelterDao.getShelterEagerBy(Id);
     }
 

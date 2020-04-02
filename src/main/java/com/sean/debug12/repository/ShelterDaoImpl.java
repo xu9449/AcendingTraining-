@@ -29,26 +29,26 @@ public class ShelterDaoImpl implements ShelterDao {
     @Override
     public List<Shelter> getShelters() {
 
-        List<Shelter> shelts = new ArrayList<>();
-        String hql = "FROM Shelter";
+        List<Shelter> shelters = new ArrayList<>();
+        String hql = "FROM Shelter s LEFT JOIN FETCH s.pets";
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Query<Shelter> query = session.createQuery(hql);
-            shelts = query.list();
+            shelters = query.list();
 
-            return shelts;
+            return shelters;
         }
         catch (Exception e){
             logger.debug(e.getMessage());
 
-            return shelts;
+            return shelters;
         }
     }
 
     @Override
     public Shelter getShelterEagerBy(long Id) {
 
-        String hql = "FROM Shelter d LEFT JOIN FETCH d.pets where d.id = :Id";
+        String hql = "FROM Shelter s LEFT JOIN FETCH s.pets where s.id = :Id";
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Query<Shelter> query = session.createQuery(hql);
@@ -66,7 +66,7 @@ public class ShelterDaoImpl implements ShelterDao {
 
     @Override
     public Shelter getShelterBy(long Id) {
-        String hql = "FROM Shelter d  where d.id = :Id";
+        String hql = "FROM Shelter s where s.id = :Id";
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Query<Shelter> query = session.createQuery(hql);
@@ -118,7 +118,7 @@ public class ShelterDaoImpl implements ShelterDao {
 
     @Override
     public boolean delete(Shelter shelter) {
-        String hql ="DELETE Shelter as s where s.id =:Id";
+        String hql ="DELETE shelters as s where s.id =:Id";
         int deletedCount = 0;
         Transaction transaction = null;
         Session session = HibernateUtil.getSessionFactory().openSession();

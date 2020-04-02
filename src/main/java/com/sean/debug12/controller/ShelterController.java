@@ -1,6 +1,8 @@
 package com.sean.debug12.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.sean.debug12.model.Shelter;
+import com.sean.debug12.model.View.ShelterViews;
 import com.sean.debug12.service.ShelterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +23,26 @@ public class ShelterController {
     private ShelterService shelterService;
 
     // http://localhost:8080/shelter GET
+    @JsonView(ShelterViews.Public.class)
     @RequestMapping(value = "", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Shelter> getShelters() {
         return shelterService.getShelters();
     }
+
+    //http://localhost:8080/shelter/id
+    @JsonView(ShelterViews.Internal.class)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE} )
+    public Shelter getShelterByID(@PathVariable("id") Long Id) {
+        Shelter shelter = shelterService.getShelterEagerBy(Id);
+        return shelter;
+    }
+//    //http://localhost:8080/shelter/id
+//    @JsonView(ShelterViews.Internal.class)
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE} )
+//    public Shelter getShelterEagerByID(@PathVariable("id") Long Id) {
+//        Shelter shelter = shelterService.getShelterEagerBy(Id);
+//        return shelter;
+//    }
 
 //    //http://localhost:8080/shelter?name = xxx
 //    @RequestMapping(value = "", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})

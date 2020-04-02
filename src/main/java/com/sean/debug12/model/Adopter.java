@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "adopter")
+@Table(name = "adopters")
 
 // owning set
 public class Adopter {

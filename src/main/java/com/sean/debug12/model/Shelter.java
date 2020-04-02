@@ -1,6 +1,9 @@
 package com.sean.debug12.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.sean.debug12.model.View.PetViews;
+import com.sean.debug12.model.View.ShelterViews;
 
 import javax.persistence.*;
 
@@ -8,11 +11,11 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "shelter")
+@Table(name = "shelters")
 public class Shelter {
-    public Shelter(){};
+    public Shelter(){}
 
-    public Shelter(long id, String name, String email, String location, String description, String principle) {
+    public Shelter(long id, String name, String email, String tel, String location, String description, String principle) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -26,22 +29,35 @@ public class Shelter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "id")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class,PetViews.Public.class, PetViews.Internal.class})
     private long id;
+
     @Column(name = "name")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class,PetViews.Public.class, PetViews.Internal.class})
     private String name;
+
     @Column(name ="tel")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
     private String tel;
+
     @Column(name = "email")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
     private String email;
+
     @Column(name = "location")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
     private String location;
+
     @Column(name = "description")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
     private String description;
+
     @Column(name = "principle")
+    @JsonView({ShelterViews.Internal.class})
     private String principle;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "shelter", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @JsonView({ShelterViews.Internal.class})
+    @OneToMany(mappedBy="shelter", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Pet> pets;
 
     //Set
@@ -112,6 +128,7 @@ public class Shelter {
         }
         return pets;
     }
+
 
     public String getPrinciple() {
         return principle;

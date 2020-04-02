@@ -2,17 +2,22 @@ package com.sean.debug12.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.sean.debug12.model.View.PetViews;
+import com.sean.debug12.model.View.ShelterViews;
+
 import javax.persistence.*;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
-@Table(name = "pet")
+@Table(name = "pets")
 
 // invert side
 public class Pet {
-    public Pet() {};
+    public Pet() {}
     public Pet(long id, String sex, String name, String age, String breed, String description, boolean adoptable) {
 
         this.id = id;
@@ -24,16 +29,9 @@ public class Pet {
         this.adoptable = adoptable;
 //        this.adopter = adopter;
 
-    };
+    }
 
 
-    @ManyToOne
-    @JoinColumn(name = "shelter_id")
-    private Shelter shelter;
-
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "userid")
 
 
 
@@ -44,35 +42,39 @@ public class Pet {
 
 
     @Column(name = "id")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class,PetViews.Public.class, PetViews.Internal.class})
     private long id;
 
     @Column(name = "sex")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class,PetViews.Public.class, PetViews.Internal.class})
     private String sex;
 
     @Column(name = "breed")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
     private String breed;
 
     @Column(name = "name")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
     private String name;
 
     @Column(name = "age")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
     private String age;
 
-//    @Column(name = "shelter_id")
-//    private long shelter_id;
-
     @Column(name = "description")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
     private String description;
 
     @Column(name = "adoptable")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
     private boolean adoptable;
 
-//    @Column(name = "adopter")
-//    private String adopter;
+    @JsonView({PetViews.Public.class, PetViews.Internal.class})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shelter_id")
+    private Shelter shelter;
 
 
-
-//    @JsonInclud()
 
 
 
@@ -85,10 +87,8 @@ public class Pet {
         this.name = name;
     }
     public void setAge(String age) { this.age = age;}
-//    public void setShelter(long shelter_id) { this.shelter_id = shelter_id; }
     public void setDescription(String description) { this.description = description;}
     public void setAdoptable(Boolean adoptable) {this.adoptable = adoptable;}
-//    public void setAdopter(String adopter) {this.adopter = adopter;}
     public void setShelter(Shelter shelter) {
         this.shelter = shelter;
     }
@@ -99,10 +99,8 @@ public class Pet {
     public String getBreed() { return breed; }
     public String getName() { return name; }
     public String getAge() {return age; }
-//    public long getShelter_id() { return shelter_id; }
     public String getDescription() {return description;}
     public Boolean getAdoptable() {return adoptable;}
-//    public String getAdopter() {return adopter;}
     public Shelter getShelter() {
         return shelter;
     }
