@@ -27,45 +27,53 @@ public class PetDaoImpl implements PetDao{
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
-    public Pet save (Pet pet){
+    public boolean save (Pet pet){
         Transaction transaction = null;
+        boolean isSuccess = true;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try  {
             transaction = session.beginTransaction();
             session.save(pet);
             transaction.commit();
             session.close();
-            return pet;
         }
         catch(Exception e) {
+            isSuccess = false;
             if (transaction != null) transaction.rollback();
             logger.error("failure to instert record", e);
             session.close();
-            return null;
         }
+        return isSuccess;
 
     }
 
-//    @Override
-//    public boolean delete(Pet pet) {}
-//    String hql = "DELETE Department as dep where dep.id = :Id";
-//    int deletedCount = 0;
-//    Transaction transaction = null;
-//    Session session = HibernateUtil.getSessionFactory().openSession();
-//    try{
-//        transaction = session.beginTransaction();
-//        Query<Pet> query = session.createQuery(hql);
-//        query.setParameter("Id", pet.getId());
-//        deletedCount = query.executeUpdate();
-//        transaction.commit();
-//        session.close();
-//        return deletedCount >= 1? true: false;
-//    }
-//    catch(HibernateException e) {
-//        if (transaction != null) transaction.rollback();
-//        session.close();
-//
-//    }
+    @Override
+    public boolean update(String name, boolean adoptable) {
+        String msg;
+        String hql = "UPDATE Pet as p set p.adoptable = :adoptable where p.name = :name";
+
+        Transaction transaction = null;
+        boolean isSuccess = true;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Pet> query = session.createQuery(hql);
+            query.setParameter("name", name);
+            query.setParameter("adoptable", adoptable);
+
+            transaction = session.beginTransaction();
+            transaction.commit();
+            msg = String.format("The employee %s was updated, the adoptable condition is : %d", name, "Ready for adopt");
+        }
+        catch (Exception e) {
+            isSuccess = false;
+            if (transaction != null) transaction.rollback();
+            msg = e.getMessage();
+        }
+
+        logger.debug(msg);
+        return isSuccess;
+    }
+
 
     @Override
     public List<Pet> getPets() {
@@ -88,7 +96,7 @@ public class PetDaoImpl implements PetDao{
 
     @Override
     public boolean delete(Pet pet) {
-        String hql = "DELETE Pet as pet where pet.id = :Id";
+        String hql = "DELETE Pet as p where p.id = :Id";
         int deletedCount = 0;
         Transaction transaction = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -108,18 +116,15 @@ public class PetDaoImpl implements PetDao{
         return false;
     }
 
-//    public Pet getPetEagerBy(Integer id) {
-//        String hql = "From Pet d LEFT JOIN FETCH d.emplyees where d.id = Id";
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-//        try {
-//            Query<Pet> query = session.createQuery(hql);
-//            query.setParameter("Id", id);
-//            Pet result = query.uniqueResult();
-//            session.close();
-//            return result;
-//        }catch (HibernateException e) {
-//            logger.error("failure to retrieve date record", e);
-//            return null;
-//        }
-//    }
+    @Override
+    public Pet getPetByName(String name) {
+        String hql = "FROM Pet as p left join fetch p.adopter where p.name = :name";
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Pet> query = session.createQuery(hql);
+            query.setParameter("name", name);
+
+            return query.uniqueResult();
+        }
+    }
 }

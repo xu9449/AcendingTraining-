@@ -20,7 +20,7 @@ public class ShelterService {
         return s1;
     }
 
-    public Shelter update(Shelter shelter){
+    public boolean update(Shelter shelter){
         return shelterDao.update(shelter);
     }
 

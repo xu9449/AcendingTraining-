@@ -24,9 +24,9 @@ public class PetService {
 
 
 
-        public Pet save (Pet pet){
-            Pet p = petDao.save(pet);
-            return p;
+        public boolean save (Pet pet){
+            boolean isSuccess = petDao.save(pet);
+            return isSuccess;
 
         }
 

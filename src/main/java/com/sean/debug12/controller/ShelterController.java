@@ -55,12 +55,12 @@ public class ShelterController {
     //http://localhost:8080/shelter?name = xxx
     //可以加 params = {"name"}来区分
     @RequestMapping(value = "/{id}", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE} )
-    public Shelter updateShelterName(@PathVariable("id") Long Id, @RequestParam("name") String name) {
+    public boolean updateShelterName(@PathVariable("id") Long Id, @RequestParam("name") String name) {
         logger.info("variable info passing in");
         Shelter s = shelterService.getShelterById(Id);
         s.setName(name);
-        s = shelterService.update(s);
-        return s;
+        boolean isSuccess = shelterService.update(s);
+        return isSuccess;
     }
 
 
@@ -81,7 +81,7 @@ public class ShelterController {
 
     //{prefix}/shelters PUT
     @RequestMapping(value = "", method = RequestMethod.PUT)
-    public Shelter update(Shelter shelter) {
+    public boolean update(Shelter shelter) {
         return shelterService.update(shelter);
     }
 }

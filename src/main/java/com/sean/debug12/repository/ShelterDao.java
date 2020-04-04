@@ -8,13 +8,20 @@ import java.util.List;
 
 public interface ShelterDao {
 
-    boolean delete(Shelter shelter);
-    List<Shelter> getShelters() ;
     Shelter save(Shelter shelter);
-    Shelter update(Shelter shelter);
-//    Shelter getShelterByName(String Name);
+    Boolean update(Shelter shelter);
+    boolean delete(Shelter shelter);
+
+    List<Shelter> getShelters() ;
+    List<Shelter> getSheltersWithChildren();
+
+
     Shelter getShelterEagerBy(long Id);
     Shelter getShelterBy(long Id);
+    Shelter getShelterByName(String sheltName);
+
+    List<Object[]> getShelterAndPets(String sheltName);
+    List<Object[]> getShelterAndPetsAndAdopters(String sheltName);
 
 
 }

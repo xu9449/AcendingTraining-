@@ -81,7 +81,7 @@ public class ShelterServiceTest {
     @Test
     public void getSheltersTest() {
         List<Shelter> shelters = shelterService.getShelters();
-        int expectedNumOfShelt = 5;
+        int expectedNumOfShelt = 8;
         shelters.forEach(shelter -> System.out.println(shelter));
         Assert.assertEquals(expectedNumOfShelt, shelters.size());
     }
