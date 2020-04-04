@@ -29,7 +29,7 @@ public class ShelterDaoImpl implements ShelterDao {
     @Override
     public List<Shelter> getShelters() {
         List<Shelter> shelters = new ArrayList<>();
-        String hql = "FROM Shelter s LEFT JOIN FETCH s.pets";  // test if there is no leftjoin
+        String hql = "FROM Shelter";  // test if there is no lef tjoin
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Query<Shelter> query = session.createQuery(hql);
@@ -39,7 +39,7 @@ public class ShelterDaoImpl implements ShelterDao {
         } catch (Exception e) {
             logger.debug(e.getMessage());
             session.close();       // why we need to close the session here?
-            return shelters;
+            return null;
         }
     }
 

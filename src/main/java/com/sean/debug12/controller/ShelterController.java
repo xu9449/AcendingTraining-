@@ -22,35 +22,28 @@ public class ShelterController {
     @Autowired
     private ShelterService shelterService;
 
-    // http://localhost:8080/shelter GET
+    //http://localhost:8080/shelter GET
     @JsonView(ShelterViews.Public.class)
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Shelter> getShelters() {
         return shelterService.getShelters();
     }
 
-    //http://localhost:8080/shelter/id
+    //http://localhost:8080/shelter/id GET
     @JsonView(ShelterViews.Internal.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE} )
     public Shelter getShelterByID(@PathVariable("id") Long Id) {
         Shelter shelter = shelterService.getShelterEagerBy(Id);
         return shelter;
     }
-//    //http://localhost:8080/shelter/id
-//    @JsonView(ShelterViews.Internal.class)
-//    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE} )
-//    public Shelter getShelterEagerByID(@PathVariable("id") Long Id) {
-//        Shelter shelter = shelterService.getShelterEagerBy(Id);
-//        return shelter;
-//    }
 
-//    //http://localhost:8080/shelter?name = xxx
-//    @RequestMapping(value = "", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-//    public Shelter getShelter(@RequestParam("name") String name){
-//        logger.info("pass in variable name: " + name);
-//
-////        return shelterService.getShelterByName(name);
-//    }
+    //http://localhost:8080/shelter?name = xxx Get
+    @JsonView({ShelterViews.Public.class})
+    @RequestMapping(value = "/name", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Shelter getShelterByName(@RequestParam("name") String name){
+        logger.info("pass in variable name: " + name);
+        return shelterService.getShelterByName(name);
+    }
 
     //http://localhost:8080/shelter?name = xxx
     //可以加 params = {"name"}来区分

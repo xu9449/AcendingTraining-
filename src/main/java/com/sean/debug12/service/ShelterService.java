@@ -43,6 +43,10 @@ public class ShelterService {
         return shelterDao.getShelterBy(Id);
     }
 
+    public Shelter getShelterByName(String name) {
+        return shelterDao.getShelterByName(name);
+    }
+
 
 
 }
