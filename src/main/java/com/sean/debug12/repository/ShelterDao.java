@@ -13,7 +13,7 @@ public interface ShelterDao {
     boolean delete(Shelter shelter);
 
     List<Shelter> getShelters() ;
-    List<Shelter> getSheltersWithChildren();
+    //List<Shelter> getSheltersWithChildren();
 
 
     Shelter getShelterEagerBy(long Id);

@@ -33,7 +33,7 @@ public class ShelterController {
     @JsonView(ShelterViews.Internal.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE} )
     public Shelter getShelterByID(@PathVariable("id") Long Id) {
-        Shelter shelter = shelterService.getShelterEagerBy(Id);
+        Shelter shelter = shelterService.getShelterById(Id);
         return shelter;
     }
 

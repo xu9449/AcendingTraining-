@@ -6,6 +6,7 @@ import java.util.List;
 @Entity
 @Table(name = "roles")
 public class Role {
+
     @Id
     //@SequenceGenerator(name = "role_id_generator", sequenceName = "role_id_seq", allocationSize = 1)
     //@GeneratedValue(strategy = SEQUENCE, generator = "role_id_generator")

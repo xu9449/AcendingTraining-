@@ -1,13 +1,29 @@
 package com.sean.debug12.repository;
 
 import com.sean.debug12.model.Adopter;
+import com.sean.debug12.model.Shelter;
 
 import java.util.List;
 
 public interface AdopterDao {
-    boolean save(Adopter adopter, String petName);
+
+
+    Adopter save(Adopter adopter);
+    boolean update(Adopter adopter);
+    boolean delete(Adopter adopter);
+
     List<Adopter> getAdopters();
-    Adopter getAdopterById(int Id);
+    Adopter getAdopterById(long Id);
+    Adopter getAdopterEagerById(long Id);
+    Adopter getAdopterByName(String AdopterName);;
+
+
+    boolean adopt(Adopter adopter, String petName);
+
+   // List<Adopter> getAdoptersWithChildren();
+
+
+
 
 
 }

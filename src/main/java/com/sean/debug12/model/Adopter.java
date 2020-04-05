@@ -24,7 +24,7 @@ public class Adopter {
         this.location = location;
         this.description = description;
         this.adopt_date = adopt_date;
-//        this.pet_id = pet_id;
+
     }
 
     @Id
@@ -55,17 +55,9 @@ public class Adopter {
     @JsonIgnore
     private List<Role> roles;
 
-//    @OneToOne
-//    @JoinColumn(name = "pet_id")
-//    private Pet petForMapping;
-
-
-    //annotation where is the foreign key
-//    @OneToMany(mappedBy = )
-//    private Pet pet;
-//
-//    @OneToMany(mappedBy = "adopter", cascadeType.ALL, fetch = FetchType.LAZY)
-//    private Set<Pet> accounts = new HashSet();
+    // Adopter's favorite Pets
+    @OneToMany(mappedBy="adopter", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Pet> pets;
 
 
     // set
@@ -98,7 +90,10 @@ public class Adopter {
     public void setPet_id(long pet_id) {
         this.pet_id = pet_id;
     }
+
+    public void setPets(Set<Pet> pets) {this.pets = pets;}
     // get
+
 
 
     public long getId() {
@@ -129,5 +124,15 @@ public class Adopter {
 
     public String getTel() {
         return tel;
+    }
+
+    public Set<Pet> getPets() {
+        try {
+            int size = pets.size();
+        }
+        catch (Exception e){
+            return null;
+        }
+        return pets;
     }
 }

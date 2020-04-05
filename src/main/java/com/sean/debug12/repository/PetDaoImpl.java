@@ -80,12 +80,11 @@ public class PetDaoImpl implements PetDao{
 //FROM Shelter s LEFT JOIN FETCH s.pets
         List<Pet> pets = new ArrayList<>();
 //        String hql = "FROM Pet";
-        String hql = "FROM Pet p LEFT JOIN FETCH p.shelter";
+        String hql = "FROM Pet";
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Query<Pet> query = session.createQuery(hql);
             pets = query.list();
-
             return pets;
         } catch (Exception e) {
             logger.error("failure to retrieve data record", e);

@@ -11,15 +11,16 @@ import javax.persistence.*;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "pets")
 
 // invert side
 public class Pet {
+
     public Pet() {}
     public Pet(long id, String sex, String name, String age, String breed, String description, boolean adoptable) {
-
         this.id = id;
         this.sex = sex;
         this.name = name;
@@ -27,19 +28,11 @@ public class Pet {
         this.breed = breed;
         this.description = description;
         this.adoptable = adoptable;
-//        this.adopter = adopter;
-
     }
 
 
-
-
-
-    @Id
-    // 每次会加一
+    @Id // will automatically add when create
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-
 
     @Column(name = "id")
     @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class,PetViews.Public.class, PetViews.Internal.class})
@@ -69,16 +62,20 @@ public class Pet {
     @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
     private boolean adoptable;
 
+    // Join Column shelter_id
     @JsonView({PetViews.Public.class, PetViews.Internal.class})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shelter_id")
     private Shelter shelter;
 
+    // who are interested in this pet
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "adopter_id")
+    private Adopter adopter;
 
 
 
-
-//    settings.put(Environment.HBM2DD_AUTO, "validate");
+    //    settings.put(Environment.HBM2DD_AUTO, "validate");
     // Set
     public void setId(long id) { this.id = id; }
     public void setSex(String sex) { this.sex = sex;}
@@ -92,6 +89,7 @@ public class Pet {
     public void setShelter(Shelter shelter) {
         this.shelter = shelter;
     }
+    public void setAdopter(Adopter adopter) {this.adopter = adopter;}
 
     // Get
     public long getId() { return id; }
@@ -104,8 +102,7 @@ public class Pet {
     public Shelter getShelter() {
         return shelter;
     }
-
-
+    public Adopter setAdopter() {return adopter;}
 
 
 }

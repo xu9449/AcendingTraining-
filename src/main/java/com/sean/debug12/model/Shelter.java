@@ -13,8 +13,8 @@ import java.util.Set;
 @Entity
 @Table(name = "shelters")
 public class Shelter {
-    public Shelter(){}
 
+    public Shelter(){}
     public Shelter(long id, String name, String email, String tel, String location, String description, String principle) {
         this.id = id;
         this.name = name;

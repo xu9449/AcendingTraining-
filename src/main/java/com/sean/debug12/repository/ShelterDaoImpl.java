@@ -43,15 +43,15 @@ public class ShelterDaoImpl implements ShelterDao {
         }
     }
 
-    @Override
-    public List<Shelter> getSheltersWithChildren() {
-        String hql = "FROM Shelter as s left join fetch s.pets as pets left join fetch pets.adopter";
-
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Shelter> query = session.createQuery(hql);
-            return query.list().stream().distinct().collect(Collectors.toList());
-        }
-    }
+//    @Override
+//    public List<Shelter> getSheltersWithChildren() {
+//        String hql = "FROM Shelter as s left join fetch s.pets as pets left join fetch pets.adopter";
+//
+//        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+//            Query<Shelter> query = session.createQuery(hql);
+//            return query.list().stream().distinct().collect(Collectors.toList());
+//        }
+//    }
 
     @Override
     public Shelter getShelterEagerBy(long Id) {
