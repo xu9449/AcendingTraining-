@@ -7,11 +7,11 @@ import com.sean.debug12.model.View.PetViews;
 import com.sean.debug12.model.View.ShelterViews;
 import com.sean.debug12.service.PetService;
 import com.sean.debug12.service.ShelterService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +19,9 @@ import java.util.List;
 @RestController
 @RequestMapping(value = {"/pets", "/pet"})
 public class PetController {
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private PetService petService;
 
@@ -28,4 +31,17 @@ public class PetController {
     public List<Pet> getPets() {
         return petService.getPets();
     }
+
+
+    //http://localhost:8080/shelter?name = xxx
+    //可以加 params = {"name"}来区分
+    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE} )
+    public boolean updatePetAdoptable(@PathVariable("id") Long Id, @RequestParam(name = "adoptable") boolean adoptable) {
+        logger.info("variable info passing in");
+        Pet p = petService.getPetById(Id);
+        p.setAdoptable(adoptable);
+        boolean isSuccess = petService.update(p);
+        return isSuccess;
+    }
+
 }

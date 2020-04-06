@@ -59,7 +59,7 @@ public class Pet {
     private String description;
 
     @Column(name = "adoptable")
-    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class,PetViews.Public.class, PetViews.Internal.class})
     private boolean adoptable;
 
     // Join Column shelter_id

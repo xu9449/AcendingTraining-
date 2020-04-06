@@ -90,8 +90,7 @@ public class ShelterDaoImpl implements ShelterDao {
     @Override
     public Shelter getShelterByName(String sheltName) {
         if (sheltName == null) return null;
-        String hql = "From Shelter as s left join fetch s.pets as pets" +
-                "left join fetch pets.adopter " + "WHERE lower(s.name)= :name";
+        String hql = "From Shelter as s left join fetch s.pets as pets where s.name = :name";
         // lower是啥意思
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Shelter> query = session.createQuery(hql);

@@ -78,7 +78,7 @@ public class AdopterDaoImpl implements AdopterDao {
     @Override
     public List<Adopter> getAdopters() {
         List<Adopter> adopters = new ArrayList<>();
-        String hql = "Adopter";  // test if there is no lef tjoin
+        String hql = "From Adopter";  // test if there is no lef tjoin
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Query<Adopter> query = session.createQuery(hql);

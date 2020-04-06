@@ -1,6 +1,7 @@
 package com.sean.debug12.service;
 
 import com.sean.debug12.model.Pet;
+import com.sean.debug12.model.Shelter;
 import com.sean.debug12.repository.PetDao;
 import com.sean.debug12.util.HibernateUtil;
 import org.hibernate.HibernateException;
@@ -32,6 +33,15 @@ public class PetService {
 
         public List<Pet> getPets() {
             return petDao.getPets();
+        }
+
+
+        public Pet getPetById(long Id) {
+            return petDao.getPetById(Id);
+        }
+
+        public boolean update(Pet pet){
+            return petDao.update(pet);
         }
 
 

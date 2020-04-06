@@ -35,7 +35,6 @@ public class ShelterService {
 
 
     public Shelter getShelterEagerBy(long Id) {
-
         return shelterDao.getShelterEagerBy(Id);
     }
 
@@ -44,6 +43,7 @@ public class ShelterService {
     }
 
     public Shelter getShelterByName(String name) {
+
         return shelterDao.getShelterByName(name);
     }
 

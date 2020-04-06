@@ -22,9 +22,18 @@ public class ShelterController {
     @Autowired
     private ShelterService shelterService;
 
+    //http://localhost:8080/shelter/?name = xxx Get
+    @JsonView({ShelterViews.Public.class})
+    @RequestMapping(value="/name", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Shelter getShelterByName(@RequestParam(name ="name") String name){
+        logger.info("pass in variable name: " + name);
+        return shelterService.getShelterByName(name);
+    }
+
+
     //http://localhost:8080/shelter GET
     @JsonView(ShelterViews.Public.class)
-    @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Shelter> getShelters() {
         return shelterService.getShelters();
     }
@@ -37,18 +46,13 @@ public class ShelterController {
         return shelter;
     }
 
-    //http://localhost:8080/shelter?name = xxx Get
-    @JsonView({ShelterViews.Public.class})
-    @RequestMapping(value = "/name", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Shelter getShelterByName(@RequestParam("name") String name){
-        logger.info("pass in variable name: " + name);
-        return shelterService.getShelterByName(name);
-    }
+
+
 
     //http://localhost:8080/shelter?name = xxx
     //可以加 params = {"name"}来区分
     @RequestMapping(value = "/{id}", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE} )
-    public boolean updateShelterName(@PathVariable("id") Long Id, @RequestParam("name") String name) {
+    public boolean updateShelterName(@PathVariable("id") Long Id, @RequestParam(name = "name") String name) {
         logger.info("variable info passing in");
         Shelter s = shelterService.getShelterById(Id);
         s.setName(name);

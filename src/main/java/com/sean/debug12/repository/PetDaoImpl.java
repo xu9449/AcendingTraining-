@@ -1,6 +1,7 @@
 package com.sean.debug12.repository;
 
 import com.sean.debug12.model.Pet;
+import com.sean.debug12.model.Shelter;
 import com.sean.debug12.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -48,29 +49,18 @@ public class PetDaoImpl implements PetDao{
     }
 
     @Override
-    public boolean update(String name, boolean adoptable) {
-        String msg;
-        String hql = "UPDATE Pet as p set p.adoptable = :adoptable where p.name = :name";
-
+    public boolean update(Pet pet) {
         Transaction transaction = null;
         boolean isSuccess = true;
-
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Pet> query = session.createQuery(hql);
-            query.setParameter("name", name);
-            query.setParameter("adoptable", adoptable);
-
             transaction = session.beginTransaction();
+            session.saveOrUpdate(pet);
             transaction.commit();
-            msg = String.format("The employee %s was updated, the adoptable condition is : %d", name, "Ready for adopt");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             isSuccess = false;
             if (transaction != null) transaction.rollback();
-            msg = e.getMessage();
+            logger.error("Failure to update record", e.getMessage());
         }
-
-        logger.debug(msg);
         return isSuccess;
     }
 
@@ -90,6 +80,23 @@ public class PetDaoImpl implements PetDao{
             logger.error("failure to retrieve data record", e);
 
             return pets;
+        }
+    }
+
+    @Override
+    public Pet getPetById(long Id){
+        String hql = "FROM Pet as p where p.id = :Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query<Pet> query = session.createQuery(hql);
+            query.setParameter("Id", Id);
+            Pet result = query.uniqueResult();
+            session.close();
+            return result;
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            session.close();
+            return null;
         }
     }
 

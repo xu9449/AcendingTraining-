@@ -7,6 +7,19 @@ import java.util.List;
 @Table(name = "roles")
 public class Role {
 
+    public Role() {}
+    public Role(long id, String name, String allowedResource, boolean allowedRead, boolean allowedCreate, boolean allowedUpdate, boolean allowedDelete, List<Adopter> adopters) {
+        this.id = id;
+        this.name = name;
+        this.allowedResource = allowedResource;
+        this.allowedRead = allowedRead;
+        this.allowedCreate = allowedCreate;
+        this.allowedUpdate = allowedUpdate;
+        this.allowedDelete = allowedDelete;
+        this.adopters = adopters;
+    }
+
+
     @Id
     //@SequenceGenerator(name = "role_id_generator", sequenceName = "role_id_seq", allocationSize = 1)
     //@GeneratedValue(strategy = SEQUENCE, generator = "role_id_generator")
@@ -25,16 +38,7 @@ public class Role {
     @Column(name = "allowed_delete")
     private boolean allowedDelete;
 
-    public Role(long id, String name, String allowedResource, boolean allowedRead, boolean allowedCreate, boolean allowedUpdate, boolean allowedDelete, List<Adopter> adopters) {
-        this.id = id;
-        this.name = name;
-        this.allowedResource = allowedResource;
-        this.allowedRead = allowedRead;
-        this.allowedCreate = allowedCreate;
-        this.allowedUpdate = allowedUpdate;
-        this.allowedDelete = allowedDelete;
-        this.adopters = adopters;
-    }
+
 
     @ManyToMany(mappedBy = "roles")
     private List<Adopter> adopters;
