@@ -1,5 +1,8 @@
 package com.sean.debug12.controller;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.sean.debug12.model.Adopter;
 import com.sean.debug12.model.Shelter;
 import com.sean.debug12.service.AdopterService;
@@ -13,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+
+import static org.postgresql.core.Oid.JSON;
 
 @RestController
 @RequestMapping(value = {"/auth"})
@@ -28,16 +33,23 @@ public class AuthController {
     @RequestMapping (value = "", method = RequestMethod.POST)
 //    public String adopterLogin(@RequestParam("adoptername") String emailOrUsername, @RequestParam("password") String password) {
         public ResponseEntity adopterLogin(@RequestBody Adopter adopter) {
+        // ResponseEntity 不仅可以返回，也可以返回customized content
         try {
-//              String digestPassword = DigestUtils.md5Hex(password.trim());
+//            String digestPassword = DigestUtils.md5Hex(password.trim());
+//              if(adopter.getEmail() == null) {
+//
+//              }
               Adopter a = adopterService.getAdopterByCredentials(adopter.getEmail(), adopter.getPassword());
-//            if(a == null)  return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).build();
-            return ResponseEntity.ok().body(jwtService.gerateToken(a));
-//              return jwtService.gerateToken(a);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        return ResponseEntity.badRequest().build();
-        return  null;
+              if(a == null)  return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).build();
+              String token = jwtService.gerateToken(a);
+              String jsonStr = "{\"token\":"+ token + "}" ;
+              JsonObject jsonObject = new JsonParser().parse(jsonStr).getAsJsonObject();
+              return ResponseEntity.ok().body(jsonObject.toString());
+
+             } catch (Exception e) {
+                e.printStackTrace();
+             }
+        return ResponseEntity.badRequest().build();
+//        return  null;
     }
 }

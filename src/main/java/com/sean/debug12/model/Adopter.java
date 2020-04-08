@@ -101,6 +101,8 @@ public class Adopter {
     }
 
     public void setPets(Set<Pet> pets) {this.pets = pets;}
+
+    public void setRoles(List<Role> roles){ this.roles = roles;}
     // get
 
 
@@ -145,5 +147,9 @@ public class Adopter {
             return null;
         }
         return pets;
+    }
+
+    public  List<Role> getRoles() {
+        return roles;
     }
 }

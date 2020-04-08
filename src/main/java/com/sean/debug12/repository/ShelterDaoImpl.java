@@ -29,7 +29,7 @@ public class ShelterDaoImpl implements ShelterDao {
     @Override
     public List<Shelter> getShelters() {
         List<Shelter> shelters = new ArrayList<>();
-        String hql = "FROM Shelter";  // test if there is no lef tjoin
+        String hql = "FROM Shelter";  // test if there is no left join
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Query<Shelter> query = session.createQuery(hql);

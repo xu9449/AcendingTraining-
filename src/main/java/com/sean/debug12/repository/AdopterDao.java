@@ -18,6 +18,7 @@ public interface AdopterDao {
     Adopter getAdopterByName(String AdopterName);
 
     Adopter getAdopterByCredentials(String email, String password) throws Exception;
+//    Adopter getAdopterByCredentials2(String name, String password) throws Exception;
 
     boolean adopt(Adopter adopter, String petName);
 
