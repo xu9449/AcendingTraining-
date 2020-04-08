@@ -82,7 +82,7 @@ public class ShelterDaoTest {
     @Test
     public void getSheltersTest() {
         List<Shelter> shelters = shelterDao.getShelters();
-        int expectedNumOfShelt = 5;
+        int expectedNumOfShelt = 4;
         shelters.forEach(shelter -> System.out.println(shelter));
         Assert.assertEquals(expectedNumOfShelt, shelters.size());
     }

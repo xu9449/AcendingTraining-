@@ -147,6 +147,21 @@ public class AdopterDaoImpl implements AdopterDao {
         return false;
     }
 
+    @Override
+    public Adopter getAdopterByCredentials(String email, String password) throws Exception {
+        String hql = "FROM Adopter as a where (lower(a.email) = :email or lower(a.name) =:email) and a.password = :password";
+        logger.debug(String.format("Adopter email: %s, password: %s", email, password));
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Adopter> query = session.createQuery(hql);
+            query.setParameter("email", email.toLowerCase().trim());
+            query.setParameter("password", password);
+            return query.uniqueResult();
+        }
+        catch (Exception e){
+            throw new Exception("can't find user record or session");
+        }
+    }
+
 
 
 

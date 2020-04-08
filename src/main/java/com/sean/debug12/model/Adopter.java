@@ -2,6 +2,8 @@ package com.sean.debug12.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.commons.codec.cli.Digest;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.persistence.*;
 
@@ -17,13 +19,15 @@ import java.util.Set;
 public class Adopter {
     public Adopter(){};
 
-    public Adopter(long id, String name, String email, String location, String description, Timestamp adopt_date){
+    public Adopter(long id, String name, String password, String email, String location, String description, Timestamp adopt_date, long pet_id){
         this.id = id;
         this.name = name;
+        this.password = password;
         this.email = email;
         this.location = location;
         this.description = description;
         this.adopt_date = adopt_date;
+        this.pet_id = pet_id;
 
     }
 
@@ -34,6 +38,8 @@ public class Adopter {
     private long id;
     @Column(name = "name")
     private String name;
+    @Column(name = "password")
+    private String password;
     @Column (name = "tel")
     private String tel;
     @Column(name = "email")
@@ -67,6 +73,9 @@ public class Adopter {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void setPassword(String password) { this.password = DigestUtils.md5Hex(password.trim());
     }
 
     public void setTel(String tel) {
@@ -103,6 +112,8 @@ public class Adopter {
     public String getName() {
         return name;
     }
+
+    public String getPassword() {return password;}
 
     public String getDescription() {
         return description;

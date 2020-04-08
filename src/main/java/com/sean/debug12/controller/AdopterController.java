@@ -46,5 +46,15 @@ public class AdopterController {
         return adopterService.getAdopterByName(name);
     }
 
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public Adopter createAdopter(@RequestBody Adopter adopter) {
+        logger.debug("Adopter: " + adopter.toString());
+        String msg = "The department was created.";
+        Adopter adop = adopterService.save(adopter);
+
+        if (adop == null) msg = "The adopter is not created.";
+        return adop;
+    }
+
 
 }

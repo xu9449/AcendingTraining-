@@ -46,4 +46,8 @@ public class AdopterService {
         return adopterDao.getAdopterByName(name);
     }
 
+    public Adopter getAdopterByCredentials(String email, String password) throws Exception{
+        return adopterDao.getAdopterByCredentials(email, password);
+    }
+
 }

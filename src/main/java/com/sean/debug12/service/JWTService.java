@@ -18,6 +18,7 @@ import java.util.Date;
 
 @Service
 public class JWTService {
+
     private Logger logger = LoggerFactory.getLogger("");
     private final String SECRET_KEY = "seanxu-seanxu";
     private final String ISSUER = "com.ascending";
@@ -41,29 +42,34 @@ public class JWTService {
         return builder.compact();
     }
 
-    public void verifyJWT(String jwt){
+    public Claims decryptJWTToken(String jwt){
         Claims claims = Jwts.parser()
                 .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
                 .parseClaimsJws(jwt).getBody();
 
-        int id = Integer.parseInt(claims.getId());
-        boolean isValidId = id < 50;
-        String Issuer = claims.getIssuer();
-        boolean isValidIssuer = Issuer.equals("com.ascending");
-        Date expirationDate = claims.getExpiration();
-        Date deadline = new Date(2020, 12, 31);
 
-        System.out.println("=========================" + "Token Validation" + "=========================");
-        System.out.println("ID is valid: " + isValidId);
-        System.out.println("Issuer: " + isValidIssuer);
-        if(expirationDate.compareTo(deadline) >= 0) {
-            System.out.println("This token is expired");
-        } else if (expirationDate.compareTo(deadline) < 0) {
-            System.out.println("This token is sill valid");
-        }
-        System.out.println("=========================" + "Token Validation" + "=========================");
+//        int id = Integer.parseInt(claims.getId());
+//        boolean isValidId = id < 50;
+//        String Issuer = claims.getIssuer();
+//        boolean isValidIssuer = Issuer.equals("com.ascending");
+//        Date expirationDate = claims.getExpiration();
+//        Date deadline = new Date(2020, 12, 31);
+//
+//        System.out.println("=========================" + "Token Validation" + "=========================");
+//        System.out.println("ID is valid: " + isValidId);
+//        System.out.println("Issuer: " + isValidIssuer);
+//        if(expirationDate.compareTo(deadline) >= 0) {
+//            System.out.println("This token is expired");
+//        } else if (expirationDate.compareTo(deadline) < 0) {
+//            System.out.println("This token is sill valid");
+//        }
+//        System.out.println("=========================" + "Token Validation" + "=========================");
+
+        return claims;
 
     }
+
+
     public void decpyToken(String token) {
 
     }

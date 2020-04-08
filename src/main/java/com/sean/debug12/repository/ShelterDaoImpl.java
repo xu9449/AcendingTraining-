@@ -90,16 +90,22 @@ public class ShelterDaoImpl implements ShelterDao {
     @Override
     public Shelter getShelterByName(String sheltName) {
         if (sheltName == null) return null;
-        String hql = "From Shelter as s left join fetch s.pets as pets where s.name = :name";
+        String hql = "From Shelter as s left join fetch s.pets as pet " +
+                "left join fetch pet.adopter " + "WHERE lower(s.name)= :name";
+        Session session = HibernateUtil.getSessionFactory().openSession();
         // lower是啥意思
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try  {
             Query<Shelter> query = session.createQuery(hql);
             query.setParameter("name", sheltName.toLowerCase());
-            return query.uniqueResult();
+            Shelter result = query.uniqueResult();
+            session.close();
+            return result;
         } catch (Exception e) {
             logger.error(e.getMessage());
+            session.close();
+            return null;
         }
-        return null;
+
     }
 
     @Override
@@ -130,14 +136,16 @@ public class ShelterDaoImpl implements ShelterDao {
             query.setParameter("Id", shelter.getId());
             deletedCount = query.executeUpdate();
             transaction.commit();
-
+            session.close();
             return deletedCount >= 1 ? true : false;
         } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
 
             logger.error("unable to delete record", e);
+            session.close();
+            return false;
         }
-        return false;
+
     }
 
     @Override
@@ -200,5 +208,7 @@ public class ShelterDaoImpl implements ShelterDao {
             return resultList;
         }
     }
+
+
 }
 

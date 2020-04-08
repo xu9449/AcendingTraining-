@@ -1,5 +1,6 @@
 package com.sean.debug12.service;
 
+import com.sean.debug12.model.Adopter;
 import com.sean.debug12.model.Shelter;
 import com.sean.debug12.repository.ShelterDao;
 import com.sean.debug12.repository.ShelterDaoImpl;
@@ -25,7 +26,6 @@ public class ShelterService {
     }
 
     public boolean delete(Shelter shelter) {
-
         return shelterDao.delete(shelter);
     }
 
@@ -43,9 +43,10 @@ public class ShelterService {
     }
 
     public Shelter getShelterByName(String name) {
-
         return shelterDao.getShelterByName(name);
     }
+
+
 
 
 

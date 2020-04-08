@@ -15,8 +15,9 @@ public interface AdopterDao {
     List<Adopter> getAdopters();
     Adopter getAdopterById(long Id);
     Adopter getAdopterEagerById(long Id);
-    Adopter getAdopterByName(String AdopterName);;
+    Adopter getAdopterByName(String AdopterName);
 
+    Adopter getAdopterByCredentials(String email, String password) throws Exception;
 
     boolean adopt(Adopter adopter, String petName);
 

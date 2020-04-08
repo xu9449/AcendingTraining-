@@ -20,6 +20,8 @@ public interface ShelterDao {
     Shelter getShelterBy(long Id);
     Shelter getShelterByName(String sheltName);
 
+
+
     List<Object[]> getShelterAndPets(String sheltName);
     List<Object[]> getShelterAndPetsAndAdopters(String sheltName);
 

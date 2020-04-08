@@ -23,8 +23,8 @@ public class ShelterController {
     private ShelterService shelterService;
 
     //http://localhost:8080/shelter/?name = xxx Get
-    @JsonView({ShelterViews.Public.class})
-    @RequestMapping(value="/name", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @JsonView(ShelterViews.Internal.class)
+    @RequestMapping(value="/", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public Shelter getShelterByName(@RequestParam(name ="name") String name){
         logger.info("pass in variable name: " + name);
         return shelterService.getShelterByName(name);
@@ -42,7 +42,7 @@ public class ShelterController {
     @JsonView(ShelterViews.Internal.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE} )
     public Shelter getShelterByID(@PathVariable("id") Long Id) {
-        Shelter shelter = shelterService.getShelterById(Id);
+        Shelter shelter = shelterService.getShelterEagerBy(Id);
         return shelter;
     }
 
@@ -51,6 +51,7 @@ public class ShelterController {
 
     //http://localhost:8080/shelter?name = xxx
     //可以加 params = {"name"}来区分
+    @JsonView(ShelterViews.Internal.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE} )
     public boolean updateShelterName(@PathVariable("id") Long Id, @RequestParam(name = "name") String name) {
         logger.info("variable info passing in");
@@ -71,9 +72,10 @@ public class ShelterController {
     }
 
     //{prefix}/shelters DELETE
-    @RequestMapping(value = "/{name}", method = RequestMethod.DELETE)
-    public boolean delete(@PathVariable("name") Shelter shelter) {
-        return shelterService.delete(shelter);
+    @RequestMapping(value = "/", method = RequestMethod.DELETE)
+    public boolean delete(@RequestParam(name = "name") String name) {
+        Shelter she = shelterService.getShelterByName(name);
+        return shelterService.delete(she);
     }
 
     //{prefix}/shelters PUT
