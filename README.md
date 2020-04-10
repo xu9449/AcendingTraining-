@@ -13,8 +13,17 @@ The relation between Shelter and Pets is One to Many, the Shelter_id will be the
 The relation between Adopters and Pets Statistics is One to Many, the adopter_id will be the foreign key and will be stored in the pet table.
 ## Build project   
 1. Clone the project
-    git clone https://github.com/xu9449/Pet-Adoption-Helper.git
-Install docker if needed. Please use docker maven openjdk and select the 3.6-jdk-8 version.
+    git clone https://github.com/xu9449/Pet-Adoption-Helper.git  
+2. Install docker if needed. Please use docker maven openjdk and select the 3.6-jdk-8 version.  
+    [3.6.0-jdk-8, 3.6-jdk-8, 3-jdk-8 (jdk-8/Dockerfile)](https://hub.docker.com/_/maven?tab=description)
+3. Open a new command line window and Spin up the PostgreSql database server using Postgres docker image
+'''
+docker pull postgres
+'''
+
+'''
+docker run --name ${BasketballDB_Demo} -e POSTGRES_DB=${basketballDB_Demo} -e POSTGRES_USER=${username} -e POSTGRES_PASSWORD=${password} -p 5432:5432 -d postgres
+'''
 ## compile
 
 ## run migration
