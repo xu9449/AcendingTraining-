@@ -17,13 +17,12 @@ The relation between Adopters and Pets Statistics is One to Many, the adopter_id
 2. Install docker if needed. Please use docker maven openjdk and select the 3.6-jdk-8 version.  
     [3.6.0-jdk-8, 3.6-jdk-8, 3-jdk-8 (jdk-8/Dockerfile)](https://hub.docker.com/_/maven?tab=description)
 3. Open a new command line window and Spin up the PostgreSql database server using Postgres docker image
-'''
+```
 docker pull postgres
-'''
-
-'''
-docker run --name ${BasketballDB_Demo} -e POSTGRES_DB=${basketballDB_Demo} -e POSTGRES_USER=${username} -e POSTGRES_PASSWORD=${password} -p 5432:5432 -d postgres
-'''
+```
+```
+docker run --name ${dealerDB2} -e POSTGRES_DB=${pethelp} -e POSTGRES_USER=${admin} -e POSTGRES_PASSWORD=${password} -p 5430:5432 -d postgres
+```
 ## compile
 
 ## run migration
