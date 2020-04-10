@@ -20,7 +20,7 @@ import java.util.Set;
 public class Pet {
 
     public Pet() {}
-    public Pet(long id, String sex, String name, String age, String breed, String description, boolean adoptable) {
+    public Pet(Long id, String sex, String name, String age, String breed, String description, boolean adoptable) {
         this.id = id;
         this.sex = sex;
         this.name = name;
@@ -36,7 +36,7 @@ public class Pet {
 
     @Column(name = "id")
     @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class,PetViews.Public.class, PetViews.Internal.class})
-    private long id;
+    private Long id;
 
     @Column(name = "sex")
     @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class,PetViews.Public.class, PetViews.Internal.class})
@@ -77,7 +77,7 @@ public class Pet {
 
     //    settings.put(Environment.HBM2DD_AUTO, "validate");
     // Set
-    public void setId(long id) { this.id = id; }
+    public void setId(Long id) { this.id = id; }
     public void setSex(String sex) { this.sex = sex;}
     public void setBreed(String breed) {this.breed = breed;}
     public void setName(String name) {
@@ -92,7 +92,7 @@ public class Pet {
     public void setAdopter(Adopter adopter) {this.adopter = adopter;}
 
     // Get
-    public long getId() { return id; }
+    public Long getId() { return id; }
     public String getSex() {return sex; }
     public String getBreed() { return breed; }
     public String getName() { return name; }

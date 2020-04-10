@@ -35,7 +35,7 @@ public class Adopter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "id")
-    private long id;
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "password")
@@ -51,7 +51,7 @@ public class Adopter {
     @Column(name = "adopt_date")
     private Timestamp adopt_date;
     @Column(name = "pet_id")
-    private long pet_id;
+    private Long pet_id;
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable( name = "adopters_roles",
@@ -71,7 +71,7 @@ public class Adopter {
         this.name = name;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -96,7 +96,7 @@ public class Adopter {
 
     public void setAdopt_date(Timestamp adopt_date) {this.adopt_date = adopt_date;}
 
-    public void setPet_id(long pet_id) {
+    public void setPet_id(Long pet_id) {
         this.pet_id = pet_id;
     }
 
@@ -107,7 +107,7 @@ public class Adopter {
 
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -131,7 +131,7 @@ public class Adopter {
 
     public Timestamp getAdopt_date() { return adopt_date; }
 
-    public long getPet_id() {
+    public Long getPet_id() {
         return pet_id;
     }
 

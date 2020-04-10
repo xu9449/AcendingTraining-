@@ -22,16 +22,16 @@ public class JWTServiceTest {
     @Autowired
     private JWTService jwtService;
 
-
-    @Test
-    public void generateTokenTest() {
-        Adopter adopter = new Adopter();
-        adopter.setId(10);
-        adopter.setName("Ryo");
-        String token = jwtService.gerateToken(adopter);
-//        assertNotNull(token);
-        jwtService.decryptJWTToken(token);
-    }
+//
+//    @Test
+//    public void generateTokenTest() {
+//        Adopter adopter = new Adopter();
+//        adopter.setId(();
+//        adopter.setName("Ryo");
+//        String token = jwtService.gerateToken(adopter);
+////        assertNotNull(token);
+//        jwtService.decryptJWTToken(token);
+//    }
 
 //    @Test
 //    public void decryptJwtTokenTest() {
