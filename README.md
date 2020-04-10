@@ -1,4 +1,4 @@
-# Ascending Training course by Liwei Wang & Ryo Hang
+# PetHelp Adopt System by Kexin XU
 
 ## Description  
 A website to help people find their ideal pets.  
@@ -23,6 +23,15 @@ docker pull postgres
 ```
 docker run --name ${dealerDB2} -e POSTGRES_DB=${pethelp} -e POSTGRES_USER=${admin} -e POSTGRES_PASSWORD=${password} -p 5430:5432 -d postgres
 ```
+
+4.Create Unit database on PGAdmin for unit testing
+
+5.Update application.properties and share-runtime.properties as following format:
+
+6.Package installation with 2 time. 1. run this commend on debug12 folder and 2. run this commend on src folder.
+  ```
+  mvn clean compile install -DskipTests=true
+  ```
 ## compile
 
 ## run migration
