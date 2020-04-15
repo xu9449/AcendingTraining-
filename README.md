@@ -1,16 +1,24 @@
-# PetHelp Adopt System by Kexin XU
+# PetHelp Adopt Website by Kexin XU
 
 ## Description  
 A website to help people find their ideal pets.  
-This application is developed using Spring Boot, Spring Data, Spring RESTful web services, Maven, PostgreSql, Docker, Amazon SQS, Amazon S3.
+This application is developed using Spring Boot, Spring Data, Spring RESTful web services, Maven, PostgreSql, Docker, Amazon SQS, Amazon S3.  
+## Project Technical Overview:
+This application is developed in Spring Framework by using Spring Boot, Spring Data, Hibernate, Spring RESTful web services, Postman, Maven, PostgresSql, Docker, Amazon SQS, and Amazon S3.  
 ## Assumption 
 Users are provided shelters and pets information based on the authorities.
 The users information need to be created before searching.
 The relation between shelter and pets is "One to Many", the relationship between adopter and pets statistics is "One to Many".
 ## Approach 
-Created Adopter, Shelter, Pets, and Roles object, and created related table and col in the database.
-The relation between Shelter and Pets is One to Many, the Shelter_id will be the foreign key and will be stored in the pet table.
-The relation between Adopters and Pets Statistics is One to Many, the adopter_id will be the foreign key and will be stored in the pet table.
+* Project Businese Rules:
+1. Object: Adopter, Pet, Shelter, Role, 
+2. Relationships:
+    i. One Adopter could adopt many Pets.   
+    ii. One Adopter could only have one role.   
+    iii. One Shelter could have many Pets.   
+    iV. One Adopter could have many favorite pets.   
+    V. One pet could have many people who are interested in them.
+    
 ## Build project   
 1. Clone the project
     git clone https://github.com/xu9449/Pet-Adoption-Helper.git  
