@@ -17,7 +17,12 @@ The relation between shelter and pets is "One to Many", the relationship between
     ii. One Adopter could only have one role.   
     iii. One Shelter could have many Pets.   
     iV. One Adopter could have many favorite pets.   
-    V. One pet could have many people who are interested in them.
+    V. One pet could have many people who are interested in them.  
+* Project Approach
+    i. Created adopters, pets, shelters, roles
+    ii. Used Hibernate to do the database schema migration
+    iii. Used JDBC to connect project with Postgres
+    iv. 
     
 ## Build project   
 1. Clone the project
