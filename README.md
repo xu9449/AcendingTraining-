@@ -10,7 +10,7 @@ Users are provided shelters and pets information based on the authorities.
 The users information need to be created before searching.
 The relation between shelter and pets is "One to Many", the relationship between adopter and pets statistics is "One to Many".
 ## Approach 
-* Project Businese Rules:
+* Project Businese Rules:  
 1. Object: Adopter, Pet, Shelter, Role, 
 2. Relationships:
     i. One Adopter could adopt many Pets.   
@@ -21,9 +21,28 @@ The relation between shelter and pets is "One to Many", the relationship between
 * Project Approach
     i. Created adopters, pets, shelters, roles
     ii. Used Hibernate to do the database schema migration
-    iii. Used JDBC to connect project with Postgres
-    iv. 
-    
+    iii. Used JDBC to connect project with Postgres  
+    iv. Configured Spring Security for Authentication  
+    v. Created repository, service and did test  
+    vi. Created Controllers and Restful APIs  
+    Vii. Used Postman to interact with back-end project    
+## Configure local environment  
+```
+docker pull postgres
+
+docker run --name ${PostgresContainerName} -e POSTGRES_USER=${username} -e POSTGRES_PASSWORD=${password} -e POSTGRES_DB=${databaseName} -p ${hostport}:${containerport} -d postgres
+```
+
+## Environment properity configuration
+```
+
+```
+
+## Flyway migration
+```
+mvn compile flyway:migrate -P unit -Ddb_username=${username} -Ddb_url=localhost:${containerport}/${databasename} -Ddb_password=${password} 
+```
+
 ## Build project   
 1. Clone the project
     git clone https://github.com/xu9449/Pet-Adoption-Helper.git  
