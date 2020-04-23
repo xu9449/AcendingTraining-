@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "pets")
+@Table(name = "pets") // 会做一个validation
 
 // invert side
 public class Pet {
