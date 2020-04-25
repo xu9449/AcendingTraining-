@@ -2,6 +2,7 @@ package com.sean.debug12.repository;
 
 import com.sean.debug12.model.Adopter;
 import com.sean.debug12.model.Pet;
+import com.sean.debug12.model.Role;
 import com.sean.debug12.model.Shelter;
 import com.sean.debug12.util.HibernateUtil;
 import org.hibernate.HibernateException;
@@ -35,6 +36,25 @@ public class AdopterDaoImpl implements AdopterDao {
         if (adopter!= null) logger.debug("The adopter was inserted into database");
         return null;
     }
+
+//    @Override
+//    public Adopter deleteRole(String adopterName, String roleName) {
+//
+//
+//        // get roles by name
+//        if (adopterName == null) return null;
+//        String hql = "From Adopter as a left join fetch a.roles as roles" +
+//                "left join fetch adopters.adopter " + "WHERE lower(a.name)= :name";
+//        // lower是啥意思
+//        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+//            Query<Adopter> query = session.createQuery(hql);
+//            query.setParameter("name", adopterName.toLowerCase());
+//            return query.uniqueResult();
+//        } catch (Exception e) {
+//            logger.error(e.getMessage());
+//        }
+//        return null;
+//    }
 
     @Override
     public boolean update(Adopter adopter) {
@@ -129,12 +149,24 @@ public class AdopterDaoImpl implements AdopterDao {
     @Override
     public Adopter getAdopterByName(String adopterName) {
         if (adopterName == null) return null;
-        String hql = "From Adopter as a left join fetch a.pets as pets" +
-                "left join fetch adopters.adopter " + "WHERE lower(a.name)= :name";
-        // lower是啥意思
+        String hql = "FROM Adopter as a LEFT JOIN FETCH a.pets where a.name = :name";
+//        String hql = "From Adopter as a left join fetch a.pets as pets" +
+//                "left join fetch adopters.adopters " + "WHERE lower(a.name)= :name";
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+//        try {
+//            Query<Adopter> query = session.createQuery(hql);
+//            query.setParameter("name", adopterName);
+//            Adopter result = query.uniqueResult();
+//            session.close();
+//            return result;
+//        } catch (Exception e) {
+//            logger.debug(e.getMessage());
+//            session.close();
+//            return null;
+//        }
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Adopter> query = session.createQuery(hql);
-            query.setParameter("name", adopterName.toLowerCase());
+            query.setParameter("name", adopterName);
             return query.uniqueResult();
         } catch (Exception e) {
             logger.error(e.getMessage());

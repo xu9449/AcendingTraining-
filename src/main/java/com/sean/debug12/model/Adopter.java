@@ -58,11 +58,11 @@ public class Adopter {
                 joinColumns = { @JoinColumn(name = "adopter_id")},
                 inverseJoinColumns = {@JoinColumn(name = "role_id")}
                 )
-    @JsonIgnore
+//    @JsonIgnore
     private List<Role> roles;
 
     // Adopter's favorite Pets
-    @OneToMany(mappedBy="adopter", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="adopter", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private Set<Pet> pets;
 
 
