@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.postgresql.core.Oid.JSON;
 
 @RestController
@@ -42,14 +45,16 @@ public class AuthController {
               Adopter a = adopterService.getAdopterByCredentials(adopter.getEmail(), adopter.getPassword());
               if(a == null)  return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).build();
               String token = jwtService.gerateToken(a);
-              String jsonStr = "{\"token\":"+ token + "}" ;
-              JsonObject jsonObject = new JsonParser().parse(jsonStr).getAsJsonObject();
-              return ResponseEntity.ok().body(jsonObject.toString());
+              Map<String, String> tokenMap = new HashMap<>();
+              tokenMap.put("token", token);
+//              String jsonStr = "{\"token\":"+ token + "}" ;
+//              JsonObject jsonObject = new JsonParser().parse(jsonStr).getAsJsonObject();
+              return ResponseEntity.ok().body(tokenMap);
 
              } catch (Exception e) {
                 e.printStackTrace();
              }
         return ResponseEntity.badRequest().build();
-//        return  null;
+
     }
 }

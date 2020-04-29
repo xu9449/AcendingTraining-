@@ -10,3 +10,4 @@ ALTER TABLE adopters_roles
 ALTER TABLE adopters_roles
   ADD CONSTRAINT roles_fk FOREIGN KEY (role_id)
       REFERENCES roles(id);
+

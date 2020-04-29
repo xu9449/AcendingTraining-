@@ -29,3 +29,7 @@ REFERENCES pets(id);
 Alter table pets
 add constraint shelters_pets_fk FOREIGN KEY (shelter_id)
 REFERENCES shelters(id);
+
+Alter table pets
+add constraint adopters_pets_fk FOREIGN KEY (adopter_id)
+REFERENCES adopters(id);

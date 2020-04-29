@@ -61,6 +61,8 @@ public class SecurityFilter implements Filter {
             // /employees/id 200 "allowedReadResources": "/employees,/ems,/acnts,/accounts",
             // /paystubs/id  403 "allowedReadResources": "/employees,/ems,/acnts,/accounts",
             for (String s : allowedResources.split(",")) {
+                if(s.trim().isEmpty())
+                    break;
                 if (uri.trim().toLowerCase().startsWith(s.trim().toLowerCase())) {
                     statusCode = HttpServletResponse.SC_ACCEPTED;
                     break;

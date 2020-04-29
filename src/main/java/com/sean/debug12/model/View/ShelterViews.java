@@ -4,7 +4,6 @@ public class ShelterViews {
     public static class Public {
 
     }
-
     public static class Internal{
 
     }

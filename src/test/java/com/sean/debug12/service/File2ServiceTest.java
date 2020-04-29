@@ -1,30 +1,29 @@
-//package com.sean.debug12.service;
-//
-//import com.amazonaws.services.s3.AmazonS3;
-//import com.amazonaws.services.s3.model.PutObjectRequest;
-//import com.sean.debug12.init.Appbootstrap;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//
-//import org.mockito.Mockito;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.context.annotation.Profile;
-//import org.springframework.test.context.junit4.SpringRunner;
-//import java.io.File;
-//import java.net.URL;
-//
-//
-//import static org.mockito.ArgumentMatchers.any;
-//import static org.mockito.ArgumentMatchers.anyString;
-//import static org.mockito.Mockito.*;
-//
+package com.sean.debug12.service;
+
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.sean.debug12.init.Appbootstrap;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import org.mockito.Mockito;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import java.io.File;
+import java.net.URL;
+
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
+
 //@RunWith(SpringRunner.class)
 //@SpringBootTest(classes = Appbootstrap.class)
 //public class File2ServiceTest {
 //    @Autowired
-//    private File2Service file2Service;
+//    private FileService file2Service;
 //
 //    @Autowired
 //    private AmazonS3 amazonS3client;
@@ -37,8 +36,8 @@
 //
 //        File testFile = Mockito.mock(File.class);
 //        when(testFile.getName()).thenReturn("resume.pdf");
-//        file2Service.uploadFile(null);
-//        verify(amazonS3client, times(0)).putObject(any(PutObjectRequest.class));
+////        file2Service.uploadFile(null);
+////        verify(amazonS3client, times(0)).putObject(any(PutObjectRequest.class));
 //        file2Service.uploadFile(testFile);
 //        verify(amazonS3client, times(1)).putObject(any(PutObjectRequest.class));
 //

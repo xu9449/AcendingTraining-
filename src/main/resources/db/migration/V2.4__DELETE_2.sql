@@ -1,1 +1,0 @@
-DELETE FROM shelters where id = '5';

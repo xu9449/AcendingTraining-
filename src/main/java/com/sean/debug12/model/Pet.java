@@ -20,11 +20,12 @@ import java.util.Set;
 public class Pet {
 
     public Pet() {}
-    public Pet(Long id, String sex, String name, String age, String breed, String description, boolean adoptable) {
+    public Pet(Long id, String sex, String name, String age, String size, String breed, String description, boolean adoptable) {
         this.id = id;
-        this.sex = sex;
         this.name = name;
+        this.sex = sex;
         this.age = age;
+        this.size = size;
         this.breed = breed;
         this.description = description;
         this.adoptable = adoptable;
@@ -41,6 +42,10 @@ public class Pet {
     @Column(name = "sex")
     @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class,PetViews.Public.class, PetViews.Internal.class})
     private String sex;
+
+    @Column(name = "size")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
+    private  String size;
 
     @Column(name = "breed")
     @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
@@ -75,7 +80,7 @@ public class Pet {
 
 
 
-    //    settings.put(Environment.HBM2DD_AUTO, "validate");
+
     // Set
     public void setId(Long id) { this.id = id; }
     public void setSex(String sex) { this.sex = sex;}
@@ -90,6 +95,8 @@ public class Pet {
         this.shelter = shelter;
     }
     public void setAdopter(Adopter adopter) {this.adopter = adopter;}
+    public void setSize(String size) { this.size = size; }
+    public void setAdoptable(boolean adoptable) { this.adoptable = adoptable; }
 
     // Get
     public Long getId() { return id; }
@@ -99,10 +106,8 @@ public class Pet {
     public String getAge() {return age; }
     public String getDescription() {return description;}
     public Boolean getAdoptable() {return adoptable;}
-    public Shelter getShelter() {
-        return shelter;
-    }
-    public Adopter setAdopter() {return adopter;}
-
-
+    public Shelter getShelter() { return shelter; }
+    public String getSize() { return size; }
+    public boolean isAdoptable() { return adoptable; }
+    public Adopter getAdopter() { return adopter; }
 }

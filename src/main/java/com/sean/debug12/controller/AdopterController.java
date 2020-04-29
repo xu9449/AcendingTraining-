@@ -30,6 +30,7 @@ public class AdopterController {
     @Autowired
     private RoleService roleService;
 
+    // GET Adopter
     // http://localhost:8080/adopter GET
     @RequestMapping(value = "", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Adopter> getAdopters() {
@@ -52,6 +53,9 @@ public class AdopterController {
         return adopter;
     }
 
+
+    // Create Adopter
+    //http://localhost:8080/adopter POST
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public Adopter createAdopter(@RequestBody Adopter adopter) {
         logger.debug("Adopter: " + adopter.toString());
@@ -62,16 +66,6 @@ public class AdopterController {
         return adop;
     }
 
-//    @RequestMapping(value = "/name", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE})
-//    public Boolean delteRoles(@RequestParam("name") String adopterName, @RequestParam("role") String role){
-//        logger.info("variable info passing in");
-//        Adopter a2 = adopterService.getAdopterByName(adopterName);
-//        List<Role> r1 = a2.getRoles();
-////        Role r = roleService.getRoleByName(role);
-//        Boolean a = adopterService.UpdateRole(adopterName, r);
-//        List<Role> r2 = a2.getRoles();
-//        return a;
-//    }
 
     @RequestMapping(value = "/name", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE})
     public Boolean delteRoles(@RequestParam("name") String adopterName, @RequestParam("Id") Long id){
@@ -83,4 +77,11 @@ public class AdopterController {
         List<Role> r2 = a2.getRoles();
         return a;
     }
+
+
+
+//    @RequestMapping(value = "/name", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+//    public Boolean addRoles(){
+//        return false;
+//    }
 }
