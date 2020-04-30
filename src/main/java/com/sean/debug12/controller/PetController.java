@@ -33,10 +33,10 @@ public class PetController {
         return petService.getPets();
     }
 
-
     //http://localhost:8080/shelter?name = xxx
     //可以加 params = {"name"}来区分
-    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE} )
+    @JsonView(PetViews.Internal.class)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE})
     public boolean updatePetAdoptable(@PathVariable("id") Long Id, @RequestParam(name = "adoptable") boolean adoptable) {
         logger.info("variable info passing in");
         Pet p = petService.getPetById(Id);
@@ -44,7 +44,6 @@ public class PetController {
         boolean isSuccess = petService.update(p);
         return isSuccess;
     }
-
 
 
 }

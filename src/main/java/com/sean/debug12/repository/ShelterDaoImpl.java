@@ -94,7 +94,7 @@ public class ShelterDaoImpl implements ShelterDao {
                 "left join fetch pet.adopter " + "WHERE lower(s.name)= :name";
         Session session = HibernateUtil.getSessionFactory().openSession();
         // lower是啥意思
-        try  {
+        try {
             Query<Shelter> query = session.createQuery(hql);
             query.setParameter("name", sheltName.toLowerCase());
             Shelter result = query.uniqueResult();

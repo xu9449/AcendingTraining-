@@ -22,47 +22,30 @@ public class PetService {
     @Autowired
     private PetDao petDao;
 
-        private Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
-
-
-        public boolean save (Pet pet){
-            boolean isSuccess = petDao.save(pet);
-            return isSuccess;
-
-        }
-
-        public List<Pet> getPets() {
-            return petDao.getPets();
-        }
-
-
-        public Pet getPetById(long Id) {
-            return petDao.getPetById(Id);
-        }
-
-        public boolean update(Pet pet){
-            return petDao.update(pet);
-        }
-
-
-        public boolean delete(Pet pet) {
-           return petDao.delete(pet);
-        }
-
-//    public Pet getPetEagerBy(Integer id) {
-//        String hql = "From Pet d LEFT JOIN FETCH d.emplyees where d.id = Id";
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-//        try {
-//            Query<Pet> query = session.createQuery(hql);
-//            query.setParameter("Id", id);
-//            Pet result = query.uniqueResult();
-//            session.close();
-//            return result;
-//        }catch (HibernateException e) {
-//            logger.error("failure to retrieve date record", e);
-//            return null;
-//        }
-//    }
+    public boolean save(Pet pet) {
+        boolean isSuccess = petDao.save(pet);
+        return isSuccess;
     }
+
+    public List<Pet> getPets() {
+        return petDao.getPets();
+    }
+
+    public Pet getPetById(long Id) {
+        return petDao.getPetById(Id);
+    }
+
+    public boolean update(Pet pet) {
+        return petDao.update(pet);
+    }
+
+
+    public boolean delete(Pet pet) {
+        return petDao.delete(pet);
+    }
+
+
+}
 

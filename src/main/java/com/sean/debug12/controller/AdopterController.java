@@ -5,6 +5,7 @@ import com.sean.debug12.model.Adopter;
 import com.sean.debug12.model.Pet;
 import com.sean.debug12.model.Role;
 import com.sean.debug12.model.Shelter;
+import com.sean.debug12.model.View.AdopterViews;
 import com.sean.debug12.model.View.PetViews;
 import com.sean.debug12.model.View.ShelterViews;
 import com.sean.debug12.service.AdopterService;
@@ -32,6 +33,7 @@ public class AdopterController {
 
     // GET Adopter
     // http://localhost:8080/adopter GET
+    @JsonView(AdopterViews.Public.class)
     @RequestMapping(value = "", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Adopter> getAdopters() {
         return adopterService.getAdopters();
@@ -39,15 +41,17 @@ public class AdopterController {
 
 
     //http://localhost:8080/adopter/id GET
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE} )
+    @JsonView(AdopterViews.Public.class)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public Adopter getAdopterByID(@PathVariable("id") Long Id) {
         Adopter adopter = adopterService.getShelterById(Id);
         return adopter;
     }
 
     //http://localhost:8080/adopter?name = xxx Get
+    @JsonView(AdopterViews.Public.class)
     @RequestMapping(value = {"/name"}, method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Adopter getAdopterByName(@RequestParam("name") String name){
+    public Adopter getAdopterByName(@RequestParam("name") String name) {
         logger.info("pass in variable name: " + name);
         Adopter adopter = adopterService.getAdopterByName(name);
         return adopter;
@@ -68,7 +72,7 @@ public class AdopterController {
 
 
     @RequestMapping(value = "/name", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Boolean delteRoles(@RequestParam("name") String adopterName, @RequestParam("Id") Long id){
+    public Boolean delteRoles(@RequestParam("name") String adopterName, @RequestParam("Id") Long id) {
         logger.info("variable info passing in");
         Adopter a2 = adopterService.getAdopterByName(adopterName);
         List<Role> r1 = a2.getRoles();
@@ -79,9 +83,4 @@ public class AdopterController {
     }
 
 
-
-//    @RequestMapping(value = "/name", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
-//    public Boolean addRoles(){
-//        return false;
-//    }
 }

@@ -21,13 +21,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class JWTService {
-
-    private Logger logger = LoggerFactory.getLogger("");
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     private final String SECRET_KEY = "seanxu-seanxu";
     private final String ISSUER = "com.ascending";
     private final long EXPIRATION_TIME = 86400 * 1000;
 
-    public String gerateToken(Adopter adopter) {
+    public String generateToken(Adopter adopter) {
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
@@ -49,10 +48,14 @@ public class JWTService {
         String allowedResource = roles.stream().map(role -> role.getAllowedResource()).collect(Collectors.joining(","));
         claims.put("allowedResource", allowedResource);
         for (Role role : roles) {
-            if (role.isAllowedRead()) allowedReadResources = String.join(role.getAllowedResource(), allowedReadResources, ",");
-            if (role.isAllowedCreate()) allowedCreateResources = String.join(role.getAllowedResource(), allowedCreateResources, ",");
-            if (role.isAllowedUpdate()) allowedUpdateResources = String.join(role.getAllowedResource(), allowedUpdateResources, ",");
-            if (role.isAllowedDelete()) allowedDeleteResources = String.join(role.getAllowedResource(), allowedDeleteResources, ",");
+            if (role.isAllowedRead())
+                allowedReadResources = String.join(role.getAllowedResource(), allowedReadResources, ",");
+            if (role.isAllowedCreate())
+                allowedCreateResources = String.join(role.getAllowedResource(), allowedCreateResources, ",");
+            if (role.isAllowedUpdate())
+                allowedUpdateResources = String.join(role.getAllowedResource(), allowedUpdateResources, ",");
+            if (role.isAllowedDelete())
+                allowedDeleteResources = String.join(role.getAllowedResource(), allowedDeleteResources, ",");
         }
         claims.put("allowedReadResources", allowedReadResources.replaceAll(".$", ""));
         claims.put("allowedCreateResources", allowedCreateResources.replaceAll(".$", ""));
@@ -64,29 +67,10 @@ public class JWTService {
         return builder.compact();
     }
 
-    public Claims decryptJWTToken(String jwt){
+    public Claims decryptJWTToken(String jwt) {
         Claims claims = Jwts.parser()
                 .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
                 .parseClaimsJws(jwt).getBody();
-
-
-//        int id = Integer.parseInt(claims.getId());
-//        boolean isValidId = id < 50;
-//        String Issuer = claims.getIssuer();
-//        boolean isValidIssuer = Issuer.equals("com.ascending");
-//        Date expirationDate = claims.getExpiration();
-//        Date deadline = new Date(2020, 12, 31);
-//
-//        System.out.println("=========================" + "Token Validation" + "=========================");
-//        System.out.println("ID is valid: " + isValidId);
-//        System.out.println("Issuer: " + isValidIssuer);
-//        if(expirationDate.compareTo(deadline) >= 0) {
-//            System.out.println("This token is expired");
-//        } else if (expirationDate.compareTo(deadline) < 0) {
-//            System.out.println("This token is sill valid");
-//        }
-//        System.out.println("=========================" + "Token Validation" + "=========================");
-
         return claims;
 
     }

@@ -7,7 +7,9 @@ import java.util.List;
 @Table(name = "roles")
 public class Role {
 
-    public Role() {}
+    public Role() {
+    }
+
     public Role(long id, String name, String allowedResource, boolean allowedRead, boolean allowedCreate, boolean allowedUpdate, boolean allowedDelete, List<Adopter> adopters) {
         this.id = id;
         this.name = name;
@@ -37,7 +39,6 @@ public class Role {
     private boolean allowedUpdate;
     @Column(name = "allowed_delete")
     private boolean allowedDelete;
-
 
 
     @ManyToMany(mappedBy = "roles")

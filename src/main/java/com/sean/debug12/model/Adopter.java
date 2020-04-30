@@ -2,6 +2,9 @@ package com.sean.debug12.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.sean.debug12.model.View.AdopterViews;
+import com.sean.debug12.model.View.ShelterViews;
 import org.apache.commons.codec.cli.Digest;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.context.annotation.Configuration;
@@ -21,50 +24,57 @@ public class Adopter {
     public Adopter() {
     }
 
-    public Adopter(long id, String name, String password, String tel, String email, String location, String description, String secretKey, String firstName, String lastName, String imageUrl, Timestamp adoptDate, long pet_id) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.tel = tel;
-        this.email = email;
-        this.location = location;
-        this.description = description;
-        this.secretKey = secretKey;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.imageUrl = imageUrl;
-        this.adopt_date = adopt_date;
-        this.pet_id = pet_id;
-
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
+    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "id")
     private Long id;
+
+    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "name")
     private String name;
+
+    @JsonView(AdopterViews.Internal.class)
     @Column(name = "password")
     private String password;
+
+    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "tel")
     private String tel;
+
+    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "email")
     private String email;
+
+    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "location")
     private String location;
+
+    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "description")
     private String description;
+
     @Column(name = "secret_key")
     private String secretKey;
+
+    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "first_name")
     private String firstName;
+
+    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "last_name")
     private String lastName;
+
+    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "image_url")
     private String imageUrl;
+
+    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "adopt_date")
     private Timestamp adopt_date;
+
+    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "pet_id")
     private Long pet_id;
 
@@ -73,11 +83,11 @@ public class Adopter {
             joinColumns = {@JoinColumn(name = "adopter_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
-
-    //@JsonIgnore
+    @JsonIgnore
     private List<Role> roles;
 
     // Adopter's favorite Pets
+    //TODO change to lazy and test
     @OneToMany(mappedBy = "adopter", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private Set<Pet> pets;
 

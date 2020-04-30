@@ -16,12 +16,11 @@ public class ShelterService {
     private ShelterDao shelterDao;
 
     public Shelter save(Shelter shelter) {
-//        shelter.setName(shelter.getName() + shelter.getLocation());
         Shelter s1 = shelterDao.save(shelter);
         return s1;
     }
 
-    public boolean update(Shelter shelter){
+    public boolean update(Shelter shelter) {
         return shelterDao.update(shelter);
     }
 
@@ -45,9 +44,6 @@ public class ShelterService {
     public Shelter getShelterByName(String name) {
         return shelterDao.getShelterByName(name);
     }
-
-
-
 
 
 }

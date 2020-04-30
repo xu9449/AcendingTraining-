@@ -23,22 +23,21 @@ import java.util.Queue;
 import static org.hibernate.cfg.AvailableSettings.USER;
 
 @Repository
-public class PetDaoImpl implements PetDao{
+public class PetDaoImpl implements PetDao {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
-    public boolean save (Pet pet){
+    public boolean save(Pet pet) {
         Transaction transaction = null;
         boolean isSuccess = true;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try  {
+        try {
             transaction = session.beginTransaction();
             session.save(pet);
             transaction.commit();
             session.close();
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             isSuccess = false;
             if (transaction != null) transaction.rollback();
             logger.error("failure to instert record", e);
@@ -84,7 +83,7 @@ public class PetDaoImpl implements PetDao{
     }
 
     @Override
-    public Pet getPetById(long Id){
+    public Pet getPetById(long Id) {
         String hql = "FROM Pet as p where p.id = :Id";
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -113,7 +112,7 @@ public class PetDaoImpl implements PetDao{
             deletedCount = query.executeUpdate();
             transaction.commit();
             session.close();
-            return deletedCount >= 1 ? true:false;
+            return deletedCount >= 1 ? true : false;
         } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
             session.close();

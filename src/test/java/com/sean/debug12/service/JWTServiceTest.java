@@ -19,6 +19,7 @@ import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes= Appbootstrap.class)
 public class JWTServiceTest {
+
     @Autowired
     private JWTService jwtService;
 

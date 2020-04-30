@@ -14,13 +14,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 
 @SpringBootApplication(scanBasePackages = {"com.sean.debug12"})
-//@ServletComponentScan(basePackages = {"com.sean.debug12.filter"})
+@ServletComponentScan(basePackages = {"com.sean.debug12.filter"})
 public class Appbootstrap extends SpringBootServletInitializer {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     public static void main(String[] args) {
-        //AppInitializer app = new AppInitializer();
+
         SpringApplication.run(Appbootstrap.class, args);
     }
 

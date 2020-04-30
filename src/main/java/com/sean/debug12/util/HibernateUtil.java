@@ -10,6 +10,7 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.Properties;
 
 public class HibernateUtil {
@@ -39,7 +40,6 @@ public class HibernateUtil {
                 Properties settings = new Properties();
 
 
-
                 settings.put(Environment.DRIVER, dbDriver);
                 settings.put(Environment.DIALECT, dbDialect);
                 settings.put(Environment.URL, dbUrl);
@@ -55,17 +55,15 @@ public class HibernateUtil {
                 StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder();
                 ServiceRegistry serviceRegistry = registryBuilder.applySettings(configuration.getProperties()).build();
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            }
-            catch (Exception e) {
-                logger.error("fail to generate hibernate sessionfactory",e);
+            } catch (Exception e) {
+                logger.error("fail to generate hibernate sessionfactory", e);
             }
         }
         return sessionFactory;
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         SessionFactory sf = HibernateUtil.getSessionFactory();
-        logger.info("success generate sf "+sf.hashCode());
-//        Session s = sf.openSession();
-//        Session s1 = sf.openSession();
+        logger.info("success generate sf " + sf.hashCode());
     }
 }

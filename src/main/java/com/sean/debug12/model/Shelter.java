@@ -14,7 +14,9 @@ import java.util.Set;
 @Table(name = "shelters")
 public class Shelter {
 
-    public Shelter(){}
+    public Shelter() {
+    }
+
     public Shelter(long id, String name, String email, String tel, String location, String description, String principle) {
         this.id = id;
         this.name = name;
@@ -29,14 +31,14 @@ public class Shelter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "id")
-    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class,PetViews.Public.class, PetViews.Internal.class})
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class, PetViews.Public.class, PetViews.Internal.class})
     private long id;
 
     @Column(name = "name")
-    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class,PetViews.Public.class, PetViews.Internal.class})
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class, PetViews.Public.class, PetViews.Internal.class})
     private String name;
 
-    @Column(name ="tel")
+    @Column(name = "tel")
     @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
     private String tel;
 
@@ -57,7 +59,7 @@ public class Shelter {
     private String principle;
 
     @JsonView({ShelterViews.Internal.class})
-    @OneToMany(mappedBy="shelter", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "shelter", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Pet> pets;
 
     //Set
@@ -90,7 +92,9 @@ public class Shelter {
         this.principle = principle;
     }
 
-    public void setPets(Set<Pet> pets) {this.pets = pets;}
+    public void setPets(Set<Pet> pets) {
+        this.pets = pets;
+    }
     //Get
 
     public String getTel() {
@@ -118,12 +122,10 @@ public class Shelter {
     }
 
 
-
     public Set<Pet> getPets() {
         try {
             int size = pets.size();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
         return pets;

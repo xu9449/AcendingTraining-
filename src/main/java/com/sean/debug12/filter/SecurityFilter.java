@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@WebFilter(filterName= "securityFilter", urlPatterns = {"/*"}, dispatcherTypes = {DispatcherType.REQUEST})
+@WebFilter(filterName = "securityFilter", urlPatterns = {"/*"}, dispatcherTypes = {DispatcherType.REQUEST})
 public class SecurityFilter implements Filter {
 
     @Autowired
@@ -32,7 +32,7 @@ public class SecurityFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         int statusCode = authorization(req);
         if (statusCode == HttpServletResponse.SC_ACCEPTED) chain.doFilter(request, response);
-        else ((HttpServletResponse)response).sendError(statusCode);
+        else ((HttpServletResponse) response).sendError(statusCode);
     }
 
     private int authorization(HttpServletRequest req) {
@@ -41,9 +41,9 @@ public class SecurityFilter implements Filter {
         if (IGNORED_PATH.contains(uri)) return HttpServletResponse.SC_ACCEPTED;
         String verb = req.getMethod();
 
-        try{
+        try {
             String token = req.getHeader("Authorization").replaceAll("^(.*?)", "");
-
+            token = token.replace("Bearer: ","");
             Claims claims = jwtService.decryptJWTToken(token);
 
             if (claims.getId() != null) {
@@ -52,16 +52,24 @@ public class SecurityFilter implements Filter {
             }
 
             String allowedResources = "/";
-            switch(verb) {
-                case "GET"    : allowedResources = (String)claims.get("allowedReadResources");   break;
-                case "POST"   : allowedResources = (String)claims.get("allowedCreateResources"); break;
-                case "PUT"    : allowedResources = (String)claims.get("allowedUpdateResources"); break;
-                case "DELETE" : allowedResources = (String)claims.get("allowedDeleteResources"); break;
+            switch (verb) {
+                case "GET":
+                    allowedResources = (String) claims.get("allowedReadResources");
+                    break;
+                case "POST":
+                    allowedResources = (String) claims.get("allowedCreateResources");
+                    break;
+                case "PUT":
+                    allowedResources = (String) claims.get("allowedUpdateResources");
+                    break;
+                case "DELETE":
+                    allowedResources = (String) claims.get("allowedDeleteResources");
+                    break;
             }
             // /employees/id 200 "allowedReadResources": "/employees,/ems,/acnts,/accounts",
             // /paystubs/id  403 "allowedReadResources": "/employees,/ems,/acnts,/accounts",
             for (String s : allowedResources.split(",")) {
-                if(s.trim().isEmpty())
+                if (s.trim().isEmpty())
                     break;
                 if (uri.trim().toLowerCase().startsWith(s.trim().toLowerCase())) {
                     statusCode = HttpServletResponse.SC_ACCEPTED;

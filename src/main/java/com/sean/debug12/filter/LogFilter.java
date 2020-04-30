@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
-@WebFilter(filterName= "logFilter", urlPatterns = {"/*"}, dispatcherTypes = {DispatcherType.REQUEST})
+@WebFilter(filterName = "logFilter", urlPatterns = {"/*"}, dispatcherTypes = {DispatcherType.REQUEST})
 
 public class LogFilter implements Filter {
 
@@ -36,6 +36,7 @@ public class LogFilter implements Filter {
         }
         return false;
     }
+
     private String logInfo(HttpServletRequest req) {
         String formData = null;
         String httpMethod = req.getMethod();
@@ -54,7 +55,7 @@ public class LogFilter implements Filter {
         if (!parameters.isEmpty()) {
             formData = parameters.toString().replaceAll("^.|.$", "");
         }
-        return  new StringBuilder("| ")
+        return new StringBuilder("| ")
                 .append(formatter.format(startDateTime)).append(" | ")
                 .append(userIP).append(" | ")
                 .append(httpMethod).append(" | ")

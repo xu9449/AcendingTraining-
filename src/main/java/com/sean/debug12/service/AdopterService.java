@@ -25,29 +25,8 @@ public class AdopterService {
         return a1;
     }
 
-//    public Boolean UpdateRole(String adopterName, Role role) {
-//        Adopter adopter = adopterDao.getAdopterByName(adopterName);
-//        List<Role> roles = adopter.getRoles();
-//        adopter.getRoles().removeIf(role1 -> (role1.getId()==role.getId()));
-//
-//        roles.remove(role.getId());
-//        roles.remove(role);
-//
-//
-//        boolean result = adopterDao.update(adopter);
-//        return result;
-//    }
-
+    //TODO camel case
     public Boolean UpdateRole(String adopterName, Long roleId) {
-//        Adopter adopter = adopterDao.getAdopterByName(adopterName);
-//        List<Role> roles = adopter.getRoles();
-////        List<Role> roles2 = adopter.getRoles();
-//        Role role = roleDao.getRoleId(roleId);
-////        roles.removeIf(role1 -> role1.equals(role));
-//        roles.remove(roleDao.getRoleId(roleId));
-//        adopter.setRoles(roles);
-//        boolean result = adopterDao.update(adopter);
-//        return result;
 
         Adopter user = adopterDao.getAdopterByName(adopterName);
         List<Role> roleList = user.getRoles();
@@ -58,7 +37,7 @@ public class AdopterService {
         return true;
     }
 
-    public boolean update(Adopter adopter){
+    public boolean update(Adopter adopter) {
         return adopterDao.update(adopter);
     }
 
@@ -67,9 +46,6 @@ public class AdopterService {
         return adopterDao.delete(adopter);
     }
 
-//    public Adopter getAdopterAndRoles(String adopterName) {
-//        return adopterDao.deleteRole(adopterName);
-//    }
 
     public List<Adopter> getAdopters() {
         return adopterDao.getAdopters();
@@ -90,7 +66,7 @@ public class AdopterService {
         return a;
     }
 
-    public Adopter getAdopterByCredentials(String email, String password) throws Exception{
+    public Adopter getAdopterByCredentials(String email, String password) throws Exception {
         return adopterDao.getAdopterByCredentials(email, password);
     }
 

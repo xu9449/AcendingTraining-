@@ -14,7 +14,7 @@ import java.awt.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = {"/shelters", "/shelter","/shelts"})
+@RequestMapping(value = {"/shelters", "/shelter", "/shelts"})
 public class ShelterController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -24,8 +24,8 @@ public class ShelterController {
 
     //http://localhost:8080/shelter/?name = xxx Get
     @JsonView(ShelterViews.Internal.class)
-    @RequestMapping(value="/", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Shelter getShelterByName(@RequestParam(name ="name") String name){
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Shelter getShelterByName(@RequestParam(name = "name") String name) {
         logger.info("pass in variable name: " + name);
         return shelterService.getShelterByName(name);
     }
@@ -40,19 +40,17 @@ public class ShelterController {
 
     //http://localhost:8080/shelter/id GET
     @JsonView(ShelterViews.Internal.class)
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE} )
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public Shelter getShelterByID(@PathVariable("id") Long Id) {
         Shelter shelter = shelterService.getShelterEagerBy(Id);
         return shelter;
     }
 
 
-
-
     //http://localhost:8080/shelter?name = xxx
     //可以加 params = {"name"}来区分
     @JsonView(ShelterViews.Internal.class)
-    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE} )
+    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE})
     public boolean updateShelterName(@PathVariable("id") Long Id, @RequestParam(name = "name") String name) {
         logger.info("variable info passing in");
         Shelter s = shelterService.getShelterById(Id);
@@ -60,7 +58,6 @@ public class ShelterController {
         boolean isSuccess = shelterService.update(s);
         return isSuccess;
     }
-
 
 
     //http://localhost:8080/shelters POST

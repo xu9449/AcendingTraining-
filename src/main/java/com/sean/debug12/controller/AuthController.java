@@ -33,27 +33,20 @@ public class AuthController {
     @Autowired
     private JWTService jwtService;
 
-    @RequestMapping (value = "", method = RequestMethod.POST)
-//    public String adopterLogin(@RequestParam("adoptername") String emailOrUsername, @RequestParam("password") String password) {
-        public ResponseEntity adopterLogin(@RequestBody Adopter adopter) {
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public ResponseEntity adopterLogin(@RequestBody Adopter adopter) {
         // ResponseEntity 不仅可以返回，也可以返回customized content
         try {
-//            String digestPassword = DigestUtils.md5Hex(password.trim());
-//              if(adopter.getEmail() == null) {
-//
-//              }
-              Adopter a = adopterService.getAdopterByCredentials(adopter.getEmail(), adopter.getPassword());
-              if(a == null)  return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).build();
-              String token = jwtService.gerateToken(a);
-              Map<String, String> tokenMap = new HashMap<>();
-              tokenMap.put("token", token);
-//              String jsonStr = "{\"token\":"+ token + "}" ;
-//              JsonObject jsonObject = new JsonParser().parse(jsonStr).getAsJsonObject();
-              return ResponseEntity.ok().body(tokenMap);
+            Adopter a = adopterService.getAdopterByCredentials(adopter.getEmail(), adopter.getPassword());
+            if (a == null) return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).build();
+            String token = jwtService.generateToken(a);
+            Map<String, String> tokenMap = new HashMap<>();
+            tokenMap.put("token", token);
+            return ResponseEntity.ok().body(tokenMap);
 
-             } catch (Exception e) {
-                e.printStackTrace();
-             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return ResponseEntity.badRequest().build();
 
     }

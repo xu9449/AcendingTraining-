@@ -23,10 +23,10 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
-    @RequestMapping(value = "", method = RequestMethod.POST, consumes =MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void uploadFile(@RequestParam("file")MultipartFile file) {
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void uploadFile(@RequestParam("file") MultipartFile file) {
         logger.info("test file name: " + file.getOriginalFilename());
-        try{
+        try {
             String url = fileService.uploadFile("sean-sean", file);
             System.out.println(url);
         } catch (IOException e) {

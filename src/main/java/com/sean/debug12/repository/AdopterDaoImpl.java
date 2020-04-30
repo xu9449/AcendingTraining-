@@ -33,28 +33,9 @@ public class AdopterDaoImpl implements AdopterDao {
             if (transaction != null) transaction.rollback();
             logger.error("Failure to insert record", e);
         }
-        if (adopter!= null) logger.debug("The adopter was inserted into database");
+        if (adopter != null) logger.debug("The adopter was inserted into database");
         return null;
     }
-
-//    @Override
-//    public Adopter deleteRole(String adopterName, String roleName) {
-//
-//
-//        // get roles by name
-//        if (adopterName == null) return null;
-//        String hql = "From Adopter as a left join fetch a.roles as roles" +
-//                "left join fetch adopters.adopter " + "WHERE lower(a.name)= :name";
-//        // lower是啥意思
-//        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-//            Query<Adopter> query = session.createQuery(hql);
-//            query.setParameter("name", adopterName.toLowerCase());
-//            return query.uniqueResult();
-//        } catch (Exception e) {
-//            logger.error(e.getMessage());
-//        }
-//        return null;
-//    }
 
     @Override
     public boolean update(Adopter adopter) {
@@ -150,20 +131,6 @@ public class AdopterDaoImpl implements AdopterDao {
     public Adopter getAdopterByName(String adopterName) {
         if (adopterName == null) return null;
         String hql = "FROM Adopter as a LEFT JOIN FETCH a.pets where a.name = :name";
-//        String hql = "From Adopter as a left join fetch a.pets as pets" +
-//                "left join fetch adopters.adopters " + "WHERE lower(a.name)= :name";
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-//        try {
-//            Query<Adopter> query = session.createQuery(hql);
-//            query.setParameter("name", adopterName);
-//            Adopter result = query.uniqueResult();
-//            session.close();
-//            return result;
-//        } catch (Exception e) {
-//            logger.debug(e.getMessage());
-//            session.close();
-//            return null;
-//        }
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Adopter> query = session.createQuery(hql);
             query.setParameter("name", adopterName);
@@ -188,15 +155,10 @@ public class AdopterDaoImpl implements AdopterDao {
             query.setParameter("email", email.toLowerCase().trim());
             query.setParameter("password", password);
             return query.uniqueResult();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("can't find user record or session");
         }
     }
-
-
-
-
 
 
 }

@@ -22,11 +22,12 @@ import com.google.common.io.Files;
 
 @Service
 public class FileService {
-        private String defaultRegion ="us-east-1";
-        private String bucketName = "sean-sean";
+    private String defaultRegion = "us-east-1";
+    //TODO VM option
+    private String bucketName = "sean-sean";
 
-        @Autowired
-        private AmazonS3 s3Client;
+    @Autowired
+    private AmazonS3 s3Client;
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -39,31 +40,31 @@ public class FileService {
 //
 //        }
 
-        public String getUrl(String s3Key) {
-            return s3Client.getUrl(bucketName, s3Key).toExternalForm();
-        }
+    public String getUrl(String s3Key) {
+        return s3Client.getUrl(bucketName, s3Key).toExternalForm();
+    }
 
     public String uploadFile(String bucketName, MultipartFile file) throws IOException {
-//            AmazonS3 s3Client = awsConfig.getAmazonS3();
-//            s3Client.putObject("sean-sean", "sampleFile4.txt", "Uploaded String");
+//        AmazonS3 s3Client = awsConfig.getAmazonS3();
+//        s3Client.putObject("sean-sean", "sampleFile4.txt", "Uploaded String");
 //        PutObjectRequest request = new PutObjectRequest(bucketName, f.getName(), f);
 //        s3Client.putObject(request);
-        try{
+        try {
             String uuid = UUID.randomUUID().toString();
             String originalFilename = file.getOriginalFilename();
-            String newFileName = Files.getFileExtension(originalFilename)+uuid+'.'+Files.getFileExtension(originalFilename);
+            String newFileName = Files.getFileExtension(originalFilename) + uuid + '.' + Files.getFileExtension(originalFilename);
             ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentType(file.getContentType());
             objectMetadata.setContentLength(file.getSize());
             s3Client.putObject(bucketName, newFileName, file.getInputStream(), objectMetadata);
             logger.info(String.format("The file name = %s was uploaded to bucket %s", file.getOriginalFilename(), bucketName));
-            String url = s3Client.getUrl(bucketName,newFileName).toString();
+            String url = s3Client.getUrl(bucketName, newFileName).toString();
             return url;
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
-//        s3Client.putObject(bucketName, file.getOriginalFilename(), file.getInputStream(), null);
-            return null;
+//      s3Client.putObject(bucketName, file.getOriginalFilename(), file.getInputStream(), null);
+        return null;
     }
 
 

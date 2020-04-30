@@ -10,13 +10,18 @@ public interface AdopterDao {
 
 
     Adopter save(Adopter adopter);
+
     boolean update(Adopter adopter);
+
     boolean delete(Adopter adopter);
 //    Adopter deleteRole(String adopterName);
 
     List<Adopter> getAdopters();
+
     Adopter getAdopterById(long Id);
+
     Adopter getAdopterEagerById(long Id);
+
     Adopter getAdopterByName(String AdopterName);
 
     Adopter getAdopterByCredentials(String email, String password) throws Exception;
@@ -24,10 +29,7 @@ public interface AdopterDao {
 
     boolean adopt(Adopter adopter, String petName);
 
-   // List<Adopter> getAdoptersWithChildren();
-
-
-
+    // List<Adopter> getAdoptersWithChildren();
 
 
 }
