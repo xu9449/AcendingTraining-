@@ -30,7 +30,6 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public Role getRoleId(Long Id) {
-
         String hql = "FROM Role as r where r.id = :Id";
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Role> query = session.createQuery(hql);

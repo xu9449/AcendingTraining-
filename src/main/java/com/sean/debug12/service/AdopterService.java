@@ -25,8 +25,8 @@ public class AdopterService {
         return a1;
     }
 
-    //TODO camel case
-    public Boolean UpdateRole(String adopterName, Long roleId) {
+
+    public Boolean updateRole(String adopterName, Long roleId) {
 
         Adopter user = adopterDao.getAdopterByName(adopterName);
         List<Role> roleList = user.getRoles();

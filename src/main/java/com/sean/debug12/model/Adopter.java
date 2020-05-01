@@ -24,6 +24,11 @@ public class Adopter {
     public Adopter() {
     }
 
+    public Adopter(String name, String password){
+        this.name = name;
+        this.password = password;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 

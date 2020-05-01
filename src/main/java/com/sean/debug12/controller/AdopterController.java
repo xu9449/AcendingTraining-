@@ -63,23 +63,36 @@ public class AdopterController {
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public Adopter createAdopter(@RequestBody Adopter adopter) {
         logger.debug("Adopter: " + adopter.toString());
-        String msg = "The department was created.";
+        String msg = "The adopter record was created.";
         Adopter adop = adopterService.save(adopter);
 
         if (adop == null) msg = "The adopter is not created.";
         return adop;
     }
 
-
+    // Delete the roles
     @RequestMapping(value = "/name", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE})
     public Boolean delteRoles(@RequestParam("name") String adopterName, @RequestParam("Id") Long id) {
         logger.info("variable info passing in");
         Adopter a2 = adopterService.getAdopterByName(adopterName);
         List<Role> r1 = a2.getRoles();
 //        Role r = roleService.getRoleByName(role);
-        Boolean a = adopterService.UpdateRole(adopterName, id);
+        Boolean a = adopterService.updateRole(adopterName, id);
         List<Role> r2 = a2.getRoles();
         return a;
+    }
+
+    // Delete the Adopter
+    //TODO: What if it has the manyToMany relationship??
+    @RequestMapping(value = "", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Boolean deleteAdopter(@RequestBody Adopter adopter){
+        logger.debug("Adopter: " + adopter.toString());
+        String msg = "The adopter record was deleted.";
+        Boolean result = adopterService.delete(adopter);
+        if(result == false) msg = "The adopter was not created.";
+        System.out.println(msg);
+        return result;
+
     }
 
 

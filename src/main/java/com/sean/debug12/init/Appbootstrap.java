@@ -23,6 +23,4 @@ public class Appbootstrap extends SpringBootServletInitializer {
 
         SpringApplication.run(Appbootstrap.class, args);
     }
-
-
 }

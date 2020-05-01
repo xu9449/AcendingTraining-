@@ -28,6 +28,7 @@ public class AdopterDaoImpl implements AdopterDao {
             transaction = session.beginTransaction();
             session.save(adopter);
             transaction.commit();
+            session.close();
             return adopter;
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
@@ -45,12 +46,15 @@ public class AdopterDaoImpl implements AdopterDao {
             transaction = session.beginTransaction();
             session.saveOrUpdate(adopter);
             transaction.commit();
+            session.close();
+            return isSuccess;
         } catch (Exception e) {
             isSuccess = false;
             if (transaction != null) transaction.rollback();
             logger.error("Failure to update record", e.getMessage());
+            return isSuccess;
         }
-        return isSuccess;
+
     }
 
     @Override
