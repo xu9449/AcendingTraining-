@@ -83,7 +83,7 @@ public class Adopter {
     @Column(name = "pet_id")
     private Long pet_id;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinTable(name = "adopters_roles",
             joinColumns = {@JoinColumn(name = "adopter_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
@@ -92,8 +92,7 @@ public class Adopter {
     private List<Role> roles;
 
     // Adopter's favorite Pets
-    //TODO change to lazy and test
-    @OneToMany(mappedBy = "adopter", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "adopter", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Pet> pets;
 
 

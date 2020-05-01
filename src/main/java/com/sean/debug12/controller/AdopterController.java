@@ -83,7 +83,6 @@ public class AdopterController {
     }
 
     // Delete the Adopter
-    //TODO: What if it has the manyToMany relationship??
     @RequestMapping(value = "", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
     public Boolean deleteAdopter(@RequestBody Adopter adopter){
         logger.debug("Adopter: " + adopter.toString());

@@ -25,7 +25,7 @@ public class SecurityFilter implements Filter {
     @Autowired
     private JWTService jwtService;
 
-    private static final Set<String> IGNORED_PATH = new HashSet<>(Arrays.asList("/auth"));
+    private static final Set<String> IGNORED_PATH = new HashSet<>(Arrays.asList("/auth", "/auth/"));
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
