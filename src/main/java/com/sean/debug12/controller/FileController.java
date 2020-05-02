@@ -1,6 +1,7 @@
 package com.sean.debug12.controller;
 
 import com.sean.debug12.service.FileService;
+import com.sean.debug12.service.ImageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class FileController {
 
     @Value("${aws.s3.bucket}")
     private String bucketName;
+
+    @Autowired
+    private ImageService imageService;
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void uploadFile(@RequestParam("file") MultipartFile file) {

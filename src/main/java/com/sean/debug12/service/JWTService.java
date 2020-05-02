@@ -24,7 +24,7 @@ public class JWTService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private final String SECRET_KEY = "seanxu-seanxu";
     private final String ISSUER = "com.ascending";
-    private final long EXPIRATION_TIME = 86400 * 1000;
+    private final Long EXPIRATION_TIME = new Long(86400 * 1000);
 
     public String generateToken(Adopter adopter) {
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;

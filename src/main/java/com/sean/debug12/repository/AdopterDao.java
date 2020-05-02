@@ -18,9 +18,9 @@ public interface AdopterDao {
 
     List<Adopter> getAdopters();
 
-    Adopter getAdopterById(long Id);
+    Adopter getAdopterById(Long Id);
 
-    Adopter getAdopterEagerById(long Id);
+    Adopter getAdopterEagerById(Long Id);
 
     Adopter getAdopterByName(String AdopterName);
 

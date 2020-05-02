@@ -18,7 +18,7 @@ public interface PetDao {
 
     Pet getPetByName(String petName);
 
-    Pet getPetById(long Id);
+    Pet getPetById(Long Id);
 
 
 }

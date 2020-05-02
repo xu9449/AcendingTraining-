@@ -23,23 +23,25 @@ public class JWTServiceTest {
     @Autowired
     private JWTService jwtService;
 
-//
-//    @Test
-//    public void generateTokenTest() {
-//        Adopter adopter = new Adopter();
-//        adopter.setId(();
-//        adopter.setName("Ryo");
-//        String token = jwtService.gerateToken(adopter);
-////        assertNotNull(token);
-//        jwtService.decryptJWTToken(token);
-//    }
 
-//    @Test
-//    public void decryptJwtTokenTest() {
+    @Test
+    public void generateTokenTest() {
+        Adopter adopter = new Adopter();
+//        adopter.setId(new Long(1));
+        adopter.setName("Ryo");
+        String token = jwtService.generateToken(adopter);
+//        assertNotNull(token);
+
+        // TODO: use regex to assert the correct token
+        jwtService.decryptJWTToken(token);
+    }
+
+    @Test
+    public void decryptJwtTokenTest() {
 //        Adopter adopter = new Adopter();
-//        adopter.setId(10);
+//        adopter.setId(new Long(2));
 //        adopter.setName("Ryo");
-//        String token = jwtService.gerateToken(adopter);
+//        String token = jwtService.generateToken(adopter);
 //
 //        Claims claims = Jwts.parser()
 //                .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
@@ -51,7 +53,7 @@ public class JWTServiceTest {
 //        boolean isValidIssuer = Issuer.equals("com.ascending");
 //        Date expirationDate = claims.getExpiration();
 //        Date deadline = new Date(2020, 12, 31);
-//
+
 //        System.out.println("=========================" + "Token Validation" + "=========================");
 //        System.out.println("ID is valid: " + isValidId);
 //        System.out.println("Issuer: " + isValidIssuer);
@@ -61,7 +63,7 @@ public class JWTServiceTest {
 //            System.out.println("This token is sill valid");
 //        }
 //        System.out.println("=========================" + "Token Validation" + "=========================");
-//    }
+    }
 
 
 

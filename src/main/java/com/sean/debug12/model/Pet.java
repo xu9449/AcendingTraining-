@@ -68,6 +68,8 @@ public class Pet {
     @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class, PetViews.Public.class, PetViews.Internal.class})
     private boolean adoptable;
 
+    //TODO Add adopt date, change format to MM/dd/yyyy
+
     // Join Column shelter_id
     @JsonView({PetViews.Public.class, PetViews.Internal.class})
     @ManyToOne(fetch = FetchType.LAZY)
@@ -78,6 +80,10 @@ public class Pet {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "adopter_id")
     private Adopter adopter;
+
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Image> images;
+
 
 
     // Set

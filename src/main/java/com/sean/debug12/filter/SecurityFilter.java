@@ -42,8 +42,8 @@ public class SecurityFilter implements Filter {
         String verb = req.getMethod();
 
         try {
-            String token = req.getHeader("Authorization").replaceAll("^(.*?)", "");
-            token = token.replace("Bearer: ","");
+            String token = req.getHeader("Authorization").replaceAll("^(.*?) ", "");
+//            token = token.replace("Bearer: ","");
             Claims claims = jwtService.decryptJWTToken(token);
 
             if (claims.getId() != null) {

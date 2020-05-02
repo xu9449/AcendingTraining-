@@ -1,5 +1,6 @@
 package com.sean.debug12.service;
 
+import com.amazonaws.services.sqs.AmazonSQS;
 import com.sean.debug12.init.Appbootstrap;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +14,13 @@ public class MessageServiceTest {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private AmazonSQS amazonSQS;
+
     @Test
     public void sendMessageTest(){
+//        when(amazonSQS)
         messageService.sendMessage("Sean", 1);
     }
+
 }

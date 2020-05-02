@@ -4,13 +4,11 @@ import com.sean.debug12.model.Adopter;
 import com.sean.debug12.model.Pet;
 import com.sean.debug12.model.Shelter;
 import com.sean.debug12.util.HibernateUtil;
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -25,12 +23,14 @@ public class ShelterDaoImpl implements ShelterDao {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired
+    SessionFactory sessionFactory;
 
     @Override
     public List<Shelter> getShelters() {
         List<Shelter> shelters = new ArrayList<>();
         String hql = "FROM Shelter";  // test if there is no left join
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Shelter> query = session.createQuery(hql);
             shelters = query.list();
@@ -47,16 +47,16 @@ public class ShelterDaoImpl implements ShelterDao {
 //    public List<Shelter> getSheltersWithChildren() {
 //        String hql = "FROM Shelter as s left join fetch s.pets as pets left join fetch pets.adopter";
 //
-//        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+//        try (Session session = sessionFactory.openSession()) {
 //            Query<Shelter> query = session.createQuery(hql);
 //            return query.list().stream().distinct().collect(Collectors.toList());
 //        }
 //    }
 
     @Override
-    public Shelter getShelterEagerBy(long Id) {
+    public Shelter getShelterEagerBy(Long Id) {
         String hql = "FROM Shelter s LEFT JOIN FETCH s.pets where s.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Shelter> query = session.createQuery(hql);
             query.setParameter("Id", Id);
@@ -71,9 +71,9 @@ public class ShelterDaoImpl implements ShelterDao {
     }
 
     @Override
-    public Shelter getShelterBy(long Id) {
+    public Shelter getShelterBy(Long Id) {
         String hql = "FROM Shelter s where s.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Shelter> query = session.createQuery(hql);
             query.setParameter("Id", Id);
@@ -92,7 +92,7 @@ public class ShelterDaoImpl implements ShelterDao {
         if (sheltName == null) return null;
         String hql = "From Shelter as s left join fetch s.pets as pet " +
                 "left join fetch pet.adopter " + "WHERE lower(s.name)= :name";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         // lower是啥意思
         try {
             Query<Shelter> query = session.createQuery(hql);
@@ -111,7 +111,7 @@ public class ShelterDaoImpl implements ShelterDao {
     @Override
     public Shelter save(Shelter shelter) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.save(shelter);
             transaction.commit();
@@ -129,7 +129,7 @@ public class ShelterDaoImpl implements ShelterDao {
         String hql = "DELETE Shelter as s where s.id =:Id";
         int deletedCount = 0;
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();
             Query<Shelter> query = session.createQuery(hql);
@@ -152,7 +152,7 @@ public class ShelterDaoImpl implements ShelterDao {
     public Boolean update(Shelter shelter) {
         Transaction transaction = null;
         boolean isSuccess = true;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(shelter);
             transaction.commit();
@@ -169,7 +169,7 @@ public class ShelterDaoImpl implements ShelterDao {
         if (sheltName == null) return null;
         String hql = "FROM Shelter as s left join s.pets where lower(s.name) = :name";
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Query query = session.createQuery(hql);
             query.setParameter("name", sheltName.toLowerCase());
 
@@ -193,7 +193,7 @@ public class ShelterDaoImpl implements ShelterDao {
                 "left join pets.adopter as adopter " +
                 "where lower(s.name) = :name";
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Query query = session.createQuery(hql);
             query.setParameter("name", sheltName.toLowerCase());
 

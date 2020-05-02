@@ -5,10 +5,12 @@ import com.sean.debug12.model.Shelter;
 import com.sean.debug12.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -27,11 +29,14 @@ public class PetDaoImpl implements PetDao {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     @Override
     public boolean save(Pet pet) {
         Transaction transaction = null;
         boolean isSuccess = true;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();
             session.save(pet);
@@ -51,7 +56,7 @@ public class PetDaoImpl implements PetDao {
     public boolean update(Pet pet) {
         Transaction transaction = null;
         boolean isSuccess = true;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(pet);
             transaction.commit();
@@ -70,7 +75,7 @@ public class PetDaoImpl implements PetDao {
         List<Pet> pets = new ArrayList<>();
 //        String hql = "FROM Pet";
         String hql = "FROM Pet";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Pet> query = session.createQuery(hql);
             pets = query.list();
@@ -83,9 +88,9 @@ public class PetDaoImpl implements PetDao {
     }
 
     @Override
-    public Pet getPetById(long Id) {
+    public Pet getPetById(Long Id) {
         String hql = "FROM Pet as p where p.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Pet> query = session.createQuery(hql);
             query.setParameter("Id", Id);
@@ -104,7 +109,7 @@ public class PetDaoImpl implements PetDao {
         String hql = "DELETE Pet as p where p.id = :Id";
         int deletedCount = 0;
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();
             Query<Pet> query = session.createQuery(hql);
@@ -125,7 +130,7 @@ public class PetDaoImpl implements PetDao {
     public Pet getPetByName(String name) {
         String hql = "FROM Pet as p left join fetch p.adopter where p.name = :name";
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Query<Pet> query = session.createQuery(hql);
             query.setParameter("name", name);
 

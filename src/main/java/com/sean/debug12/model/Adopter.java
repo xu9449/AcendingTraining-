@@ -32,7 +32,7 @@ public class Adopter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
+    @JsonView({AdopterViews.Internal.class})
     @Column(name = "id")
     private Long id;
 
@@ -40,7 +40,7 @@ public class Adopter {
     @Column(name = "name")
     private String name;
 
-    @JsonView(AdopterViews.Internal.class)
+
     @Column(name = "password")
     private String password;
 
@@ -71,24 +71,32 @@ public class Adopter {
     @Column(name = "last_name")
     private String lastName;
 
-    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
+    @JsonView({AdopterViews.Internal.class})
     @Column(name = "image_url")
     private String imageUrl;
 
     @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "adopt_date")
+
+    //TODO change to MM/dd/yyyy format
     private Timestamp adopt_date;
 
     @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "pet_id")
     private Long pet_id;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "adopter", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Image> images;
+
+
+
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(name = "adopters_roles",
             joinColumns = {@JoinColumn(name = "adopter_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
-    @JsonIgnore
+
+    @JsonView({AdopterViews.Internal.class})
     private List<Role> roles;
 
     // Adopter's favorite Pets
@@ -101,9 +109,9 @@ public class Adopter {
         this.name = name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public void setPassword(String password) {
         this.password = DigestUtils.md5Hex(password.trim());
@@ -167,6 +175,7 @@ public class Adopter {
         return name;
     }
 
+//    @JsonIgnore
     public String getPassword() {
         return password;
     }

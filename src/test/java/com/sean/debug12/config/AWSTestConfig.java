@@ -22,9 +22,10 @@ public class AWSTestConfig {
     @Bean
     //TODO change to mock
     public AmazonSQS getAmazonSQS() {
-        return AmazonSQSClientBuilder
-                .standard()
-                .withCredentials(new DefaultAWSCredentialsProviderChain())
-                .build();
+//        return AmazonSQSClientBuilder
+//                .standard()
+//                .withCredentials(new DefaultAWSCredentialsProviderChain())
+//                .build();
+        return mock(AmazonSQS.class);
     }
 }

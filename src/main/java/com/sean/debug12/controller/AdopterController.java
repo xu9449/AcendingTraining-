@@ -41,10 +41,10 @@ public class AdopterController {
 
 
     //http://localhost:8080/adopter/id GET
-    @JsonView(AdopterViews.Public.class)
+    @JsonView(AdopterViews.Internal.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public Adopter getAdopterByID(@PathVariable("id") Long Id) {
-        Adopter adopter = adopterService.getShelterById(Id);
+        Adopter adopter = adopterService.getAdopterEagerBy(Id);
         return adopter;
     }
 
@@ -56,7 +56,6 @@ public class AdopterController {
         Adopter adopter = adopterService.getAdopterByName(name);
         return adopter;
     }
-
 
     // Create Adopter
     //http://localhost:8080/adopter POST

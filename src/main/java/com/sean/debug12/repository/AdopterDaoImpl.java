@@ -7,10 +7,12 @@ import com.sean.debug12.model.Shelter;
 import com.sean.debug12.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -21,10 +23,13 @@ public class AdopterDaoImpl implements AdopterDao {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     @Override
     public Adopter save(Adopter adopter) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.save(adopter);
             transaction.commit();
@@ -42,7 +47,8 @@ public class AdopterDaoImpl implements AdopterDao {
     public boolean update(Adopter adopter) {
         Transaction transaction = null;
         boolean isSuccess = true;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        // TODO: change to dependency injection
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(adopter);
             transaction.commit();
@@ -62,7 +68,7 @@ public class AdopterDaoImpl implements AdopterDao {
         String hql = "DELETE Adopter as a where a.id =:Id";
         int deletedCount = 0;
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();
             Query<Adopter> query = session.createQuery(hql);
@@ -83,8 +89,8 @@ public class AdopterDaoImpl implements AdopterDao {
     @Override
     public List<Adopter> getAdopters() {
         List<Adopter> adopters = new ArrayList<>();
-        String hql = "From Adopter";  // test if there is no lef tjoin
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "From Adopter";
+        Session session = sessionFactory.openSession();
         try {
             Query<Adopter> query = session.createQuery(hql);
             adopters = query.list();
@@ -92,15 +98,15 @@ public class AdopterDaoImpl implements AdopterDao {
             return adopters;
         } catch (Exception e) {
             logger.debug(e.getMessage());
-            session.close();       // why we need to close the session here?
+            session.close();
             return null;
         }
     }
 
     @Override
-    public Adopter getAdopterById(long Id) {
+    public Adopter getAdopterById(Long Id) {
         String hql = "FROM Adopter a where a.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Adopter> query = session.createQuery(hql);
             query.setParameter("Id", Id);
@@ -115,9 +121,10 @@ public class AdopterDaoImpl implements AdopterDao {
     }
 
     @Override
-    public Adopter getAdopterEagerById(long Id) {
-        String hql = "FROM Adopter a LEFT JOIN FETCH a.pets where a.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+    public Adopter getAdopterEagerById(Long Id) {
+//        String hql = "FROM Adopter a LEFT JOIN FETCH a.pets where a.id = :Id";
+        String hql = "FROM Adopter a LEFT JOIN FETCH a.roles where a.id = :Id";
+        Session session = sessionFactory.openSession();
         try {
             Query<Adopter> query = session.createQuery(hql);
             query.setParameter("Id", Id);
@@ -135,7 +142,7 @@ public class AdopterDaoImpl implements AdopterDao {
     public Adopter getAdopterByName(String adopterName) {
         if (adopterName == null) return null;
         String hql = "FROM Adopter as a LEFT JOIN FETCH a.pets where a.name = :name";
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Query<Adopter> query = session.createQuery(hql);
             query.setParameter("name", adopterName);
             return query.uniqueResult();
@@ -154,7 +161,7 @@ public class AdopterDaoImpl implements AdopterDao {
     public Adopter getAdopterByCredentials(String email, String password) throws Exception {
         String hql = "FROM Adopter as a where (lower(a.email) = :email or lower(a.name) =:email) and a.password = :password";
         logger.debug(String.format("Adopter email: %s, password: %s", email, password));
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Query<Adopter> query = session.createQuery(hql);
             query.setParameter("email", email.toLowerCase().trim());
             query.setParameter("password", password);

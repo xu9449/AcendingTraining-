@@ -3,6 +3,7 @@ package com.sean.debug12.service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.sqs.AmazonSQS;
 import com.sean.debug12.init.Appbootstrap;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.junit.Test;
@@ -37,17 +38,18 @@ public class FileServiceTest {
     @Autowired
     private AmazonS3 amazonS3client;
 
+
     @Test
     public void uploadFileTest() throws IOException {
 //        AmazonS3 s3Client = Mockito.mock(AmazonS3.class);
 //        s3Client.putObject("xxx", "xxxxxxx","xxxxxx");
 //        verify(s3Client, times(1)).putObject(anyString(), anyString(), anyString());//File testFile = new File("/Users/xukexin/Downloads/resume.pdf");
 
-        File testFile = Mockito.mock(File.class);
+//        File testFile = Mockito.mock(File.class);
         MultipartFile testFile2 = Mockito.mock(MultipartFile.class);
         InputStream anyInputStream = new ByteArrayInputStream("test data".getBytes());
 
-        when(testFile.getName()).thenReturn("resume.pdf");
+//        when(testFile.getName()).thenReturn("resume.pdf");
         when(testFile2.getOriginalFilename()).thenReturn("resume.pdf");
         when(testFile2.getInputStream()).thenReturn(anyInputStream);
 //        file2Service.uploadFile(null);
@@ -56,9 +58,11 @@ public class FileServiceTest {
         verify(amazonS3client, times(0)).putObject(any(PutObjectRequest.class));
         //file.getInputStream()
         fileService.uploadFile(testFile2);
-        verify(amazonS3client, times(1)).putObject(anyString(), anyString(),any(InputStream.class),any(ObjectMetadata.class));
-
+//        verify(amazonS3client, times(1)).putObject(anyString(), anyString(),any(InputStream.class),any(ObjectMetadata.class));
+        verify(amazonS3client, times(1)).putObject(any(PutObjectRequest.class));
     }
+
+
 
     @Test
     public void getUrlTest() {
@@ -67,6 +71,8 @@ public class FileServiceTest {
 //        when(testFile.getName()).thenReturn("resume.pdf");
 
         String key = "qwer1234";
+
+        //TODO: unit test no try catch
         try {
             when(amazonS3client.getUrl(anyString(), anyString())).thenReturn(new URL("http", "ascending.com", 800, "sdf.pdf"));
             String url = fileService.getUrl(key);

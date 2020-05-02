@@ -17,7 +17,7 @@ public class Shelter {
     public Shelter() {
     }
 
-    public Shelter(long id, String name, String email, String tel, String location, String description, String principle) {
+    public Shelter(Long id, String name, String email, String tel, String location, String description, String principle) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -32,7 +32,7 @@ public class Shelter {
 
     @Column(name = "id")
     @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class, PetViews.Public.class, PetViews.Internal.class})
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class, PetViews.Public.class, PetViews.Internal.class})
@@ -64,7 +64,7 @@ public class Shelter {
 
     //Set
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -113,7 +113,7 @@ public class Shelter {
         return name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

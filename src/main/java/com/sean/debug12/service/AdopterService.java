@@ -57,7 +57,7 @@ public class AdopterService {
         return adopterDao.getAdopterEagerById(Id);
     }
 
-    public Adopter getShelterById(long Id) {
+    public Adopter getAdopterById(long Id) {
         return adopterDao.getAdopterById(Id);
     }
 

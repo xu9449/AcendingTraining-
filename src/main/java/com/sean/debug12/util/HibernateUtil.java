@@ -10,12 +10,15 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 
 import java.util.Properties;
 
+@org.springframework.context.annotation.Configuration
 public class HibernateUtil {
-    private static SessionFactory sessionFactory;
-    private static Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
+    //TODO change to static
+    private SessionFactory sessionFactory;
+    private Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
 
     /* Define JVM options
     -Ddatabase.driver=org.postgresql.Driver
@@ -24,9 +27,8 @@ public class HibernateUtil {
     -Ddatabase.user=admin
     -Ddatabase.password=Training123!
     */
-
-    public static SessionFactory getSessionFactory() {
-        //first time invoke
+    @Bean
+    public  SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
 
@@ -62,8 +64,9 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-    public static void main(String[] args) {
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        logger.info("success generate sf " + sf.hashCode());
-    }
+//    public static void main(String[] args) {
+//        //TODO just changed, wait for test
+//        SessionFactory sf = sessionFactory;
+//        logger.info("success generate sf " + sf.hashCode());
+//    }
 }

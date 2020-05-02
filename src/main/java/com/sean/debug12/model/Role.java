@@ -10,7 +10,7 @@ public class Role {
     public Role() {
     }
 
-    public Role(long id, String name, String allowedResource, boolean allowedRead, boolean allowedCreate, boolean allowedUpdate, boolean allowedDelete, List<Adopter> adopters) {
+    public Role(Long id, String name, String allowedResource, boolean allowedRead, boolean allowedCreate, boolean allowedUpdate, boolean allowedDelete, List<Adopter> adopters) {
         this.id = id;
         this.name = name;
         this.allowedResource = allowedResource;
@@ -23,10 +23,9 @@ public class Role {
 
 
     @Id
-    //@SequenceGenerator(name = "role_id_generator", sequenceName = "role_id_seq", allocationSize = 1)
-    //@GeneratedValue(strategy = SEQUENCE, generator = "role_id_generator")
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "allowed_resource")
@@ -44,11 +43,11 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private List<Adopter> adopters;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

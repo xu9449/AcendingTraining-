@@ -4,9 +4,11 @@ import com.sean.debug12.model.Adopter;
 import com.sean.debug12.model.Role;
 import com.sean.debug12.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -14,11 +16,14 @@ public class RoleDaoImpl implements RoleDao {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired
+    SessionFactory sessionFactory;
+
     @Override
     public Role getRoleByName(String roleName) {
         if (roleName == null) return null;
         String hql = "FROM Role as r where r.name = :name";
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Query<Role> query = session.createQuery(hql);
             query.setParameter("name", roleName);
             return query.uniqueResult();
@@ -31,7 +36,7 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     public Role getRoleId(Long Id) {
         String hql = "FROM Role as r where r.id = :Id";
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Query<Role> query = session.createQuery(hql);
             query.setParameter("Id", Id);
             return query.uniqueResult();

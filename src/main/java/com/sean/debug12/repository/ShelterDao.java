@@ -18,9 +18,9 @@ public interface ShelterDao {
     //List<Shelter> getSheltersWithChildren();
 
 
-    Shelter getShelterEagerBy(long Id);
+    Shelter getShelterEagerBy(Long Id);
 
-    Shelter getShelterBy(long Id);
+    Shelter getShelterBy(Long Id);
 
     Shelter getShelterByName(String sheltName);
 
