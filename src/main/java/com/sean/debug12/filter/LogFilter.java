@@ -24,10 +24,10 @@ public class LogFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         long startTime = System.currentTimeMillis();
         HttpServletRequest req = (HttpServletRequest) request;
-        String logInfo = logInfo(req);
-        logger.info(logInfo.replace("responseTime", String.valueOf(System.currentTimeMillis() - startTime)));
+        String logInfo = this.logInfo(req);
         chain.doFilter(request, response);
-        long endTime = System.currentTimeMillis();
+        logger.info(logInfo.replace("responseTime", String.valueOf(System.currentTimeMillis() - startTime)));
+
     }
 
     private boolean isIgnoredWord(String word, List<String> excludedWords) {
@@ -36,6 +36,8 @@ public class LogFilter implements Filter {
         }
         return false;
     }
+
+
 
     private String logInfo(HttpServletRequest req) {
         String formData = null;

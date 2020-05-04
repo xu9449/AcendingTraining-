@@ -41,11 +41,7 @@ public class FileServiceTest {
 
     @Test
     public void uploadFileTest() throws IOException {
-//        AmazonS3 s3Client = Mockito.mock(AmazonS3.class);
-//        s3Client.putObject("xxx", "xxxxxxx","xxxxxx");
-//        verify(s3Client, times(1)).putObject(anyString(), anyString(), anyString());//File testFile = new File("/Users/xukexin/Downloads/resume.pdf");
 
-//        File testFile = Mockito.mock(File.class);
         MultipartFile testFile2 = Mockito.mock(MultipartFile.class);
         InputStream anyInputStream = new ByteArrayInputStream("test data".getBytes());
 

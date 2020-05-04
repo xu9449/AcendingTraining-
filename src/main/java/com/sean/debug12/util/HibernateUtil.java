@@ -48,7 +48,7 @@ public class HibernateUtil {
                 settings.put(Environment.USER, dbUser);
                 settings.put(Environment.PASS, dbPassword);
                 settings.put(Environment.SHOW_SQL, "true");
-                //验证mapping做的对不对， validate schema
+                //validate schema
                 settings.put(Environment.HBM2DDL_AUTO, "validate");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
                 configuration.setProperties(settings);

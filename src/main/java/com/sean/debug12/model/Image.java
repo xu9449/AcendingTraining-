@@ -11,6 +11,10 @@ public class Image {
     public Image(){
 
     }
+
+    public Image(String fileName){
+        this.fileName = fileName;
+    }
 //
     @Id // will automatically add when create
     @GeneratedValue(strategy = GenerationType.IDENTITY)

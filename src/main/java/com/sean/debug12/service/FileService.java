@@ -4,6 +4,7 @@ import com.amazonaws.services.alexaforbusiness.AmazonAlexaForBusiness;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.sean.debug12.init.AWSConfig;
@@ -52,11 +53,12 @@ public class FileService {
         try {
             String uuid = UUID.randomUUID().toString();
             String originalFilename = file.getOriginalFilename();
-            String newFileName = Files.getFileExtension(originalFilename) + uuid + '.' + Files.getFileExtension(originalFilename);
+            String newFileName = Files.getNameWithoutExtension(originalFilename) + uuid + '.' + Files.getFileExtension(originalFilename);
             ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentType(file.getContentType());
             objectMetadata.setContentLength(file.getSize());
-            s3Client.putObject(bucketName, newFileName, file.getInputStream(), objectMetadata);
+            PutObjectRequest request = new PutObjectRequest (bucketName, newFileName, file.getInputStream(), objectMetadata);
+            s3Client.putObject(request.withCannedAcl(CannedAccessControlList.PublicRead));
             logger.info(String.format("The file name = %s was uploaded to bucket %s", file.getOriginalFilename(), bucketName));
             String url = s3Client.getUrl(bucketName, newFileName).toString();
             return url;
@@ -81,7 +83,7 @@ public class FileService {
             objectMetadata.setContentLength(file.getSize());
 
             PutObjectRequest request = new PutObjectRequest (bucketName, newFileName, file.getInputStream(), objectMetadata);
-            s3Client.putObject(request);
+            s3Client.putObject(request.withCannedAcl(CannedAccessControlList.PublicRead));
 
             //s3Client.putObject(bucketName, newFileName, file.getInputStream(), objectMetadata);
 

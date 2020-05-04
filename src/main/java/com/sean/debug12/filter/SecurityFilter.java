@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -48,7 +49,10 @@ public class SecurityFilter implements Filter {
 
             if (claims.getId() != null) {
                 Adopter adopter = adopterService.getAdopterEagerBy(Long.valueOf(claims.getId()));
-                if (adopter != null) statusCode = HttpServletResponse.SC_ACCEPTED;
+                HttpSession httpSession = req.getSession();
+                httpSession.setAttribute("adopter",adopter);
+                //TODO: activeStatus
+                //if (adopter != null) statusCode = HttpServletResponse.SC_ACCEPTED;
             }
 
             String allowedResources = "/";

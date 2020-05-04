@@ -1,6 +1,6 @@
 CREATE TABLE images (
   id                BIGSERIAL NOT NULL,
-  file_name         VARCHAR(30) not null unique,
+  file_name         VARCHAR(512) not null,
   upload_time       TIMESTAMP,
   s3key             VARCHAR(150),
   url               VARCHAR(512),
