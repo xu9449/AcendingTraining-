@@ -1,4 +1,4 @@
-# PetHelp Adopt Website by Kexin XU
+# PetHelp Website by Kexin XU
 
 ## Description  
 A website to help people find their ideal pets.  
