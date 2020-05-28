@@ -197,13 +197,11 @@
                     <configuration>
                         <driver>org.postgresql.Driver</driver>
 
-                        <!--<url>jdbc:postgresql://${database.url}:${database.port}/${database.name}</url>-->
-                        <!--<url>jdbc:postgresql://localhost:5430/pethelp</url>-->
-                        <url>jdbc:postgresql://172.17.0.2:5432/pethelpCICD</url>
+                        <url>jdbc:postgresql://${database.url}:${database.port}/${database.name}</url>
 
-                        <user>admin</user>
+                        <user>${database.user}</user>
 
-                        <password>password</password>
+                        <password>${database.password}</password>
                         <schemas>
                             <schema>public</schema>
                         </schemas>
