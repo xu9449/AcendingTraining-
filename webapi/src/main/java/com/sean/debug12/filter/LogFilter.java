@@ -20,6 +20,8 @@ public class LogFilter implements Filter {
     private final List<String> excludedWords = Arrays.asList("newPasswd", "confirmPasswd", "passwd", "password");
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss,SSS");
 
+
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         long startTime = System.currentTimeMillis();
@@ -29,6 +31,7 @@ public class LogFilter implements Filter {
         logger.info(logInfo.replace("responseTime", String.valueOf(System.currentTimeMillis() - startTime)));
 
     }
+
 
     private boolean isIgnoredWord(String word, List<String> excludedWords) {
         for (String excludedWord : excludedWords) {

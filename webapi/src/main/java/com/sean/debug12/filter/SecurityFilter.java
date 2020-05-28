@@ -28,6 +28,8 @@ public class SecurityFilter implements Filter {
 
     private static final Set<String> IGNORED_PATH = new HashSet<>(Arrays.asList("/auth", "/auth/"));
 
+
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
@@ -35,6 +37,8 @@ public class SecurityFilter implements Filter {
         if (statusCode == HttpServletResponse.SC_ACCEPTED) chain.doFilter(request, response);
         else ((HttpServletResponse) response).sendError(statusCode);
     }
+
+
 
     private int authorization(HttpServletRequest req) {
         int statusCode = HttpServletResponse.SC_UNAUTHORIZED;

@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Appbootstrap.class)
-@Profile("unit")
 public class MessageServiceTest {
     @Autowired
     private MessageService messageService;
