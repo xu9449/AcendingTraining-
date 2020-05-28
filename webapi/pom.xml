@@ -197,8 +197,8 @@
                     <configuration>
                         <driver>org.postgresql.Driver</driver>
                         <url>jdbc:postgresql://${database.url}:${database.port}/${database.name}</url>
-                        <user>admin</user>
-                        <password>password</password>
+                        <user>${database.user}</user>
+                        <password>${database.password}</password>
                         <schemas>
                             <schema>public</schema>
                         </schemas>
