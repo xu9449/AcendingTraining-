@@ -198,7 +198,9 @@
                         <driver>org.postgresql.Driver</driver>
 
                         <!--<url>jdbc:postgresql://${database.url}:${database.port}/${database.name}</url>-->
-                        <url>jdbc:postgresql://localhost:5430/pethelp</url>
+                        <!--<url>jdbc:postgresql://localhost:5430/pethelp</url>-->
+                        <url>jdbc:postgresql://172.17.0.2:5432/pethelpCICD</url>
+
                         <user>admin</user>
 
                         <password>password</password>
