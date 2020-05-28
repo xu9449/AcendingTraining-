@@ -1,7 +1,7 @@
 package com.sean.debug12.service;
 
 import com.sean.debug12.model.Image;
-import main.java.com.sean.debug12.repository.ImageDao;
+import com.sean.debug12.repository.ImageDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

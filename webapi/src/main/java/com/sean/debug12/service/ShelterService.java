@@ -3,7 +3,7 @@ package com.sean.debug12.service;
 import com.sean.debug12.model.Adopter;
 import com.sean.debug12.model.Shelter;
 import com.sean.debug12.repository.ShelterDao;
-import main.java.com.sean.debug12.repository.ShelterDaoImpl;
+import com.sean.debug12.repository.ShelterDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

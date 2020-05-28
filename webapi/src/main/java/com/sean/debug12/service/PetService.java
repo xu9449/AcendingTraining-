@@ -2,7 +2,7 @@ package com.sean.debug12.service;
 
 import com.sean.debug12.model.Pet;
 import com.sean.debug12.model.Shelter;
-import main.java.com.sean.debug12.repository.PetDao;
+import com.sean.debug12.repository.PetDao;
 import com.sean.debug12.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

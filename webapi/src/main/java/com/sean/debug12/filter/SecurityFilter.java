@@ -1,7 +1,7 @@
 package com.sean.debug12.filter;
 
 import com.sean.debug12.model.Adopter;
-import main.java.com.sean.debug12.service.AdopterService;
+import com.sean.debug12.service.AdopterService;
 import com.sean.debug12.service.JWTService;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,7 +4,7 @@ import com.sean.debug12.model.Adopter;
 import com.sean.debug12.model.Role;
 import com.sean.debug12.model.Shelter;
 import com.sean.debug12.repository.AdopterDao;
-import main.java.com.sean.debug12.repository.RoleDao;
+import com.sean.debug12.repository.RoleDao;
 import com.sean.debug12.repository.ShelterDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

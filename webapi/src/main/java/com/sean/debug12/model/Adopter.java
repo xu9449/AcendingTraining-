@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +21,8 @@ import java.util.Set;
 @Table(name = "adopters")
 
 // owning set
-public class Adopter {
+public class Adopter implements Serializable {
+
     public Adopter() {
     }
 
@@ -75,11 +77,17 @@ public class Adopter {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
-    @Column(name = "adopt_date")
 
-    //TODO change to MM/dd/yyyy format
-    private Timestamp adopt_date;
+    @JsonView({AdopterViews.Internal.class})
+    @Column(name = "Active_status")
+    private Boolean activeStatus;
+
+//    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
+//    @Column(name = "adopt_date")
+//
+//    //TODO change to MM/dd/yyyy format
+//    private Timestamp adopt_date;
+
 
     @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "pet_id")
@@ -102,6 +110,15 @@ public class Adopter {
     // Adopter's favorite Pets
     @OneToMany(mappedBy = "adopter", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Pet> pets;
+
+
+    public Boolean getActiveStatus() {
+        return activeStatus;
+    }
+
+    public void setActiveStatus(Boolean activeStatus) {
+        this.activeStatus = activeStatus;
+    }
 
 
     // setter
@@ -145,9 +162,11 @@ public class Adopter {
         this.imageUrl = imageUrl;
     }
 
-    public void setAdopt_date(Timestamp adopt_date) {
-        this.adopt_date = adopt_date;
-    }
+
+//    public void setAdopt_date(Timestamp adopt_date) {
+//        this.adopt_date = adopt_date;
+//    }
+
 
     public void setPet_id(Long pet_id) {
         this.pet_id = pet_id;
@@ -171,7 +190,9 @@ public class Adopter {
         return name;
     }
 
+
     @JsonIgnore
+
     public String getPassword() {
         return password;
     }
@@ -188,9 +209,11 @@ public class Adopter {
         return location;
     }
 
-    public Timestamp getAdopt_date() {
-        return adopt_date;
-    }
+//
+//    public Timestamp getAdopt_date() {
+//        return adopt_date;
+//    }
+
 
     public Long getPet_id() {
         return pet_id;
