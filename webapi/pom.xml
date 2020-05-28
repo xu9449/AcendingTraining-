@@ -196,9 +196,12 @@
                     <version>6.3.1</version>
                     <configuration>
                         <driver>org.postgresql.Driver</driver>
-                        <url>jdbc:postgresql://${database.url}:${database.port}/${database.name}</url>
-                        <user>${database.user}</user>
-                        <password>${database.password}</password>
+
+                        <!--<url>jdbc:postgresql://${database.url}:${database.port}/${database.name}</url>-->
+                        <url>jdbc:postgresql://localhost:5430/pethelp</url>
+                        <user>admin</user>
+
+                        <password>password</password>
                         <schemas>
                             <schema>public</schema>
                         </schemas>
