@@ -7,12 +7,14 @@ import com.sean.debug12.model.View.ShelterViews;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "shelters")
-public class Shelter {
+public class Shelter implements Serializable {
+
 
     public Shelter() {
     }

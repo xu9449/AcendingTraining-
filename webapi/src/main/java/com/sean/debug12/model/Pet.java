@@ -8,6 +8,7 @@ import com.sean.debug12.model.View.ShelterViews;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
@@ -16,7 +17,7 @@ import java.util.Set;
 @Table(name = "pets") // 会做一个validation
 
 // invert side
-public class Pet {
+public class Pet implements Serializable {
 
     public Pet() {
     }
@@ -60,6 +61,15 @@ public class Pet {
     @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
     private String age;
 
+    public Timestamp getAdoptDate() {
+        return adoptDate;
+    }
+
+    public void setAdoptDate(Timestamp adoptDate) {
+        this.adoptDate = adoptDate;
+    }
+
+
     @Column(name = "description")
     @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class})
     private String description;
@@ -68,7 +78,9 @@ public class Pet {
     @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class, PetViews.Public.class, PetViews.Internal.class})
     private boolean adoptable;
 
-    //TODO Add adopt date, change format to MM/dd/yyyy
+    @Column(name = "adopt_date")
+    @JsonView({ShelterViews.Public.class, ShelterViews.Internal.class, PetViews.Public.class, PetViews.Internal.class})
+    private Timestamp adoptDate;
 
     // Join Column shelter_id
     @JsonView({PetViews.Public.class, PetViews.Internal.class})
@@ -87,7 +99,6 @@ public class Pet {
 
 
     // Set
-
     public void setSex(String sex) {
         this.sex = sex;
     }

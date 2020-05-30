@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,12 +40,11 @@ public class FileController {
 
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void uploadFile( @RequestParam("file") MultipartFile file, ServletRequest request) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, ServletRequest request) {
         try{
             logger.info("test file name: " + file.getOriginalFilename());
-//        HttpServletRequest request = this.
-//                String token = token.replaceAll("^(.*?) ", "");
-            com.sean.debug12.model.Image image = new com.sean.debug12.model.Image(file.getOriginalFilename());
+            Image image = new Image(file.getOriginalFilename());
+
             image.setFileName(file.getOriginalFilename());
             HttpServletRequest req = (HttpServletRequest) request;
             HttpSession httpSession = req.getSession();
@@ -53,10 +53,15 @@ public class FileController {
             String url = fileService.uploadFile(bucketName, file);
             image.setUrl(url);
             Image image2 = imageService.save(image);
-            System.out.println(url);
+
+            Long id = image.getId();
+            String result = "The message id is: "+ id +"\n"+"Url is: "+url;
+            System.out.println("The message id is: "+ id +"\n"+"Url is: "+url);
+            return ResponseEntity.ok().body(result);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return ResponseEntity.badRequest().build();
     }
 
 }

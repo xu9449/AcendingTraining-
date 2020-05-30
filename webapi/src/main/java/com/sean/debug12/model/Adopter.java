@@ -22,7 +22,6 @@ import java.util.Set;
 
 // owning set
 public class Adopter implements Serializable {
-
     public Adopter() {
     }
 
@@ -82,11 +81,6 @@ public class Adopter implements Serializable {
     @Column(name = "Active_status")
     private Boolean activeStatus;
 
-//    @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
-//    @Column(name = "adopt_date")
-//
-//    //TODO change to MM/dd/yyyy format
-//    private Timestamp adopt_date;
 
 
     @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
@@ -163,9 +157,6 @@ public class Adopter implements Serializable {
     }
 
 
-//    public void setAdopt_date(Timestamp adopt_date) {
-//        this.adopt_date = adopt_date;
-//    }
 
 
     public void setPet_id(Long pet_id) {
@@ -209,10 +200,7 @@ public class Adopter implements Serializable {
         return location;
     }
 
-//
-//    public Timestamp getAdopt_date() {
-//        return adopt_date;
-//    }
+
 
 
     public Long getPet_id() {
@@ -251,4 +239,5 @@ public class Adopter implements Serializable {
     public List<Role> getRoles() {
         return roles;
     }
+
 }

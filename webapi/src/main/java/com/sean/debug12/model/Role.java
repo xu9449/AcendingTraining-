@@ -1,14 +1,17 @@
 package com.sean.debug12.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.sean.debug12.model.View.AdopterViews;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements Serializable {
+
 
     public Role() {
     }
@@ -49,6 +52,7 @@ public class Role {
     private boolean allowedDelete;
 
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private List<Adopter> adopters;
 

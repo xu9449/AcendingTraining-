@@ -21,6 +21,8 @@ public class AdopterService {
     private RoleDao roleDao;
 
     public Adopter save(Adopter adopter) {
+
+        adopter.setActiveStatus(true);
         Adopter a1 = adopterDao.save(adopter);
         return a1;
     }
@@ -34,6 +36,26 @@ public class AdopterService {
         roleList.remove(role);
         user.setRoles(roleList);
         adopterDao.save(user);
+        return true;
+    }
+
+    public Boolean deleteRole(String adopterName, Long roleId) {
+        Adopter user = adopterDao.getAdopterByName(adopterName);
+        List<Role> roleList = user.getRoles();
+        Role role = roleDao.getRoleId(roleId);
+        roleList.remove(role);
+        user.setRoles(roleList);
+        adopterDao.update(user);
+        return true;
+    }
+
+    public Boolean addRole(String adopterName, Long roleId) {
+        Adopter user = adopterDao.getAdopterByName(adopterName);
+        List<Role> roleList = user.getRoles();
+        Role role = roleDao.getRoleId(roleId);
+        roleList.add(role);
+        user.setRoles(roleList);
+        adopterDao.update(user);
         return true;
     }
 

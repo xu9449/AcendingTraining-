@@ -14,9 +14,13 @@ import com.sean.debug12.service.RoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -42,6 +46,7 @@ public class AdopterController {
     //TODO add role
 
     //http://localhost:8080/adopter/id GET
+    @Cacheable(value = "adopters")
     @JsonView(AdopterViews.Internal.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public Adopter getAdopterByID(@PathVariable("id") Long Id) {
@@ -79,15 +84,30 @@ public class AdopterController {
 
 
     // Delete the roles
+    //http://localhost:8080/adopter/name/?name = XXX & roleId = XXX PATCH
+    @JsonView(AdopterViews.Internal.class)
     @RequestMapping(value = "/name", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Boolean delteRoles(@RequestParam("name") String adopterName, @RequestParam("Id") Long id) {
+    public Boolean deleteRoles(@RequestParam("name") String adopterName, @RequestParam("roleId") Long id, ServletRequest request) {
         logger.info("variable info passing in");
-        Adopter a2 = adopterService.getAdopterByName(adopterName);
-        List<Role> r1 = a2.getRoles();
-//        Role r = roleService.getRoleByName(role);
-        Boolean a = adopterService.updateRole(adopterName, id);
-        List<Role> r2 = a2.getRoles();
-        return a;
+        // if the user's role is "Admin", allow
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpSession httpSession = req.getSession();
+        Adopter requester = (Adopter) httpSession.getAttribute("adopter");
+        List<Role> requesterRoles = requester.getRoles();
+        Boolean allow = false;
+        for(Role role: requesterRoles){
+            if(role.getId() == 1){
+                allow = true;
+            }
+        }
+        if(allow == true) {
+            Adopter a2 = adopterService.getAdopterByName(adopterName);
+            Boolean a = adopterService.addRole(adopterName, id);
+            return a;
+        }
+        else {
+            return false;
+        }
     }
 
     // Delete the Adopter
@@ -100,6 +120,38 @@ public class AdopterController {
         System.out.println(msg);
         return result;
 
+    }
+
+    // PATCH(Add) the roles (Admin)
+    //http://localhost:8080/adopter/adoptername/?adoptername = XXX & roleId = XXX PATCH
+    @JsonView(AdopterViews.Internal.class)
+    @RequestMapping(value = "/adopterName", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public boolean addRoles(@RequestParam("adopterName") String adopterName, @RequestParam("roleId") Long id, ServletRequest request){
+        try {
+            logger.info("variable info passing in");
+            // if the user's role is "Admin", allow
+            HttpServletRequest req = (HttpServletRequest) request;
+            HttpSession httpSession = req.getSession();
+            Adopter requester = (Adopter) httpSession.getAttribute("adopter");
+            List<Role> requesterRoles = requester.getRoles();
+            Boolean allow = false;
+            for(Role role: requesterRoles){
+                if(role.getId() == 1){
+                    allow = true;
+                }
+            }
+            if(allow == true) {
+                Adopter a2 = adopterService.getAdopterByName(adopterName);
+                Boolean a = adopterService.addRole(adopterName, id);
+                return a;
+            }
+            else {
+                return false;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
 

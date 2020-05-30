@@ -67,7 +67,7 @@ public class AuthController {
             adopter.setName(username);
             adopter.setEmail(email);
             adopter.setPassword(password);
-            Role role = roleService.getRoleByName("User");
+            Role role = roleService.getRoleByName("user"); // user
             List<Role> roles = new ArrayList<>();
             roles.add(role);
             adopter.setRoles(roles);
