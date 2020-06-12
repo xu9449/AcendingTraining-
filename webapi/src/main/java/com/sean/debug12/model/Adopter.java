@@ -182,7 +182,7 @@ public class Adopter implements Serializable {
     }
 
 
-    @JsonIgnore
+
 
     public String getPassword() {
         return password;
