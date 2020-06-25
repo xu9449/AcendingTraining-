@@ -30,22 +30,6 @@ This application is developed in Spring Framework by using Spring Boot, Spring D
     Vii. Used Postman to interact with back-end project   
     Viii. Did mock test for AWS S3 Storage service.  
     iX. Integrated third-party application AWS SQS and did Mock test.
-## Configure local environment  
-```
-docker pull postgres
-
-docker run --name ${PostgresContainerName} -e POSTGRES_USER=${username} -e POSTGRES_PASSWORD=${password} -e POSTGRES_DB=${databaseName} -p ${hostport}:${containerport} -d postgres
-```
-
-## Environment properity configuration
-```
-
-```
-
-## Flyway migration
-```
-mvn compile flyway:migrate -P unit -Ddb_username=${username} -Ddb_url=localhost:${containerport}/${databasename} -Ddb_password=${password} 
-```
 
 ## Build project   
 1.Clone the project
@@ -119,6 +103,7 @@ Put the request body.
 Then you can get the response login token.
 
 Demo Screen Shot:
+![screenshot_signup](https://github.com/xu9449/Pet-Adoption-Helper/blob/master/image/screenshot_signup.png)
 
 * Then we can login with the token 
 make a post request in the address:
@@ -142,9 +127,11 @@ make a post request in the address:
 ````
 * This token is need for the future access other api. So you don't need to login to the every API.
  DEMO screen shoot:
+ ![screenshot_signin](https://github.com/xu9449/Pet-Adoption-Helper/blob/master/image/screenshot_signin.png)
 
 * Then you can get some info with the token
 DEMO screen shoot:
+![screenshot_findshelters](https://github.com/xu9449/Pet-Adoption-Helper/blob/master/image/screenshot_findshelters.png)
 ## CICD  
 You should have completed the following stages before you work with DevOps engineer.
 
