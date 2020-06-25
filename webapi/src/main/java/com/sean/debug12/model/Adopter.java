@@ -17,18 +17,29 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
+// ADOPTER MODULE
+/*
+    id, d
+
+
+
+ */
+
 @Entity
 @Table(name = "adopters")
-
 // owning set
 public class Adopter implements Serializable {
+
     public Adopter() {
+
     }
 
     public Adopter(String name, String password){
         this.name = name;
         this.password = password;
     }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +51,6 @@ public class Adopter implements Serializable {
     @JsonView({AdopterViews.Public.class, AdopterViews.Internal.class})
     @Column(name = "name")
     private String name;
-
 
     @Column(name = "password")
     private String password;
