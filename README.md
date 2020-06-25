@@ -34,11 +34,12 @@ This application is developed in Spring Framework by using Spring Boot, Spring D
 ## Build project   
 1.Clone the project
 ````
-    git clone https://github.com/xu9449/Pet-Adoption-Helper.git  
+git clone https://github.com/xu9449/Pet-Adoption-Helper.git  
 ````
 2.Install docker if needed. Please use docker maven openjdk and select the 3.6-jdk-8 version.  
 
-    [3.6.0-jdk-8, 3.6-jdk-8, 3-jdk-8 (jdk-8/Dockerfile)](https://hub.docker.com/_/maven?tab=description)
+[3.6.0-jdk-8, 3.6-jdk-8, 3-jdk-8 (jdk-8/Dockerfile)](https://hub.docker.com/_/maven?tab=description)
+
 3.Open a new command line window and Spin up the PostgreSql database server using Postgres docker image
 ```
 docker pull postgres
@@ -50,7 +51,6 @@ docker run --name ${dealerDB2} -e POSTGRES_DB=${pethelp} -e POSTGRES_USER=${admi
 4.Create Unit database on PGAdmin for unit testing
 ````
 create database pethelp_database_demo;
-
 ````
 5.Environment properties configuration
 ````
@@ -82,7 +82,6 @@ mvn compile flyway:migrate -P unit -Ddb_username=${username} -Ddb_url=localhost:
 * Run the test with the command. All the Test are done using JUnit and Mockito
 ````
 mvn compile test -Dspring.profiles.active=${unit} -Daws.region=${region} -Ddb_url=${localhost:5432/pigge_unit} -Ddb.username=${username} -Ddb.password=${password} 
-
 ````
 ## API guideline and Reference DEMO
 * You need to sign up for authority to get access.
@@ -108,7 +107,7 @@ Demo Screen Shot:
 * Then we can login with the token 
 make a post request in the address:
 ````
-    POST - http://localhost:8080/auth
+POST - http://localhost:8080/auth
 ````
 
 * Put the request body.（ You can chose login with username or email)
