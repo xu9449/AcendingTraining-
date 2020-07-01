@@ -1,4 +1,4 @@
-# PetHelp Website by Kexin XU
+# YaYa Website by Kexin XU
 
 ## Description  
 This is a website to help street pets find their sweet home.  
