@@ -1,0 +1,17 @@
+Pet:  
+1. show random pet
+2. search with pet kind
+3. search with pet age
+4. add pet to favorate list
+5. add one pet into database
+6. update the adoption condition.
+7. transfer to another foster
+
+Shelter:
+1. get shelter by its name
+2. list random shelter
+3. get shelter by id
+4. add one shelter)
+5. delete one shelter (deactive)
+6, update the shelter
+7. Show shelter based on location
