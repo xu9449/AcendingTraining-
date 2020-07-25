@@ -21,15 +21,15 @@ This application is developed in Spring Framework by using Spring Boot, Spring D
     V. One Pet could have many people who are interested in them.  
     Vi. One Pet can have only one shelter.
 * Project Approach  
-    i. Created adopters, pets, shelters, roles.   
-    ii. Used Hibernate to do the database schema migration.  
-    iii. Used JDBC to connect project with Postgres  
-    iv. Configured Spring Security for Authentication  
-    v. Created repository, service and did test  
-    vi. Created Controllers and Restful APIs  
-    Vii. Used Postman to interact with back-end project   
-    Viii. Did mock test for AWS S3 Storage service.  
-    iX. Integrated third-party application AWS SQS and did Mock test.
+    i.      Created adopters, pets, shelters, roles.   
+    ii.     Used Hibernate to do the database schema migration.  
+    iii.    Used JDBC to connect project with Postgres  
+    iv.     Configured Spring Security for Authentication  
+    v.      Created repository, service and did test  
+    vi.     Created Controllers and Restful APIs  
+    Vii.    Used Postman to interact with back-end project   
+    Viii.   Did mock test for AWS S3 Storage service.  
+    iX.     Integrated third-party application AWS SQS and did Mock test.
 
 ## Build project   
 1.Clone the project
