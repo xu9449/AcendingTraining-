@@ -1,7 +1,7 @@
 # YaYa Website by Kexin XU
 
 ## Description  
-This is a website to help street pets find their homes.  
+What I want to build is a website to help street pets find their homes. Especially during the COVID-19 period, hope they can still find their new homes.  
 
 ## Project Technical Overview:
 This application is developed in Spring Framework by using Spring Boot, Spring Data, Hibernate, Spring RESTful web services, Postman, Maven, PostgresSql, Docker, Amazon SQS, and Amazon S3.  
