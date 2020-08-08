@@ -1,5 +1,5 @@
 insert into pets (name, sex, breed, age, shelter_id, adoptable, description) values
-('Pepper', 'M', 'Domestic Short Hair', '18 months', '1',TRUE, 'Perfect Condition'),
+('Pepper', 'M', 'Domestic Short Hair', '18 mohs', '1',TRUE, 'Perfect Condition'),
 ('Shadow','F', 'Domestic Short Hair', '2 years', '1',TRUE, 'Perfect Condition'),
 ('Eva','M', 'Domestic Medium Hair', '3 years', '2',TRUE, 'Perfect Condition'),
 ('Oki','F', 'Domestic Long Hair', '12 years', '1',TRUE, 'Perfect Condition')

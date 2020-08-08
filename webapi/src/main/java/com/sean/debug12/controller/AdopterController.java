@@ -26,7 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = {"/adopters", "/adopter"})
 public class AdopterController {
-
+    // TODO: finish 10 controllers
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
@@ -43,8 +43,6 @@ public class AdopterController {
         return adopterService.getAdopters();
     }
 
-    //TODO add role
-
     //http://localhost:8080/adopter/id GET
     @Cacheable(value = "adopters")
     @JsonView(AdopterViews.Internal.class)
@@ -53,7 +51,7 @@ public class AdopterController {
         Adopter adopter = adopterService.getAdopterEagerBy(Id);
         return adopter;
     }
-
+    //TODO exception handling
     //http://localhost:8080/adopter?name = xxx Get
     @JsonView(AdopterViews.Public.class)
     @RequestMapping(value = {"/name"}, method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})

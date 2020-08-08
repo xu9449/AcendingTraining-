@@ -246,6 +246,8 @@ public class Adopter implements Serializable {
         return pets;
     }
 
+
+
     public List<Role> getRoles() {
         return roles;
     }

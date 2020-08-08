@@ -27,21 +27,39 @@ import java.util.List;
 @RestController
 @RequestMapping(value = {"/pets", "/pet"})
 public class PetController {
+    //finish 10 controllers
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private PetService petService;
 
-    // http://localhost:8080/pet GET
+    // ---- GET RANDOM PETS ----
+    //http://localhost:8080/pet GET
     @JsonView(PetViews.Internal.class)
     @RequestMapping(value = "", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Pet> getPets() {
         return petService.getPets();
     }
 
+    //TODO: SEARCH WITH PET'S KIND
+
+
+    //TODO: SEARCH WITH PET'S AGE
+
+
+    //TODO: ADD THE PET TO LIKE LIST
+
+
+    //TODO: SEARCH WITH PET'S COLOR
+
+
+    //TODO: ADD ONE PET
+
+    //TODO: TRANSFER TO ANOTHER FOSTER
+
+    // --- UPDATE PET'S ADOPTION CONDITION ---
     //http://localhost:8080/shelter?name = xxx
-    //可以加 params = {"name"}来区分
     @JsonView(PetViews.Internal.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity updatePetAdoptable(@PathVariable("id") Long Id, @RequestParam(name = "adoptable") boolean adoptable, ServletRequest request) {

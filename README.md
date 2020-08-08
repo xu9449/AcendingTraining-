@@ -1,7 +1,7 @@
-# PetHelp Website by Kexin XU
+# YaYa
 
-## Description  
-This is a website to help street pets find their sweet home.  
+
+YaYa is a website to help street pets find their sweet home.  
 
 ## Project Technical Overview:
 This application is developed in Spring Framework by using Spring Boot, Spring Data, Hibernate, Spring RESTful web services, Postman, Maven, PostgresSql, Docker, Amazon SQS, and Amazon S3.  

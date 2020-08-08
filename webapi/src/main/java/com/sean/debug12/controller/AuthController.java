@@ -32,7 +32,6 @@ public class AuthController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-
     @Autowired
     private AdopterService adopterService;
     @Autowired

@@ -91,6 +91,7 @@ public class FileService {
             String url = s3Client.getUrl(bucketName, newFileName).toString();
             return url;
         } catch (Exception e) {
+            //TODO: add more logic here
             logger.error(e.getMessage());
         }
 //      s3Client.putObject(bucketName, file.getOriginalFilename(), file.getInputStream(), null);

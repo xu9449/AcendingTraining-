@@ -16,12 +16,14 @@ import java.util.List;
 @RestController
 @RequestMapping(value = {"/shelters", "/shelter", "/shelts"})
 public class ShelterController {
+    //TODO: finish 10 controllers
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private ShelterService shelterService;
 
+    //GET SHELTER BY THE NAME
     //http://localhost:8080/shelter/?name = xxx Get
     @JsonView(ShelterViews.Internal.class)
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -30,13 +32,14 @@ public class ShelterController {
         return shelterService.getShelterByName(name);
     }
 
-
+    //LIST RANDOM SHELTER
     //http://localhost:8080/shelter GET
     @JsonView(ShelterViews.Public.class)
     @RequestMapping(value = "", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Shelter> getShelters() {
         return shelterService.getShelters();
     }
+
 
     //http://localhost:8080/shelter/id GET
     @JsonView(ShelterViews.Internal.class)
@@ -48,7 +51,6 @@ public class ShelterController {
 
 
     //http://localhost:8080/shelter?name = xxx
-    //可以加 params = {"name"}来区分
     @JsonView(ShelterViews.Internal.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.PATCH, produces = {MediaType.APPLICATION_JSON_VALUE})
     public boolean updateShelterName(@PathVariable("id") Long Id, @RequestParam(name = "name") String name) {
@@ -59,7 +61,7 @@ public class ShelterController {
         return isSuccess;
     }
 
-
+    // ADD ONE SHELTER HERE
     //http://localhost:8080/shelters POST
     @RequestMapping(value = "", method = RequestMethod.POST)
     public Shelter save(@RequestBody Shelter shelter) {
@@ -68,6 +70,7 @@ public class ShelterController {
         return she;
     }
 
+    //TODO: SET THE SHELTER DEACTIVE
     //{prefix}/shelters DELETE
     @RequestMapping(value = "/", method = RequestMethod.DELETE)
     public boolean delete(@RequestParam(name = "name") String name) {
@@ -75,6 +78,9 @@ public class ShelterController {
         return shelterService.delete(she);
     }
 
+    //TODO: SHOW SHELTER BASED ON LOCATION
+
+    //TODO: UPDATE SHELTER
     //{prefix}/shelters PUT
     @RequestMapping(value = "", method = RequestMethod.PUT)
     public boolean update(Shelter shelter) {
