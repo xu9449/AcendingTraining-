@@ -25,7 +25,7 @@ This application is developed in Spring Framework by using Spring Boot, Spring D
     iV. One Adopter could have many favorite pets.   
     V. One Pet could have many people who are interested in them.  
     Vi. One Pet can have only one shelter.  
-    ![database](https://github.com/xu9449/BudE_Plus/blob/master/image/Database%20Relationships.png)
+    ![database](https://raw.githubusercontent.com/xu9449/BudE_Plus/master/image/BudE%2B.png)
 * Project Approach  
     i.      Created adopters, pets, shelters, roles.   
     ii.     Used Hibernate to do the database schema migration.  
