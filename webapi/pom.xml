@@ -197,9 +197,10 @@
                     <configuration>
                         <driver>org.postgresql.Driver</driver>
 
-                        <url>jdbc:postgresql://database-1.clcwfezn7hyj.us-east-1.rds.amazonaws.com:5432/pethelp</url>
+                        <!--<url>jdbc:postgresql://database-1.clcwfezn7hyj.us-east-1.rds.amazonaws.com:5432/pethelp</url>-->
+                        <url>jdbc:postgresql://localhost:5430/pethelp</url>
 
-                        <user>postadmin</user>
+                        <user>admin</user>
 
                         <password>password</password>
                         <schemas>

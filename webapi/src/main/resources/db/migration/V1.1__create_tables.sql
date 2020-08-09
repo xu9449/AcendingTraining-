@@ -50,16 +50,16 @@ CREATE TABLE roles (
 );
 
 ALTER TABLE roles
-ADD CONSTRAINT role_pk PRIMARY KEY ( id );
+ADD CONSTRAINT role_pk PRIMARY KEY ( role_id );
 
 Alter table shelters
-Add constraint shelters_pk PRIMARY KEY (id);
+Add constraint shelters_pk PRIMARY KEY (shelter_id);
 
 Alter table pets
-Add constraint pets_pk PRIMARY KEY (id);
+Add constraint pets_pk PRIMARY KEY (pet_id);
 
-Alter table adopters
-Add constraint adopters_pk PRIMARY KEY (id);
+Alter table users
+Add constraint adopters_pk PRIMARY KEY (user_id);
 
 
 
