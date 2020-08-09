@@ -1,21 +1,21 @@
 CREATE TABLE images (
-  id                BIGSERIAL NOT NULL,
-  file_name         VARCHAR(512) not null,
-  upload_time       TIMESTAMP,
-  s3key             VARCHAR(150),
-  url               VARCHAR(512),
-  extension         VARCHAR(150),
-  uuid              VARCHAR(300),
-  description       VARCHAR(512),
-  pet_id            BIGINT,
-  adopter_id        BIGINT
+  image_id                BIGSERIAL NOT NULL,
+  image_file_name         VARCHAR(30) not null,
+  image_upload_time       TIMESTAMP,
+  image_s3key             VARCHAR(125),
+  image_url               VARCHAR(125),
+  image_extension         VARCHAR(150),
+  image_uuid              VARCHAR(300),
+  image_description       VARCHAR(512),
+  image_pet_id            BIGINT,
+  image_adopter_id        BIGINT
 );
-ALTER TABLE images ADD CONSTRAINT images_pk PRIMARY KEY(id);
+ALTER TABLE images ADD CONSTRAINT images_pk PRIMARY KEY(image_id);
 
 ALTER TABLE images
-    ADD CONSTRAINT images_pet_fk FOREIGN KEY (pet_id)
-    REFERENCES pets(id);
+    ADD CONSTRAINT images_pet_fk FOREIGN KEY (image_pet_id)
+    REFERENCES pets(pet_id);
 
 ALTER TABLE images
-ADD CONSTRAINT images_adopter_fk FOREIGN KEY (adopter_id)
-REFERENCES adopters(id);
+ADD CONSTRAINT images_adopter_fk FOREIGN KEY (image_adopter_id)
+REFERENCES users(user_id);

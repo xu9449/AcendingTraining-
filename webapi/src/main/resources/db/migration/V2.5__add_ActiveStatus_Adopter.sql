@@ -1,2 +1,2 @@
-ALTER TABLE adopters
-ADD Active_Status Boolean;
+ALTER TABLE users
+ADD user_active_status Boolean;

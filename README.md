@@ -1,17 +1,15 @@
-<<<<<<< HEAD
-# YaYa
 
+# BudE+
 
-YaYa is a website to help street pets find their sweet home.  
-=======
-# YaYa Website by Kexin XU
+BudE+ is a website to help street pets find their sweet home.  
 
 ## Description  
 What I want to build is a website to help street pets find their homes. Especially during the COVID-19 period, hope they can still find their new homes.  
->>>>>>> 7783ed5feb74bdb6608a439b7c435ca656c5a196
+
 
 ## Project Technical Overview:
 This application is developed in Spring Framework by using Spring Boot, Spring Data, Hibernate, Spring RESTful web services, Postman, Maven, PostgresSql, Docker, Amazon SQS, and Amazon S3.  
+
 ## Assumption 
 1. It's will be a website to help shelters find homes for their pets, especially after COVID - 19, it will help them to recovery the adopt market.
 2. The adopters need to sign up before access any data.

@@ -1,13 +1,13 @@
-CREATE TABLE adopters_roles (
-  adopter_id BIGINT NOT NULL,
+CREATE TABLE users_roles (
+  user_id BIGINT NOT NULL,
   role_id BIGINT NOT NULL
 );
 
-ALTER TABLE adopters_roles
-  ADD CONSTRAINT adopters_fk FOREIGN KEY (adopter_id)
-      REFERENCES adopters(id);
+ALTER TABLE users_roles
+  ADD CONSTRAINT users_fk FOREIGN KEY (user_id)
+      REFERENCES users(user_id);
 
-ALTER TABLE adopters_roles
+ALTER TABLE users_roles
   ADD CONSTRAINT roles_fk FOREIGN KEY (role_id)
-      REFERENCES roles(id);
+      REFERENCES roles(role_id);
 

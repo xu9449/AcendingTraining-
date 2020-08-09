@@ -1,52 +1,52 @@
 CREATE TABLE shelters (
-    id                BIGSERIAL NOT NULL,
-    name              VARCHAR(30) not null unique,
-    tel               VARCHAR(150),
-    email             VARCHAR(50),
-    location          VARCHAR(100),
-    description       VARCHAR(512),
-    principle         VARCHAR(50)
+    shelter_id                BIGSERIAL NOT NULL,
+    shelter_name              VARCHAR(30) not null,
+    shelter_tel               VARCHAR(30),
+    shelter_email             VARCHAR(50),
+    shelter_location          VARCHAR(64),
+    shelter_description       VARCHAR(512),
+    shelter_principle         VARCHAR(50)
 );
 
 
 CREATE TABLE pets (
-id                BIGSERIAL NOT NULL,
-name              VARCHAR(30) not null unique,
-sex               VARCHAR (10),
-age               VARCHAR(30),
-size              VARCHAR (10),
-breed             VARCHAR(50),
-description       VARCHAR(512),
-adoptable         BOOLEAN not null default TRUE,
-shelter_id        BIGINT,
-adopter_id        BIGINT
+    pet_id                BIGSERIAL NOT NULL,
+    pet_name              VARCHAR(30) not null,
+    pet_sex               VARCHAR (10),
+    pet_age               VARCHAR(30),
+    pet_size              VARCHAR (10),
+    pet_breed             VARCHAR(50),
+    pet_description       VARCHAR(512),
+    pet_adoptable         BOOLEAN not null default TRUE,
+    pet_shelter_id        BIGINT,
+    pet_adopter_id        BIGINT
 );
 
 
-CREATE TABLE adopters (
-id                BIGSERIAL NOT NULL,
-name              VARCHAR(30) not null unique,
-password          VARCHAR(64),
-tel               VARCHAR(40),
-email             VARCHAR(50) not null unique,
-location          VARCHAR(100),
-description       VARCHAR(512),
-secret_key        VARCHAR(512),
-first_name        VARCHAR(30),
-last_name         VARCHAR(30),
-image_url         VARCHAR(512),
-adopt_date        TIMESTAMP,
-pet_id            BIGINT
+CREATE TABLE users (
+    user_id                BIGSERIAL NOT NULL,
+--    user_name              VARCHAR(30) not null,
+    user_password          VARCHAR(64) not null,
+    user_tel               VARCHAR(40) ,
+    user_email             VARCHAR(50) not null unique,
+    user_location          VARCHAR(64),
+    user_description       VARCHAR(512),
+    user_secret_key        VARCHAR(512),
+    user_first_name        VARCHAR(30),
+    user_last_name         VARCHAR(30),
+    user_image_url         VARCHAR(512),
+    --adopt_date        TIMESTAMP,
+    user_pet_id            BIGINT
 );
 
 CREATE TABLE roles (
-    id                   BIGSERIAL NOT NULL,
-    name                 VARCHAR(30) not null unique,
-    allowed_resource     VARCHAR(200),
-    allowed_read         BOOLEAN not null default FALSE,
-    allowed_create       BOOLEAN not null default FALSE,
-    allowed_update       BOOLEAN not null default FALSE,
-    allowed_delete       BOOLEAN not null default FALSE
+    role_id                   BIGSERIAL NOT NULL,
+    role_name                 VARCHAR(30) not null unique,
+    role_allowed_resource     VARCHAR(200),
+    role_allowed_read         BOOLEAN not null default FALSE,
+    role_allowed_create       BOOLEAN not null default FALSE,
+    role_allowed_update       BOOLEAN not null default FALSE,
+    role_allowed_delete       BOOLEAN not null default FALSE
 );
 
 ALTER TABLE roles

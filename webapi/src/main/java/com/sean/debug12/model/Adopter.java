@@ -18,13 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 
-// ADOPTER MODULE
-/*
-    id, d
 
-
-
- */
 
 @Entity
 @Table(name = "adopters")

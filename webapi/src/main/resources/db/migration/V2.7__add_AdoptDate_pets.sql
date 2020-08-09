@@ -1,2 +1,2 @@
 ALTER TABLE pets
-ADD adopt_date TIMESTAMP;
+ADD pet_adopt_date TIMESTAMP;
